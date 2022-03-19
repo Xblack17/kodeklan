@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
-    <Folder Include="Models\UserModels\" />
   </ItemGroup>
 
 </Project>
