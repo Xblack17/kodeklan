@@ -14,6 +14,12 @@ namespace iTut.Models.UserModels.ParentUser
         [Required]
         public string UserId { get; set; }
 
+        [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
+
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
 

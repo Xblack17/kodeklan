@@ -10,26 +10,12 @@ namespace iTut.Models
         [StringLength(120, ErrorMessage = "The {0} must be at least {2} and at a max {1} characters long.", MinimumLength = 2)]
         public string FirstName { get; set; }
 
-        [Display(Name = "Maiden Name")]
-        [StringLength(120, ErrorMessage = "The {0} must be at least {2} and at a max {1} characters long.", MinimumLength = 2)]
-        public string MaidenName { get; set; }
-
         [Required]
         [Display(Name = "Last Name")]
         [StringLength(120, ErrorMessage = "The {0} must be at least {2} and at a max {1} characters long.", MinimumLength = 2)]
         public string LastName { get; set; }
+    }
 
-        [Display(Name = "User Type")]
-        public UserType UserType { get; set; }
-    }
-    public enum UserType
-    {
-        Student,
-        Educator,
-        Parent,
-        HOD,
-        Facilitator
-    }
     public enum Gender
     {
         Female,
