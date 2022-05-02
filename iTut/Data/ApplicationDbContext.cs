@@ -24,6 +24,6 @@ namespace iTut.Data
             builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
         }
 
-        public DbSet<Parent> Parents { get; set; }
+        public DbSet<ParentUser> Parents { get; set; }
     }
 }

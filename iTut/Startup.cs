@@ -141,7 +141,7 @@ namespace iTut
                     if (result.Succeeded)
                     {
                         await userManager.AddToRoleAsync(user, RoleConstants.Parent);
-                        var parent = new Parent
+                        var parent = new ParentUser
                         {
                             UserId = user.Id,
                             FirstName = user.FirstName,
