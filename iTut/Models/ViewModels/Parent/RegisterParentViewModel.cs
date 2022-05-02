@@ -18,16 +18,21 @@ namespace iTut.Models.ViewModels.Parent
         public string LastName { get; set; }
 
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
+        [Display(Name = "Gender")]
         public Gender Gender { get; set; }
 
+        [Display(Name = "Ethnicity")]
         public Race Race { get; set; }
 
+        [Display(Name = "Physical Address")]
         public string PhysicalAddress { get; set; }
 
         [Required]
