@@ -1,10 +1,9 @@
-﻿using iTut.Models.UserModels.StudentUser;
+﻿using iTut.Constants;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace iTut.Models.UserModels.ParentUser
+namespace iTut.Models.Users
 {
     public class Parent
     {
@@ -32,8 +31,6 @@ namespace iTut.Models.UserModels.ParentUser
         public Race Race { get; set; }
 
         public string PhysicalAddress { get; set; }
-
-        public List<Student> Children { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

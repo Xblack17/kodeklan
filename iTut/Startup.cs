@@ -1,7 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using iTut.Constants;
 using iTut.Data;
-using iTut.Models;
-using iTut.Models.UserModels.ParentUser;
+using iTut.Models.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -9,8 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Threading.Tasks;
 
 namespace iTut
 {
@@ -30,15 +30,17 @@ namespace iTut
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
+
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddRazorPages();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            InitializeDbContext(app);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -46,13 +48,10 @@ namespace iTut
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            InitializeDbContextAsync(app).GetAwaiter().GetResult();
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -63,53 +62,84 @@ namespace iTut
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
 
-        private async Task InitializeDbContextAsync(IApplicationBuilder builder)
+        private async void InitializeDbContext(IApplicationBuilder builder)
         {
             var serviceScope = builder.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using (IServiceScope scope = serviceScope.CreateScope())
             {
-                Console.WriteLine(">>>>>>>>>>>>>>>>>> I am being called <<<<<<<<<<<<<<<<<<<<<<");
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
 
-                var studentRole = await roleManager.FindByNameAsync(RoleConstants.Student);
-                if (studentRole == null)
+                if (!roleManager.Roles.Any())
+            {
+                var roles = new List<IdentityRole>
                 {
-                    await roleManager.CreateAsync(new IdentityRole(RoleConstants.Student));
+                    new IdentityRole
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = RoleConstants.Student,
+                        NormalizedName = "STUDENT",
+                        ConcurrencyStamp = Guid.NewGuid().ToString()
+                    },
+                    new IdentityRole
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = RoleConstants.Parent,
+                        NormalizedName = "PARENT",
+                        ConcurrencyStamp = Guid.NewGuid().ToString()
+                    },
+                    new IdentityRole
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = RoleConstants.Facilitator,
+                        NormalizedName = "FACILITATOR",
+                        ConcurrencyStamp = Guid.NewGuid().ToString()
+                    },
+                    new IdentityRole
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = RoleConstants.Educator,
+                        NormalizedName = "EDUCATOR",
+                        ConcurrencyStamp = Guid.NewGuid().ToString()
+                    },
+                    new IdentityRole
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = RoleConstants.HOD,
+                        NormalizedName = "HOD",
+                        ConcurrencyStamp = Guid.NewGuid().ToString()
+                    }
+                };
+                foreach (var role in roles)
+                {
+                    roleManager.CreateAsync(role).Wait();
                 }
+            }
 
-                var educatorRole = await roleManager.FindByNameAsync(RoleConstants.Educator);
-                if (educatorRole == null)
+                if (!context.Users.Any())
                 {
-                    await roleManager.CreateAsync(new IdentityRole(RoleConstants.Educator));
-                }
-
-                var parentRole = await roleManager.FindByNameAsync(RoleConstants.Parent);
-                if (parentRole == null)
-                {
-                    var role = new IdentityRole(RoleConstants.Parent);
-                    await roleManager.CreateAsync(role);
-
-                    var user = new ApplicationUser
+                    ApplicationUser user = new ApplicationUser()
                     {
                         FirstName = "Johannes",
-                        LastName = "Mogashoa",
+                        LastName = "Parent",
                         PhoneNumber = "0618021411",
-                        Email = "jm.segodi@gmail.com",
-                        UserName = "jm.segodi@gmail.com",
+                        Email = "johannes@email.com",
+                        UserName = "johannes@email.com",
                         EmailConfirmed = true
                     };
 
-                    var result = await userManager.CreateAsync(user, "Pass@123456");
+                    var result = await userManager.CreateAsync(user, "Password1!");
 
                     if (result.Succeeded)
                     {
-                        Console.WriteLine(">>>>>>>>>>>>>>>>>> I Created the user <<<<<<<<<<<<<<<<<<<<<<");
                         await userManager.AddToRoleAsync(user, RoleConstants.Parent);
                         var parent = new Parent
                         {
@@ -125,19 +155,7 @@ namespace iTut
                         context.Add(parent);
                     }
                     await context.SaveChangesAsync();
-                    Console.WriteLine(">>>>>>>>>>>>>>>>>> Everything should be saved to the database by now <<<<<<<<<<<<<<<<<<<<<<");
-                }
-
-                var hodRole = await roleManager.FindByNameAsync(RoleConstants.HOD);
-                if (hodRole == null)
-                {
-                    await roleManager.CreateAsync(new IdentityRole(RoleConstants.HOD));
-                }
-
-                var facilitatorRole = await roleManager.FindByNameAsync(RoleConstants.Facilitator);
-                if (facilitatorRole == null)
-                {
-                    await roleManager.CreateAsync(new IdentityRole(RoleConstants.Facilitator));
+                    Console.WriteLine("I am done with everything");
                 }
             }
         }

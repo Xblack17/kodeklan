@@ -1,6 +1,6 @@
 ﻿using System;
 using iTut.Data;
-using iTut.Models;
+using iTut.Models.Users;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

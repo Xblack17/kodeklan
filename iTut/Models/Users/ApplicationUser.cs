@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace iTut.Models
+namespace iTut.Models.Users
 {
     public class ApplicationUser : IdentityUser
     {
@@ -14,26 +14,6 @@ namespace iTut.Models
         [Display(Name = "Last Name")]
         [StringLength(120, ErrorMessage = "The {0} must be at least {2} and at a max {1} characters long.", MinimumLength = 2)]
         public string LastName { get; set; }
-    }
-
-    public enum Gender
-    {
-        Female,
-        Male, 
-        Other
-    }
-
-    public enum Race
-    {
-        [Display(Name = "African")]
-        African,
-        [Display(Name = "White")]
-        White,
-        [Display(Name = "Colored")]
-        Colored,
-        [Display(Name = "Indian")]
-        Indian,
-        [Display(Name = "Other")]
-        Other
+        
     }
 }

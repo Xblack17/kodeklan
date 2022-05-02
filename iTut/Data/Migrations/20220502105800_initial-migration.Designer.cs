@@ -10,15 +10,15 @@ using iTut.Data;
 namespace iTut.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220501193014_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220502105800_initial-migration")]
+    partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.15")
+                .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -156,7 +156,7 @@ namespace iTut.Data.Migrations
                     b.ToTable("UserTokens");
                 });
 
-            modelBuilder.Entity("iTut.Models.ApplicationUser", b =>
+            modelBuilder.Entity("iTut.Models.Users.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -231,67 +231,7 @@ namespace iTut.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("iTut.Models.UserModels.EducatorUser.Educator", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Educators");
-                });
-
-            modelBuilder.Entity("iTut.Models.UserModels.FacilitatorUser.Facilitator", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Facilitators");
-                });
-
-            modelBuilder.Entity("iTut.Models.UserModels.HodUser.HOD", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("HODs");
-                });
-
-            modelBuilder.Entity("iTut.Models.UserModels.ParentUser.Parent", b =>
+            modelBuilder.Entity("iTut.Models.Users.Parent", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -335,36 +275,6 @@ namespace iTut.Data.Migrations
                     b.ToTable("Parents");
                 });
 
-            modelBuilder.Entity("iTut.Models.UserModels.StudentUser.Student", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EducatorId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ParentId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EducatorId");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("Students");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -376,7 +286,7 @@ namespace iTut.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("iTut.Models.ApplicationUser", null)
+                    b.HasOne("iTut.Models.Users.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -385,7 +295,7 @@ namespace iTut.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("iTut.Models.ApplicationUser", null)
+                    b.HasOne("iTut.Models.Users.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -400,7 +310,7 @@ namespace iTut.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("iTut.Models.ApplicationUser", null)
+                    b.HasOne("iTut.Models.Users.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -409,36 +319,11 @@ namespace iTut.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("iTut.Models.ApplicationUser", null)
+                    b.HasOne("iTut.Models.Users.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("iTut.Models.UserModels.StudentUser.Student", b =>
-                {
-                    b.HasOne("iTut.Models.UserModels.EducatorUser.Educator", "Educator")
-                        .WithMany("Students")
-                        .HasForeignKey("EducatorId");
-
-                    b.HasOne("iTut.Models.UserModels.ParentUser.Parent", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Educator");
-
-                    b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("iTut.Models.UserModels.EducatorUser.Educator", b =>
-                {
-                    b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("iTut.Models.UserModels.ParentUser.Parent", b =>
-                {
-                    b.Navigation("Children");
                 });
 #pragma warning restore 612, 618
         }
