@@ -72,7 +72,7 @@ namespace iTut.Controllers
                     await _context.SaveChangesAsync();
                     _logger.LogInformation("User created a new account with password.");
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Parent");
                 }
                 foreach (var error in result.Errors)
                 {

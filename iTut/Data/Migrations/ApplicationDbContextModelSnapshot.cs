@@ -229,7 +229,7 @@ namespace iTut.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("iTut.Models.Users.Parent", b =>
+            modelBuilder.Entity("iTut.Models.Users.ParentUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
