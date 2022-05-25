@@ -1,4 +1,5 @@
-﻿using iTut.Models.Users;
+﻿using iTut.Models.Parent;
+using iTut.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -25,5 +26,6 @@ namespace iTut.Data
         }
 
         public DbSet<ParentUser> Parents { get; set; }
+        public DbSet<Complaint> Complaints { get; set; }
     }
 }
