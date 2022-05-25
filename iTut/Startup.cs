@@ -45,8 +45,9 @@ namespace iTut
                 .AddJsonFile("appsettings.json", false, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
-            
+
             InitializeDbContext(app);
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -75,7 +76,7 @@ namespace iTut
             });
         }
 
-        private async void InitializeDbContext(IApplicationBuilder builder)
+        private void InitializeDbContext(IApplicationBuilder builder)
         {
             var serviceScope = builder.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using (IServiceScope scope = serviceScope.CreateScope())
@@ -85,8 +86,8 @@ namespace iTut
                 var userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
 
                 if (!roleManager.Roles.Any())
-            {
-                var roles = new List<IdentityRole>
+                {
+                    var roles = new List<IdentityRole>
                 {
                     new IdentityRole
                     {
@@ -105,8 +106,8 @@ namespace iTut
                     new IdentityRole
                     {
                         Id = Guid.NewGuid().ToString(),
-                        Name = RoleConstants.Facilitator,
-                        NormalizedName = "FACILITATOR",
+                        Name = RoleConstants.SubjectCoordinator,
+                        NormalizedName = "SUBJECTCOORDINATOR",
                         ConcurrencyStamp = Guid.NewGuid().ToString()
                     },
                     new IdentityRole
@@ -124,44 +125,10 @@ namespace iTut
                         ConcurrencyStamp = Guid.NewGuid().ToString()
                     }
                 };
-                foreach (var role in roles)
-                {
-                    roleManager.CreateAsync(role).Wait();
-                }
-            }
-
-                if (!context.Users.Any())
-                {
-                    ApplicationUser user = new ApplicationUser()
+                    foreach (var role in roles)
                     {
-                        FirstName = "Johannes",
-                        LastName = "Parent",
-                        PhoneNumber = "0618021411",
-                        Email = "johannes@email.com",
-                        UserName = "johannes@email.com",
-                        EmailConfirmed = true
-                    };
-
-                    var result = await userManager.CreateAsync(user, "Password1!");
-
-                    if (result.Succeeded)
-                    {
-                        await userManager.AddToRoleAsync(user, RoleConstants.Parent);
-                        var parent = new ParentUser
-                        {
-                            UserId = user.Id,
-                            FirstName = user.FirstName,
-                            LastName = user.LastName,
-                            PhoneNumber = user.PhoneNumber,
-                            Gender = Gender.Female,
-                            Race = Race.African,
-                            PhysicalAddress = "3 On Mill, Port Elizabeth Central, Eastern Cape, 6001",
-                            CreatedOn = DateTime.Now
-                        };
-                        context.Add(parent);
+                        roleManager.CreateAsync(role).Wait();
                     }
-                    await context.SaveChangesAsync();
-                    Console.WriteLine("I am done with everything");
                 }
             }
         }
