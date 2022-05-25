@@ -40,7 +40,6 @@ namespace iTut.Controllers
             var viewModel = new ParentIndexViewModel
             {
                 Parent = parent,
-                Children = new List<string>()
             };
 
             return View(viewModel);

@@ -5,6 +5,6 @@
 
     $('.logout-button').click(function () {
         localStorage.clear();
-        window.location.href = "/Account/Logout";
+        window.location.href = "/Identity/Account/Logout";
     });
 });

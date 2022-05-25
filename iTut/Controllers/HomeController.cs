@@ -39,7 +39,7 @@ namespace iTut.Controllers
                 {
                     return RedirectToAction("Index", "Student");
                 }
-                else if (User.IsInRole(RoleConstants.Facilitator))
+                else if (User.IsInRole(RoleConstants.SubjectCoordinator))
                 {
                     return RedirectToAction("Index", "Facilitator");
                 }

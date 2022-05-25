@@ -6,6 +6,6 @@ namespace iTut.Constants
         public const string Educator = "Educator";
         public const string Parent = "Parent";
         public const string HOD = "HOD";
-        public const string Facilitator = "Facilitator";
+        public const string SubjectCoordinator = "SubjectCoordinator";
     }
 }
