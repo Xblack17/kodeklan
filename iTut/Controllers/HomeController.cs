@@ -1,4 +1,7 @@
-﻿using iTut.Models;
+﻿using iTut.Constants;
+using iTut.Models;
+using iTut.Models.Users;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,17 +15,42 @@ namespace iTut.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            if(User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole(RoleConstants.Parent))
+                {
+                    return RedirectToAction("Index", "Parent");
+                }
+                else if (User.IsInRole(RoleConstants.Educator))
+                {
+                    return RedirectToAction("Index", "Educator");
+                }
+                else if (User.IsInRole(RoleConstants.Student))
+                {
+                    return RedirectToAction("Index", "Student");
+                }
+                else if (User.IsInRole(RoleConstants.Facilitator))
+                {
+                    return RedirectToAction("Index", "Facilitator");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "HOD");
+                }
+            }
             return View();
         }
-
+        
         public IActionResult Privacy()
         {
             return View();
