@@ -1,7 +1,6 @@
 ﻿@model ParentIndexViewModel
 @{
     ViewData["Title"] = "Home";
-    Layout = "~/Views/Shared/_ParentLayout.cshtml";
 }
 
 <div id="collapseOffCanvas" class="bg-body offcanvas-collapse open w-100">
@@ -28,33 +27,16 @@
                     <div class="col-12">
                         <div class="d-flex align-items-center mb-3">
                             <div class="mr-auto">
-                                <h2 class="mb-2 fs-2 lh-tight">Children</h2>
+                                <h2 class="mb-2 fs-2 lh-tight">Timeline</h2>
+                                <p>What is happening?</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        @if (Model.Children.Count > 0)
-                        {
-                            foreach (var child in Model.Children)
-                            {
-                                <p>@child</p>
-                            }
-                        }
-                        else
-                        {
-                            <p>No children</p>
-                        }
+                        
                     </div>
                 </div>
             </div>
         </div>
     </main>
 </div>
-
-@*@if (Model.Users != null)
-    {
-    foreach (var user in Model.Users)
-    {
-    <partial name="_EditUserPartial" model="@ModelHelpers.GetEditUserViewModel(user)" />
-    }
-    }*@
