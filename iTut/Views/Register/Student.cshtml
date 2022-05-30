@@ -1,4 +1,4 @@
-﻿@model RegisterStudentViewModel
+﻿@model iTut.Models.ViewModels.Student.RegisterStudentViewModel
 @{
     ViewData["Title"] = "Register Student";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
@@ -7,7 +7,7 @@
 <div>
     <form asp-controller="Register" asp-action="Student" method="post" class="w-100">
         <div asp-validation-summary="ModelOnly" class="text-danger list-unstyled mb-2"></div>
-        <h3 class="mb-5">Register as a Student</h3>
+        <h3 class="mb-2">Register as a Student</h3>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">

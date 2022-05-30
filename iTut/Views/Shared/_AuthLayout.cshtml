@@ -14,7 +14,14 @@
 <body class="p-0 m-0">
     <main class="vw-100 vh-100 d-flex overflow-hidden">
         <section style="width: 45%; height: 100%">
-            <img src="~\Uimages\exam-education-uniform-students-testing-exams-with-pencil-multiple-choice-test_4236-1225.jpg" alt="Student Illustration" class="w-100" />
+            @if (ViewContext.HttpContext.Request.Path == "/Register/Student")
+            {
+                <img src="~/img/student.svg" alt="Student Illustration" class="w-100" />
+            }
+            else if (ViewContext.HttpContext.Request.Path == "/Register/Parent")
+            {
+                <img src="~/img/parent.svg" alt="Parent Illustration" class="w-100" />
+            }
         </section>
         <section class="d-flex justify-content-center align-items-center flex-grow-1">
             @RenderBody()
