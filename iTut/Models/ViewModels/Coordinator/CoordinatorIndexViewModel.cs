@@ -5,6 +5,6 @@ namespace iTut.Models.ViewModels.Coordinator
 {
     public class CoordinatorIndexViewModel
     {
-        public CoordinatorUser coordinator { get; set; }
+        public CoordinatorUser SubjectCoordinator { get; set; }
     }
 }

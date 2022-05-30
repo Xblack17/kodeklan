@@ -7,8 +7,11 @@
     <main class="main-expanded vh-100 w-100">
         <div class="container-fluid px-lg-5">
             <div class="d-flex py-5 border-bottom">
-                <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@Model.Parent.FirstName.ToCharArray()[0]</span>
-               
+                <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@Model.Coordinator.FirstName.ToCharArray()[0]</span>
+                <div class="mr-auto">
+                    <h2 class="mb-2 fs-1 lh-tight">Hi, @Model.Coordinator.FirstName</h2>
+                    <p class="lh-tight">Dashboard</p>
+                </div>
                 <ul class="list-unstyled d-flex align-items-center">
                     <li class="d-lg-none mr-sm-5">
                         <button class="btn link-body p-0 offcanvas-button" type="button">
@@ -25,7 +28,8 @@
                         <div class="d-flex align-items-center mb-3">
                             <div class="mr-auto">
                                 <h2 class="mb-2 fs-2 lh-tight">Timeline</h2>
-                               
+                                <p>View Subjects</p>
+                                <p> Subjects</p>
                             </div>
                         </div>
                     </div>
