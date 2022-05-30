@@ -1,12 +1,8 @@
 ﻿using iTut.Constants;
 using iTut.Data;
-using iTut.Models;
-using iTut.Models.Parent;
 using iTut.Models.Users;
 using iTut.Models.ViewModels.Coordinator;
-using iTut.Models.ViewModels.Parent;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +38,10 @@ namespace iTut.Controllers
                 SubjectCoordinator = SubjectCoordinator,
             };
             return View(viewModel);  
+        }
+        public IActionResult CreateASubject()
+        {
+            return View();
         }
     }
 }
