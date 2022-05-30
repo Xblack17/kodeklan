@@ -28,5 +28,13 @@ namespace iTut.Models.Users
 
         public string PhysicalAddress { get; set; }
 
+        public Gender Gender { get; set; }
+
+        public Race Race { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public bool Archived { get; set; }
+
     }
 }

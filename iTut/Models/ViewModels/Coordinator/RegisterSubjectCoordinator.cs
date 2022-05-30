@@ -26,6 +26,10 @@ namespace iTut.Models.ViewModels.Coordinator
 
         [Display(Name = "Gender")]
         public Gender Gender { get; set; }
+
+        [Display(Name = "Ethnicity")]
+        public Race Race { get; set; }
+
         [Display(Name = "Physical Address")]
         public string PhysicalAddress { get; set; }
 

@@ -8,22 +8,17 @@
             <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@user.FirstName.ToCharArray()[0]</span>
             <div class="mr-auto">
                 @user.FirstName @user.LastName <br />
-                @*@if (await UserManager.IsEmailConfirmedAsync(user))
+                @if (User.IsInRole(RoleConstants.Parent))
                 {
                     <p class="mt-1 badge bg-success text-white my-auto">
-                        Confirmed
+                        Parent
                     </p>
                 }
-                else
+                else if (User.IsInRole(RoleConstants.SubjectCoordinator))
                 {
-                    <p class="mt-1 badge bg-danger text-white my-auto">
-                        Not Confirmed
+                    <p class="mt-1 badge bg-success text-white my-auto">
+                        Coordinator
                     </p>
-                }*@
-                @if(User.IsInRole(RoleConstants.Parent)){
-                <p class="mt-1 badge bg-success text-white my-auto">
-                    Parent
-                </p>
                 }
             </div>
         </div>

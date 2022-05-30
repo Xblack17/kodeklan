@@ -31,9 +31,5 @@ namespace iTut.Data
 
         public DbSet<CoordinatorUser> SubjectCoordinator { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-       // public DbSet<Feedback> Feedbacks { get; set; }
-
-
-
     }
 }

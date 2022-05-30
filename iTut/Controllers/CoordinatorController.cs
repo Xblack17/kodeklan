@@ -16,20 +16,20 @@ using System.Threading.Tasks;
 namespace iTut.Controllers
 {
     [Authorize(Roles = RoleConstants.SubjectCoordinator)]
-    public class CoordinatorController1 : Controller
+    public class CoordinatorController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILogger<CoordinatorController1> _logger;
+        private readonly ILogger<CoordinatorController> _logger;
 
 
-        public CoordinatorController1(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ILogger<CoordinatorController1> logger)
+        public CoordinatorController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ILogger<CoordinatorController> logger)
         {
             _context = context;
             _userManager = userManager;
-
             _logger = logger;
         }
+        
         public ActionResult Index()
         {
             var SubjectCoordinator = _context.SubjectCoordinator.Where(c => c.UserId == _userManager.GetUserId(User)).FirstOrDefault();
@@ -39,6 +39,7 @@ namespace iTut.Controllers
             };
             return View(viewModel);  
         }
+        
         public IActionResult CreateASubject()
         {
             return View();
