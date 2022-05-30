@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iTut.Models.Users
 {
-    public class ParentUser
+    public class StudentUser
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; } = $"{Guid.NewGuid()}{Guid.NewGuid()}";
@@ -28,7 +28,9 @@ namespace iTut.Models.Users
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
-        public List<StudentParent> Children { get; set; }
+        public List<StudentParent> Parents { get; set; }
+
+        public Grade Grade { get; set; }
 
         public Gender Gender { get; set; }
 
