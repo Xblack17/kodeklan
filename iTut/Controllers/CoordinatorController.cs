@@ -32,7 +32,7 @@ namespace iTut.Controllers
         
         public ActionResult Index()
         {
-            var SubjectCoordinator = _context.SubjectCoordinator.Where(c => c.UserId == _userManager.GetUserId(User)).FirstOrDefault();
+            var SubjectCoordinator = _context.SubjectCoordinators.Where(c => c.UserId == _userManager.GetUserId(User)).FirstOrDefault();
             var viewModel = new CoordinatorIndexViewModel
             {
                 SubjectCoordinator = SubjectCoordinator,

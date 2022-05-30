@@ -27,7 +27,7 @@ namespace iTut.Controllers
         }
         public ActionResult Index()
         {
-            var educator = _context.Educator.Where(e => e.UserId == _userManager.GetUserId(User)).FirstOrDefault();
+            var educator = _context.Educators.Where(e => e.UserId == _userManager.GetUserId(User)).FirstOrDefault();
 
             var viewModel = new EducatorIndexViewModel
             {

@@ -29,10 +29,10 @@ namespace iTut.Data
 
         public DbSet<ParentUser> Parents { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
-        public DbSet<EducatorUser> Educator { get; set; }
+        public DbSet<EducatorUser> Educators { get; set; }
         public DbSet<StudentUser> Students { get; set; }
         public DbSet<StudentParent> StudentParents { get; set; }
-        public DbSet<CoordinatorUser> SubjectCoordinator { get; set; }
+        public DbSet<CoordinatorUser> SubjectCoordinators { get; set; }
         public DbSet<Subject> Subjects { get; set; }
     }
 }
