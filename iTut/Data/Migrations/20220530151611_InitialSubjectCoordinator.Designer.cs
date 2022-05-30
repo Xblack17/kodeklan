@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using iTut.Data;
 
 namespace iTut.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220530151611_InitialSubjectCoordinator")]
+    partial class InitialSubjectCoordinator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,32 +214,6 @@ namespace iTut.Data.Migrations
                     b.ToTable("Complaints");
                 });
 
-            modelBuilder.Entity("iTut.Models.Relationships.StudentParent", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ParentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ParentUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentUserId");
-
-                    b.HasIndex("StudentUserId");
-
-                    b.ToTable("StudentParents");
-                });
-
             modelBuilder.Entity("iTut.Models.Users.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -313,7 +289,6 @@ namespace iTut.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("iTut.Models.Users.EducatorUser", b =>
             modelBuilder.Entity("iTut.Models.Users.CoordinatorUser", b =>
                 {
                     b.Property<string>("Id")
@@ -346,15 +321,6 @@ namespace iTut.Data.Migrations
                     b.Property<string>("PhysicalAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PrimarySubject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Race")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SecondarySubject")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Race")
                         .HasColumnType("int");
 
@@ -364,7 +330,6 @@ namespace iTut.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Educator");
                     b.ToTable("SubjectCoordinator");
                 });
 
@@ -410,53 +375,6 @@ namespace iTut.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Parents");
-                });
-
-            modelBuilder.Entity("iTut.Models.Users.StudentUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Grade")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhysicalAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Race")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -508,27 +426,6 @@ namespace iTut.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("iTut.Models.Relationships.StudentParent", b =>
-                {
-                    b.HasOne("iTut.Models.Users.ParentUser", null)
-                        .WithMany("Children")
-                        .HasForeignKey("ParentUserId");
-
-                    b.HasOne("iTut.Models.Users.StudentUser", null)
-                        .WithMany("Parents")
-                        .HasForeignKey("StudentUserId");
-                });
-
-            modelBuilder.Entity("iTut.Models.Users.ParentUser", b =>
-                {
-                    b.Navigation("Children");
-                });
-
-            modelBuilder.Entity("iTut.Models.Users.StudentUser", b =>
-                {
-                    b.Navigation("Parents");
                 });
 #pragma warning restore 612, 618
         }

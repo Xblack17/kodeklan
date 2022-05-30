@@ -85,6 +85,7 @@ namespace iTut
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
 
+                
                 if (!roleManager.Roles.Any())
                 {
                     var roles = new List<IdentityRole>
