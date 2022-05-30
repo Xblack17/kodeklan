@@ -3,6 +3,7 @@ using iTut.Data;
 using iTut.Models.Users;
 using iTut.Models.ViewModels.Parent;
 using iTut.Models.ViewModels.Educator;
+using iTut.Models.ViewModels.Student;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -75,6 +76,60 @@ namespace iTut.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Parent");
                 }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            return View(model);
+        }
+
+        public IActionResult Student()
+        {
+            return View(new RegisterStudentViewModel());
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Student(RegisterStudentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.EmailAddress,
+                    Email = model.EmailAddress,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    PhoneNumber = model.PhoneNumber,
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, RoleConstants.Student);
+                    var student = new StudentUser
+                    {
+                        UserId = user.Id,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        EmailAddress = model.EmailAddress,
+                        PhoneNumber = model.PhoneNumber,
+                        PhysicalAddress = model.PhysicalAddress,
+                        Gender = model.Gender,
+                        Grade = model.Grade,
+                        Race = model.Race,
+                        CreatedOn = DateTime.Now,
+                        Archived = false
+                    };
+                    _context.Add(student);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation("User created a new account with password.");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Student");
+                }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);

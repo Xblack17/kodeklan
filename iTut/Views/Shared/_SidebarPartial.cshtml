@@ -8,8 +8,7 @@
             <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@user.FirstName.ToCharArray()[0]</span>
             <div class="mr-auto">
                 @user.FirstName @user.LastName <br />
-                @if (User.IsInRole(RoleConstants.Parent))
-                {
+                @if(User.IsInRole(RoleConstants.Parent)){
                     <p class="mt-1 badge bg-success text-white my-auto">
                         Parent
                     </p>
@@ -18,6 +17,12 @@
                 {
                     <p class="mt-1 badge bg-success text-white my-auto">
                         Educator
+                    </p>
+                }
+                else if (User.IsInRole(RoleConstants.Student))
+                {
+                    <p class="mt-1 badge bg-success text-white my-auto">
+                        Student
                     </p>
                 }
             </div>

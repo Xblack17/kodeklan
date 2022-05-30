@@ -11,6 +11,10 @@
     <Content Remove="Models\Educator\**" />
     <EmbeddedResource Remove="Models\Educator\**" />
     <None Remove="Models\Educator\**" />
+    <Compile Remove="Models\Student\**" />
+    <Content Remove="Models\Student\**" />
+    <EmbeddedResource Remove="Models\Student\**" />
+    <None Remove="Models\Student\**" />
   </ItemGroup>
 
   <ItemGroup>
