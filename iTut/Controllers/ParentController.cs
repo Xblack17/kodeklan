@@ -80,7 +80,7 @@ namespace iTut.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> InviteParent(ParentInvite invite)
+        public IActionResult InviteParent(ParentInvite invite)
         {
             if(ModelState.IsValid)
             {

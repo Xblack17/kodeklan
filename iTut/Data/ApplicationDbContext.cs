@@ -27,5 +27,6 @@ namespace iTut.Data
 
         public DbSet<ParentUser> Parents { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<EducatorUser> Educator { get; set; }
     }
 }
