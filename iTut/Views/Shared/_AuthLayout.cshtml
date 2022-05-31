@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - iTut</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/grayshift.css" />
+    <link rel="stylesheet" href="~/css/theme.css" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -14,9 +14,20 @@
 <body class="p-0 m-0">
     <main class="vw-100 vh-100 d-flex overflow-hidden">
         <section style="width: 45%; height: 100%">
-            <img src="~/images/parent.svg" alt="Parent Illustration" class="w-100" />
+            @if (ViewContext.HttpContext.Request.Path == "/Register/Student")
+            {
+                <img src="~/img/student.svg" alt="Student Illustration" class="w-100" />
+            }
+            else if (ViewContext.HttpContext.Request.Path == "/Register/Parent")
+            {
+                <img src="~/img/parent.svg" alt="Parent Illustration" class="w-100" />
+            }
+            else
+            {
+                <img src="~/img/auth_image.jpg" alt="Auth Illustration" class="w-100" />
+            }
         </section>
-        <section class="d-flex justify-content-center align-items-center flex-grow-1">
+        <section class="d-flex justify-content-center align-items-center flex-grow-1 min-vh-100">
             @RenderBody()
         </section>
     </main>

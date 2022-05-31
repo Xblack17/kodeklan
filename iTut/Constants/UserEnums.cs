@@ -22,4 +22,13 @@ namespace iTut.Constants
         [Display(Name = "Other")]
         Other
     }
+
+    public enum Grade
+    {
+        Eight,
+        Nine,
+        Ten,
+        Eleven,
+        Twelve
+    }
 }

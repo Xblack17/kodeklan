@@ -255,7 +255,7 @@
 }
 
 .bg-img-cover-1 {
-    background-image: url("/assets/img/001.jpg");
+    background-image: url("/img/001.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center

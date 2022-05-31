@@ -41,7 +41,7 @@ namespace iTut.Controllers
                 }
                 else if (User.IsInRole(RoleConstants.SubjectCoordinator))
                 {
-                    return RedirectToAction("Index", "Facilitator");
+                    return RedirectToAction("Index", "Coordinator");
                 }
                 else
                 {
@@ -52,6 +52,10 @@ namespace iTut.Controllers
         }
         
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult Disclaimer()
         {
             return View();
         }

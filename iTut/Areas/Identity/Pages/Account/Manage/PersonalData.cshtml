@@ -3,22 +3,36 @@
 @{
     ViewData["Title"] = "Personal Data";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
-<h4>@ViewData["Title"]</h4>
-
-<div class="row">
-    <div class="col-md-6">
-        <p>Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
-        <p>
-            <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
-        </p>
-        <form id="download-data" asp-page="DownloadPersonalData" method="post" class="form-group">
-            <button class="btn btn-primary" type="submit">Download</button>
-        </form>
-        <p>
-            <a id="delete" asp-page="DeletePersonalData" class="btn btn-secondary">Delete</a>
-        </p>
+<div class="bg-img-cover w-100 min-vh-100 d-flex flex-column justify-content-center">
+    <div class="py-5">
+        <div class="mx-auto bg-body p-5 rounded" style="max-width: 600px">
+            <a class="link-body" asp-controller="Home" asp-action="Index">
+                <img class="img-fluid" style="height: 45px" src="~/assets/img/logo.png" alt="" />
+            </a>
+            <h4 class="mb-5 fs-4 mt-4">Manage Your Personal Data</h4>
+            <hr class="mt-0" role="presentation">
+            <div class="row">
+                <p>Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
+                <p class="mt-2">
+                    <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+                </p>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <form asp-page="DownloadPersonalData" method="post" class="form-group">
+                            <button class="btn btn-primary" type="submit">Download</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <a asp-page="DeletePersonalData" class="btn btn-danger">Delete</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

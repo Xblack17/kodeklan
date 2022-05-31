@@ -1,5 +1,7 @@
 ﻿using iTut.Constants;
+using iTut.Models.Relationships;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,6 +27,8 @@ namespace iTut.Models.Users
         [Required]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
+
+        public List<StudentParent> Children { get; set; }
 
         public Gender Gender { get; set; }
 
