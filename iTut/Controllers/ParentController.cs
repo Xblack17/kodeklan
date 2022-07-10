@@ -47,11 +47,14 @@ namespace iTut.Controllers
 
         public async Task<ActionResult> Complaints()
         {
-            return View(await _context.Complaints.Where(c => c.ParentId == _userManager.GetUserId(User)).ToListAsync());
+            var parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
+            var complaints = await _context.Complaints.Where(c => c.ParentId == parent.Id && c.Archived == false).ToListAsync();
+            return View(complaints);
         }
 
         public IActionResult CreateComplaint()
         {
+            ViewBag.Parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
             return View();
         }
 
@@ -61,9 +64,8 @@ namespace iTut.Controllers
         {
             if (ModelState.IsValid)
             {
-                var parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
                 var complaint = new Complaint {
-                    ParentId = parent.Id,
+                    ParentId = model.ParentId,
                     Title = model.Title,
                     ComplaintBody = model.ComplaintBody,
                     Status = ComplaintStatus.Pending,
@@ -72,8 +74,40 @@ namespace iTut.Controllers
                 };
                 _context.Add(complaint);
                 await _context.SaveChangesAsync();
-                _logger.LogInformation("Complaint created!");
+                _logger.LogInformation($"Complaint, id: {complaint.Id}, created!");
                 return RedirectToAction(nameof(Complaints));
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult MeetingRequest()
+        {
+            ViewBag.Parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
+            //ViewBag.Teachers = _context.Educators.Where(e => e.Archived == false).ToList();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MeetingRequest(MeetingRequest model)
+        {
+            if (ModelState.IsValid)
+            {
+                var meetingRequest = new MeetingRequest
+                {
+                    ParentId = model.ParentId,
+                    EducatorId = $"{Guid.NewGuid()}{Guid.NewGuid()}",
+                    Reason = model.Reason,
+                    MeetingDate = model.MeetingDate,
+                    Status = MeetingStatus.Pending,
+                    CreatedAt = DateTime.Now,
+                    ModifiedAt = DateTime.Now
+                };
+                _context.Add(meetingRequest);
+                await _context.SaveChangesAsync();
+                _logger.LogInformation($"Meeting Request, id: {meetingRequest.Id}, created!");
+                return RedirectToAction(nameof(Index));
             }
             return View(model);
         }

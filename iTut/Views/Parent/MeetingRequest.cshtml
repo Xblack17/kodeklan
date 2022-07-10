@@ -1,0 +1,52 @@
+﻿@model iTut.Models.Parent.MeetingRequest
+
+@{
+    ViewData["Title"] = "Meeting Request";
+    ViewBag.Title = "Parent";
+}
+<div id="collapseOffCanvas" class="bg-body offcanvas-collapse open w-100">
+    <main class="main-expanded vh-100 w-100">
+        <div class="container-fluid px-lg-5">
+            <div class="invisible-scrollbar position-relative wh-main">
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="mr-auto">
+                                <h2 class="mb-2 fs-2 lh-tight">Request Meeting</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <form asp-controller="Parent" asp-action="MeetingRequest" class="col-12">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="ParentId" hidden value="@ViewBag.Parent" />
+                        <div>
+                            @*<div class="form-group mb-3">
+                                <label asp-for="EducatorId" class="control-label"></label>
+                                <select asp-for="EducatorId" class="form-control">
+                                    @foreach (var teacher in ViewBag.Teachers)
+                                   {
+                                       <option value="@teacher.Id">@teacher.FirstName @teacher.LastName</option>
+                                   }
+                                </select>
+                                <span asp-validation-for="EducatorId" class="text-danger"></span>
+                            </div>*@
+                            <div class="form-group mb-3">
+                                <label asp-for="Reason" class="control-label"></label>
+                                <input asp-for="Reason" class="form-control" />
+                                <span asp-validation-for="Reason" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="MeetingDate" class="control-label"></label>
+                                <input asp-for="MeetingDate" class="form-control" type="datetime-local" />
+                                <span asp-validation-for="MeetingDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Request" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
