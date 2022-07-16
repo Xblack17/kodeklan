@@ -2,8 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using iTut.Constants;
+using iTut.Coravel;
 using iTut.Data;
+using iTut.Models.Mail;
 using iTut.Models.Users;
+using iTut.Services;
+using iTut.Services.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -35,6 +39,11 @@ namespace iTut
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddTransient<IMailService, MailService>();
+            services.AddTransient<IMailTemplateService, MailTemplateService>();
+            services.AddTransient<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
+            services.AddCoravel();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +75,7 @@ namespace iTut
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCoravel();
 
             app.UseEndpoints(endpoints =>
             {

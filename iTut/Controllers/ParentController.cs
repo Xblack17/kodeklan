@@ -1,7 +1,10 @@
-﻿using iTut.Constants;
+﻿using Coravel.Queuing.Interfaces;
+using iTut.Constants;
+using iTut.Coravel.Events;
 using iTut.Data;
 using iTut.Models;
 using iTut.Models.Parent;
+using iTut.Models.Relationships;
 using iTut.Models.Users;
 using iTut.Models.ViewModels.Parent;
 using Microsoft.AspNetCore.Authorization;
@@ -24,12 +27,14 @@ namespace iTut.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<ParentController> _logger;
+        private readonly IQueue _queue;
 
-        public ParentController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ILogger<ParentController> logger)
+        public ParentController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ILogger<ParentController> logger, IQueue queue)
         {
             _context = context;
             _userManager = userManager;
             _logger = logger;
+            _queue = queue;
         }
 
         // GET: ParentController
@@ -72,7 +77,10 @@ namespace iTut.Controllers
                     CreateAt = DateTime.Now,
                     UpdateAt = DateTime.Now
                 };
+
+                var parent =  _context.Parents.Where(p => p.Id == model.ParentId).FirstOrDefault();
                 _context.Add(complaint);
+                _queue.QueueBroadcast(new ComplaintCreated(complaint, parent));
                 await _context.SaveChangesAsync();
                 _logger.LogInformation($"Complaint, id: {complaint.Id}, created!");
                 return RedirectToAction(nameof(Complaints));
@@ -112,15 +120,70 @@ namespace iTut.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult InviteParent()
+        {
+            ViewBag.Parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult InviteParent(ParentInvite invite)
+        public IActionResult InviteParent(InviteParent invite)
         {
             if(ModelState.IsValid)
             {
+                _logger.LogInformation($"Invitation Sent to {invite.ParentEmail}");
                 return RedirectToAction(nameof(Index));
             }
             return View(invite);
+        }
+
+        [HttpGet]
+        public ActionResult Children()
+        {
+            List<StudentUser> children = new List<StudentUser>();
+            var dbParent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
+            var students = _context.Students.Where(s => s.Archived == false).Include(s => s.Parents).ToList();
+            foreach (var student in students)
+            {
+                foreach (var parent in student.Parents)
+                {
+                    if(parent.ParentId == dbParent.Id)
+                    {
+                        children.Add(student);
+                    }
+                }
+            }
+
+            return View(children);
+        }
+
+        [HttpGet]
+        public ActionResult AddChild()
+        {
+            ViewBag.Parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddChild(AddStudentModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var studentId = _context.Students.Where(s => s.EmailAddress == model.StudentEmail).FirstOrDefault().Id;
+                var studentParent = new StudentParent
+                {
+                    ParentId = model.ParentId,
+                    StudentId = studentId,
+                    
+                };
+                _context.Add(studentParent);
+                await _context.SaveChangesAsync();
+                _logger.LogInformation($"Relationship created between parent: {model.ParentId} and student: {studentId}");
+                return RedirectToAction(nameof(Children));
+            }
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
