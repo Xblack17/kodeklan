@@ -404,7 +404,7 @@ namespace iTut.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Educator");
+                    b.ToTable("Educators");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.ParentUser", b =>
