@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using iTut.Data;
 
 namespace iTut.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220718092510_datas")]
+    partial class datas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -404,7 +406,7 @@ namespace iTut.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Educator");
+                    b.ToTable("Educators");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.ParentUser", b =>
