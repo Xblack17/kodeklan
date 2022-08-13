@@ -5044,3 +5044,8 @@ fieldset:disabled .btn {
 .translate-middle {
   transform: translateX(-50%) translateY(-50%) !important;
 }
+
+.bs-tooltip-auto[x-placement^=right] .arrow::before,
+.bs-tooltip-bottom .arrow::before {
+    border-bottom-color: #f00; /* Red */
+}
