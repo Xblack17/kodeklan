@@ -116,7 +116,7 @@ namespace iTut.Controllers
         public ActionResult MeetingRequest()
         {
             ViewBag.Parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
-            ViewBag.Teachers = _context.Educators.Where(e => e.Archived == false).ToList();
+            ViewBag.Teachers = _context.Educator.Where(e => e.Archived == false).ToList();
             return View();
         }
 
