@@ -10,8 +10,8 @@ using iTut.Data;
 namespace iTut.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220719074827_educator")]
-    partial class educator
+    [Migration("20220804110123_anotherMiigrationCategory")]
+    partial class anotherMiigrationCategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -2,7 +2,7 @@
 
 namespace iTut.Data.Migrations
 {
-    public partial class educator : Migration
+    public partial class testIt : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
