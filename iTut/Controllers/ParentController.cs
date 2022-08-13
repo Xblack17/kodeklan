@@ -50,6 +50,8 @@ namespace iTut.Controllers
             return View(viewModel);
         }
 
+        #region Complaints
+
         public async Task<ActionResult> Complaints()
         {
             var parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
@@ -107,11 +109,14 @@ namespace iTut.Controllers
             return View(nameof(Complaints));
         }
 
+        #endregion
+
+        #region Meeting Requests
         [HttpGet]
         public ActionResult MeetingRequest()
         {
             ViewBag.Parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
-            //ViewBag.Teachers = _context.Educators.Where(e => e.Archived == false).ToList();
+            ViewBag.Teachers = _context.Educators.Where(e => e.Archived == false).ToList();
             return View();
         }
 
@@ -124,7 +129,7 @@ namespace iTut.Controllers
                 var meetingRequest = new MeetingRequest
                 {
                     ParentId = model.ParentId,
-                    EducatorId = $"{Guid.NewGuid()}{Guid.NewGuid()}",
+                    EducatorId = model.EducatorId,
                     Reason = model.Reason,
                     MeetingDate = model.MeetingDate,
                     Status = MeetingStatus.Pending,
@@ -138,6 +143,9 @@ namespace iTut.Controllers
             }
             return View(model);
         }
+        #endregion
+
+        #region Invite Parent
 
         [HttpGet]
         public ActionResult InviteParent()
@@ -157,6 +165,8 @@ namespace iTut.Controllers
             }
             return View(invite);
         }
+
+        #endregion
 
         [HttpGet]
         public ActionResult Children()
