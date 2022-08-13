@@ -1,12 +1,15 @@
 ﻿using iTut.Constants;
 using iTut.Data;
+using iTut.Models.Edu;
 using iTut.Models.Users;
 using iTut.Models.ViewModels.Educator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace iTut.Controllers
@@ -27,7 +30,7 @@ namespace iTut.Controllers
         }
         public ActionResult Index()
         {
-            var educator = _context.Educators.Where(e => e.UserId == _userManager.GetUserId(User)).FirstOrDefault();
+            var educator = _context.Educator.Where(e => e.UserId == _userManager.GetUserId(User)).FirstOrDefault();
 
             var viewModel = new EducatorIndexViewModel
             {
@@ -41,5 +44,44 @@ namespace iTut.Controllers
             return View();
         }
       
+        public async Task<ActionResult> Categories()
+        {
+            //return View(await _context.Categories.Where(c => c.EducatorID == _userManager.GetUserId(User)).ToListAsync());
+            return View(_context.Categories.ToList());
+        }
+
+        public IActionResult CreateCategory()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult>CreateCategory(Category model)
+        {
+            if(ModelState.IsValid)
+            {
+                var educator = _context.Educator.Where(e => e.UserId == _userManager.GetUserId(User)).FirstOrDefault();
+
+                var category = new Category
+                {
+                    EducatorID = educator.Id,
+                    CategoryName = model.CategoryName,
+                    categoryStatus = Category.CategoryStatus.Active,
+                    CreateAt = DateTime.Now,
+                    UpdateAt = DateTime.Now,
+
+                };
+                _context.Add(category);
+                await _context.SaveChangesAsync();
+                _logger.LogInformation("Categoy created!");
+                return RedirectToAction(nameof(Categories));
+            }
+            return View(model);
+        }
+
+        public IActionResult CreateQuiz()
+        {
+            return View();
+        }
     }
 }

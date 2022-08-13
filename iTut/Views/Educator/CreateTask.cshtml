@@ -2,30 +2,57 @@
     ViewData["Title"] = "Create Task";
 }
 
-<div class="row m-0">
+<div class="container py-3 px-2" > 
+    <div class="WorkBoard py-4 d-flex"> 
+         <div class="taskTitle">
+        <h2> Your Work Board</h2>
+        </div>
+       <div class="edu_task_icon ml-auto pr-3 py-0">
+           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="dark" class="bi bi-pc-display" viewBox="0 0 16 16">
+  <path d="M8 1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V1Zm1 13.5a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0Zm2 0a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0ZM9.5 1a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5ZM9 3.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0-.5.5ZM1.5 2A1.5 1.5 0 0 0 0 3.5v7A1.5 1.5 0 0 0 1.5 12H6v2h-.5a.5.5 0 0 0 0 1H7v-4H1.5a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5H7V2H1.5Z"/>
+</svg>
+       </div>
+    </div>
+
+<div class="overflow-scroll">
+<div class="row m-1 justify-content-around" >
     <div class="card col-md-4">
         <img class="card-img-top w-100" src="~/img/undraw_calculator_re_alsc.svg" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title">Create quiz</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quisquam suscipit magni dicta, repellat, .</p>
-            <a href="#" class="btn btn-primary">Create quiz</a>
+            <h5 class="card-title py-2">Create quiz</h5>
+            <p class="card-text py-2"> Create a new quiz,exam, test below .</p>
+            <a href="/Educator/CreateQuiz" class="btn btn-primary">Create quiz</a>
         </div>
     </div>
     <div class="card col-md-4">
         <img class="card-img-top w-100" src="~/img/undraw_online_stats_0g94.svg" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title">View Quiz Stats</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quisquam suscipit magni dicta, repellat, .</p>
+            <h5 class="card-title py-5">View Quiz Stats</h5>
+            <p class="card-text pt-0 pb-2"> View latest quzi status and statistics .</p>
             <a href="#" class="btn btn-primary">Go To Stats</a>
         </div>
     </div>
     <div class="card col-md-4">
         <img class="card-img-top w-100" src="~/img/undraw_world_re_768g.svg" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title">View Marks</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quisquam suscipit magni dicta, repellat, .</p>
+            <h5 class="card-title py-2">View Marks</h5>
+            <p class="card-text py-3"> view student marks, average marks from a task .</p>
             <a href="#" class="btn btn-primary">View Marks</a>
         </div>
     </div>
+</div> 
+<div class="row m-1 " >
+
+    <div class="card col-md-4">
+        <img class="card-img-top w-100" src="~/img/undraw_add_files_re_v09g.svg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title py-2">Add Category</h5>
+            <p class="card-text py-2"> Add a Category or Topic here Below .</p>
+            <a href="/Educator/CreateCategory" class="btn btn-primary"> Add Category</a>
+        </div>
+    </div>
+   
+    </div>
+     </div>
 </div>
 
