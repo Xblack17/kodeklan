@@ -57,35 +57,54 @@ namespace iTut.Controllers
             return View(complaints);
         }
 
-        public IActionResult CreateComplaint()
-        {
-            ViewBag.Parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateComplaint(Complaint model)
         {
             if (ModelState.IsValid)
             {
+                var parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
+
                 var complaint = new Complaint {
-                    ParentId = model.ParentId,
+                    ParentId = parent.Id,
                     Title = model.Title,
                     ComplaintBody = model.ComplaintBody,
                     Status = ComplaintStatus.Pending,
                     CreateAt = DateTime.Now,
                     UpdateAt = DateTime.Now
                 };
-
-                var parent =  _context.Parents.Where(p => p.Id == model.ParentId).FirstOrDefault();
                 _context.Add(complaint);
-                _queue.QueueBroadcast(new ComplaintCreated(complaint, parent));
+                //_queue.QueueBroadcast(new ComplaintCreated(complaint, parent));
                 await _context.SaveChangesAsync();
                 _logger.LogInformation($"Complaint, id: {complaint.Id}, created!");
                 return RedirectToAction(nameof(Complaints));
             }
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditComplaint(Complaint model)
+        {
+
+            Console.WriteLine($">>>>>>>>>>>>>>>>>>>>>>>>>>> Complaint Model ID: {model.Id}");
+
+            if (ModelState.IsValid)
+            {
+                var dbComplaint = _context.Complaints.Where(c => c.Id == model.Id).FirstOrDefault();
+                if(dbComplaint != null)
+                {
+                    dbComplaint.Title = model.Title;
+                    dbComplaint.ComplaintBody = model.ComplaintBody;
+                    dbComplaint.Status = model.Status;
+                    dbComplaint.UpdateAt = DateTime.Now;
+                    _context.Update(dbComplaint);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation($"Complaint, id: {dbComplaint.Id}, updated");
+                    return RedirectToAction(nameof(Complaints));
+                }
+            }
+            return View(nameof(Complaints));
         }
 
         [HttpGet]
