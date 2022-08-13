@@ -1,0 +1,19 @@
+﻿@using iTut.Models.Parent
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Complaint
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<body>
+    <h1>iTUT Complaint Created</h1>
+    <p>This email serves to confirm that your complaint has been created successfully.</p>
+    <div>
+        <h4>@Model.Title</h4>
+        <p>@Model.ComplaintBody</p>
+    </div>
+    <p><em>This complaint has been sent to the HOD for review.</em></p>
+</body>
+</html>
