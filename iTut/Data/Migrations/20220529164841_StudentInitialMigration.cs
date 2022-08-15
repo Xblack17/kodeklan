@@ -31,55 +31,10 @@ namespace iTut.Data.Migrations
                     table.PrimaryKey("PK_Students", x => x.Id);
                 });
 
-            
-
-            migrationBuilder.CreateTable(
-                name: "StudentParents",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ParentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StudentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ParentUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    StudentUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StudentParents", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_StudentParents_Parents_ParentUserId",
-                        column: x => x.ParentUserId,
-                        principalTable: "Parents",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_StudentParents_Students_StudentUserId",
-                        column: x => x.StudentUserId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentParents_ParentUserId",
-                table: "StudentParents",
-                column: "ParentUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentParents_StudentUserId",
-                table: "StudentParents",
-                column: "StudentUserId");
-
-           
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "StudentParents");
-
             migrationBuilder.DropTable(
                 name: "Parents");
 

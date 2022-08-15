@@ -1,5 +1,5 @@
 ﻿using iTut.Constants;
-using iTut.Models.Relationships;
+using iTut.Models.Parent;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +9,10 @@ namespace iTut.Models.Users
 {
     public class ParentUser
     {
+        public ParentUser()
+        {
+            this.Children = new HashSet<StudentUser>();
+        }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; } = $"{Guid.NewGuid()}{Guid.NewGuid()}";
 
@@ -28,7 +32,7 @@ namespace iTut.Models.Users
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
-        public List<StudentParent> Children { get; set; }
+        public virtual ICollection<StudentUser> Children { get; set; }
 
         public Gender Gender { get; set; }
 

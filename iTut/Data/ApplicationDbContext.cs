@@ -1,5 +1,4 @@
 ﻿using iTut.Models.Parent;
-using iTut.Models.Relationships;
 using iTut.Models.Coordinator;
 using iTut.Models.Users;
 using Microsoft.AspNetCore.Identity;
@@ -31,7 +30,6 @@ namespace iTut.Data
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<EducatorUser> Educators { get; set; }
         public DbSet<StudentUser> Students { get; set; }
-        public DbSet<StudentParent> StudentParents { get; set; }
         public DbSet<CoordinatorUser> SubjectCoordinators { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<MeetingRequest> MeetingRequest { get; set; }

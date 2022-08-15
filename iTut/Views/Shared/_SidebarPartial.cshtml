@@ -1,5 +1,5 @@
 ﻿@inject UserManager<ApplicationUser> UserManager;
-@{ 
+@{
     var user = await UserManager.GetUserAsync(User);
 }
 <div class="sidebar sidebar-expand-lg invisible-scrollbar order-1 order-lg-0">
@@ -38,6 +38,22 @@
             <h1 class="mr-auto fs-3 mb-3">Menu</h1>
         </div>
         <hr class="mt-0" role="presentation">
+        @if (User.IsInRole(RoleConstants.Parent))
+        {
+            <div class="w-100 cusror-pointer">
+                <div class="d-flex">
+                    <a href="/Parent/UserReport">
+                        <div class="flex-grow-1">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h2 class="fs-1">User Report</h2>
+                            </div>
+                            <p class="text-body fs-1">See All Your Data as a Parent</p>
+                        </div>
+                    </a>
+                </div>
+                <hr class="mt-1" role="presentation">
+            </div>
+        }
         <div class="w-100 cusror-pointer">
             <div class="d-flex">
                 <a href="/Identity/Account/Manage/PersonalData">
