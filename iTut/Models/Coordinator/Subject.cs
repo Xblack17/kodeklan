@@ -23,5 +23,12 @@ namespace iTut.Models.Coordinator
         public string SubjectDescr { get; set; }
 
 
+        public string Educator { get; set; }
+
+        public string Grade { get; set; }
+
+        public string Created_at { get; set; }
+
+        public string Updated_at { get; set; }
     }
 }
