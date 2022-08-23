@@ -2,9 +2,12 @@
 using iTut.Models.Relationships;
 using iTut.Models.Coordinator;
 using iTut.Models.Users;
+using iTut.Models.ViewModels.HOD;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using iTut.Models.HOD;
+using iTut.Models.HOD.Leave;
 
 namespace iTut.Data
 {
@@ -12,6 +15,10 @@ namespace iTut.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
+        {
+        }
+
+        public ApplicationDbContext()
         {
         }
 
@@ -34,5 +41,46 @@ namespace iTut.Data
         public DbSet<StudentParent> StudentParents { get; set; }
         public DbSet<CoordinatorUser> SubjectCoordinators { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<HODUser> HOD { get; set; }
+
+
+
+
+        public DbSet<GuardianType> GuardianType { get; set; }
+        public DbSet<Guardian> Guardian { get; set; }
+        public DbSet<Student> Student { get; set; }
+        public DbSet<Admission> Admission { get; set; }
+        public DbSet<Session> Session { get; set; }
+        public DbSet<Section> Section { get; set; }
+        public DbSet<Group> Group { get; set; }
+        public DbSet<Shift> Shift { get; set; }
+        public DbSet<ExamMark> ExamMark { get; set; }
+        public DbSet<Course> Course { get; set; }
+        public DbSet<StudentClass> StudentClass { get; set; }
+        public DbSet<ClassName> ClassName { get; set; }
+        public DbSet<AssignRoll> AssignRoll { get; set; }
+        public DbSet<Designation> Designation { get; set; }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<EducationLevel> EducationLevel { get; set; }
+        public DbSet<ExamTitle> ExamTitle { get; set; }
+        public DbSet<EmployeeEducation> EmployeeEducation { get; set; }
+        public DbSet<EmploymentHistory> EmploymentHistory { get; set; }
+        public DbSet<JobInfo> JobInfo { get; set; }
+        public DbSet<ClassFee> ClassFee { get; set; }
+        
+        public DbSet<DefaultSetting> DefaultSetting { get; set; }
+        public DbSet<School> School { get; set; }
+        public DbSet<iTut.Models.HOD.AssignStuff> AssignStuff { get; set; }
+        public DbSet<iTut.Models.HOD.Attendance> Attendance { get; set; }
+        
+        public DbSet<iTut.Models.HOD.Grade> Grade { get; set; }
+        public DbSet<iTut.Models.HOD.FeeType> FeeType { get; set; }
+        public DbSet<iTut.Models.HOD.Leave.LeaveAllocationVM> LeaveAllocationVM { get; set; }
+        public DbSet<iTut.Models.HOD.Leave.LeaveRequestVM> LeaveRequestVM { get; set; }
+        public DbSet<iTut.Models.HOD.Leave.LeaveTypeVM> LeaveTypeVM { get; set; }
+        public DbSet<iTut.Models.HOD.Leave.AdminLeaveRequestViewVM> AdminLeaveRequestViewVM { get; set; }
+
+
+        
     }
 }
