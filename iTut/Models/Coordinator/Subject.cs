@@ -1,17 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iTut.Models.Coordinator
 {
-    public  class Subject
+    public class Subject
     {
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Id { get; set; } = $"{Guid.NewGuid()}{Guid.NewGuid()}";
-
-        [Required]
-        public string SubjectId { get; set; }
+        [Key]
+        public int SubjectId { get; set; }
 
 
         [Required]
@@ -23,12 +19,11 @@ namespace iTut.Models.Coordinator
         public string SubjectDescr { get; set; }
 
 
-        public string Educator { get; set; }
+        //  public string Educator { get; set; }
 
-        public string Grade { get; set; }
+        //public string Grade { get; set; }
 
-        public string Created_at { get; set; }
-
-        public string Updated_at { get; set; }
+        public DateTime Created_at { get; set; }
+        public DateTime Updated_at { get; set; }
     }
 }

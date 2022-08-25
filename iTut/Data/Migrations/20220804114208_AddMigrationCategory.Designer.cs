@@ -356,7 +356,7 @@ namespace iTut.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubjectCoordinators");
+                    b.ToTable("subjectcoordinator");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.EducatorUser", b =>

@@ -35,7 +35,7 @@ namespace iTut.Data
 
         public DbSet<StudentUser> Students { get; set; }
         public DbSet<StudentParent> StudentParents { get; set; }
-        public DbSet<CoordinatorUser> SubjectCoordinators { get; set; }
+        public DbSet<CoordinatorUser> SubjectCoordinator { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<MeetingRequest> MeetingRequest { get; set; }
     }

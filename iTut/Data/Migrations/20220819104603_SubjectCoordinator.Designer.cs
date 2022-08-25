@@ -10,8 +10,8 @@ using iTut.Data;
 namespace iTut.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220804105446_addCategory")]
-    partial class addCategory
+    [Migration("20220819104603_SubjectCoordinator")]
+    partial class SubjectCoordinator
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,6 +161,15 @@ namespace iTut.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Educator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Grade")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SubjectDescr")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -174,9 +183,40 @@ namespace iTut.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Updated_at")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Subjects");
+                });
+
+            modelBuilder.Entity("iTut.Models.Edu.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EducatorID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("categoryStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("iTut.Models.Parent.Complaint", b =>
@@ -212,6 +252,40 @@ namespace iTut.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Complaints");
+                });
+
+            modelBuilder.Entity("iTut.Models.Parent.MeetingRequest", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EducatorId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MeetingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ParentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MeetingRequest");
                 });
 
             modelBuilder.Entity("iTut.Models.Relationships.StudentParent", b =>
@@ -356,7 +430,7 @@ namespace iTut.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("subjectcoordinator");
+                    b.ToTable("SubjectCoordinator");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.EducatorUser", b =>

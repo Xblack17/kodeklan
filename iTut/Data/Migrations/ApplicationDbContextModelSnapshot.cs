@@ -156,35 +156,27 @@ namespace iTut.Data.Migrations
 
             modelBuilder.Entity("iTut.Models.Coordinator.Subject", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("SubjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Created_at")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Educator")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Grade")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SubjectDescr")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("SubjectId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SubjectName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Updated_at")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Updated_at")
+                        .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("SubjectId");
 
                     b.ToTable("Subjects");
                 });
@@ -428,7 +420,7 @@ namespace iTut.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubjectCoordinators");
+                    b.ToTable("SubjectCoordinator");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.EducatorUser", b =>
