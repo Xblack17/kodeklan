@@ -41,11 +41,16 @@ namespace iTut.Controllers
             return View(viewModel);
         }
 
+        public IActionResult Subject()
+        {
+            return View();
+        }
+
         public IActionResult CreateASubject()
         {
             return View();
         }
-       
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -57,12 +62,9 @@ namespace iTut.Controllers
 
                 var subject = new Subject
                 {
-                    //Id = model.Id,
-                    SubjectId = model.SubjectId,
+                    Id = model.Id,
                     SubjectName = model.SubjectName,
                     SubjectDescr = model.SubjectDescr,
-                    //  Educator = model.Educator,
-                    // Grade = model.Grade,
                     Created_at = DateTime.Now,
                     Updated_at = DateTime.Now,
 
@@ -77,7 +79,7 @@ namespace iTut.Controllers
         public IActionResult Reports()
         {
             return View();
-          
+
         }
         [HttpPost]
         public IActionResult Reports(Report model)
@@ -89,34 +91,14 @@ namespace iTut.Controllers
                 {
 
                 };
-               _context.Add(report);
-             
-                // _logger.LogInformation("Subject was created!");
-                return RedirectToAction(nameof(Subject));
-            }
-            return View(model);
-        }
-      public IActionResult Subject()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> Subject(Subject model)
-        {
-            if (ModelState.IsValid)
-            {
-                var SubjectCoordinator = _context.SubjectCoordinator.Where(e => e.UserId == _userManager.GetUserId(User)).FirstOrDefault();
-                var subject = new Subject
-                {
+                _context.Add(report);
 
-                };
-                //   _context.Add(subject);
-                await _context.SaveChangesAsync();
-                // _logger.LogInformation("Subject was created!");
+                _logger.LogInformation("Subject was created!");
                 return RedirectToAction(nameof(Subject));
             }
             return View(model);
         }
+
         //GET FEEDBACK
         public IActionResult Feedback()
         {
@@ -142,29 +124,6 @@ namespace iTut.Controllers
             }
             return View(model);
         }
-       // UPDATING THE SUBJECT
-        public IActionResult Update(int? Id)
-        {
-            if (Id == null || Id == 0)
-            {
-                return NotFound();
-            }
-            var obj = _context.Subjects.Find(Id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            return View(obj);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Update(Subject obj)
-        {
-            _context.Subjects.Update(obj);
-            _context.SaveChanges();
-            return RedirectToAction("Subjects");
-        }
 
         //GETTING THE EDUCATOR
         public IActionResult Educator()
@@ -178,6 +137,6 @@ namespace iTut.Controllers
             _context.SaveChanges();
             return RedirectToAction("Educator");
         }
-       
+
     }
 }
