@@ -2,7 +2,6 @@
 using iTut.Data;
 using iTut.Models.Users;
 using iTut.Models.Coordinator;
-using iTut.Models.Edu;
 using iTut.Models.ViewModels.Coordinator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
