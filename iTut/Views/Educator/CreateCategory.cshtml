@@ -1,5 +1,5 @@
 ﻿
-@model iTut.Models.Edu.Category
+@model iTut.Models.Educator.Topic
 
 
 @{
@@ -11,7 +11,7 @@
    <div class="Category-container d-flex py-2 mx-2">
 
        <div class="Category_tittle">
-    <h1 class="pb-2">Categories</h1>
+    <h1 class="pb-2">Categories/Topic</h1>
 
        </div>
        
@@ -21,24 +21,25 @@
      
     </div>
     </div>
-
+     <!--The Form-->
   <form asp-controller="Educator" asp-action="CreateCategory" method="post" class="container">
 
     <div asp-validation-summary="ModelOnly" class="text-danger list-unstyled mb-2"></div>
     <div class="form-group">
    
 
-     <label asp-for="CategoryName" class="control-label"></label>
+     <label asp-for="TopicName" class="control-label"></label>
 
-    <input asp-for="CategoryName" class="form-control w-20" />
+    <input asp-for="TopicName" class="form-control w-20" />
 
-    <span asp-validation-for="CategoryName" class="text-danger"></span>
+    <span asp-validation-for="TopicName" class="text-danger"></span>
 
+    <!--Buttons-->
      <div class="py-2">
 
      
-    <button type="submit" class="btn btn-primary">Add Category</button>
-    <a href="/Educator/Categories" class="btn btn-danger"> View Categories</a>
+    <button type="submit" class="btn btn-primary">Add Topic</button>
+    <a href="/Educator/Categories" class="btn btn-danger"> View Categories/Topic</a>
 
 
 

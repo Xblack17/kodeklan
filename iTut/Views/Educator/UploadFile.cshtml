@@ -1,0 +1,63 @@
+﻿@model iTut.Models.UploadFiles.SingleFileModel
+
+@{
+    ViewData["Title"] = "Upload File";
+}
+<div class="Container py-3 m-2 w-100">
+    
+   <div class="Category-container d-flex py-2 mx-2">
+
+       <div class="Category_tittle">
+    <h1 class="pb-2">Upload Files</h1>
+
+       </div>
+       
+     <div class="back_button ml-auto pr-3 py-0">
+        <a href="/Educator/CreateTask" class="btn btn-outline-danger"> Back </a> 
+
+     
+    </div>
+    </div>
+
+
+<form asp-action="Upload" asp-controller="Educator" method="post" enctype = "multipart/form-data">
+    @if (Model.IsResponse)
+    {
+        if (Model.IsSuccess)
+        {
+            <div class="alert alert-success">
+                @Model.Message
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">
+                @Model.Message
+            </div>
+        }
+    }
+    <div class="row mt-2">
+        <div class="col-12">
+            <label class="col-form-label">Enter File Name For Save</label>
+            <input asp-for="FileName" class="form-control" />
+            <span asp-validation-for="FileName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <label class="col-form-label">Select File</label>
+            <input asp-for="File" class="form-control" />
+            <span asp-validation-for="File" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <button type="submit" class="btn btn-success">Upload File</button>
+        </div>
+    </div>
+</form>
+
+</div>

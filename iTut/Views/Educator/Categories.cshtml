@@ -1,13 +1,13 @@
-﻿@model IEnumerable<iTut.Models.Edu.Category>
+﻿@model IEnumerable<iTut.Models.Educator.Topic>
 
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = "Categories/Topics";
 }
 
 <div class="Container-fluid py-2 px-lg-2 w-100" > 
 
            <div class="Head_Container py-2 d-flex">
-           <h1>Categories</h1>
+           <h1>Categories and Topics</h1>
 
           <div class="back_button ml-auto pr-3 py-0">
                 <a href="/Educator/CreateCategory" class="btn btn-outline-danger"> Back </a> 
@@ -16,19 +16,19 @@
             </div>
         </div>
  
-        <table class="table">
+        <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.CategoryName)
+                    <th scope="col" style="width: 10%">
+                        @Html.DisplayNameFor(model => model.TopicName)
                     </th>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.categoryStatus)
+                    <th scope="col" >
+                        @Html.DisplayNameFor(model => model.Status)
                     </th>
-                    <th scope="col">
+                    <th scope="col" >
                         @Html.DisplayNameFor(model => model.CreateAt)
                     </th>
-                    <th scope="col">
+                    <th scope="col" >
                         @Html.DisplayNameFor(model => model.UpdateAt)
                     </th>
                     <th></th>
@@ -38,22 +38,22 @@
         @foreach (var item in Model) {
                 <tr>
            
-                    <td scope="row">
-                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    <td scope="row" style="padding: 4px">
+                        @Html.DisplayFor(modelItem => item.TopicName)
                     </td>
                     <td >
-                        @Html.DisplayFor(modelItem => item.categoryStatus)
+                        @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CreateAt)
-                    </td>
+                    </td >
                     <td>
                         @Html.DisplayFor(modelItem => item.UpdateAt)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.CategoryID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.CategoryID">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.TopicId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.TopicId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.TopicId">Delete</a>
                     </td>
                 </tr>
                 }
