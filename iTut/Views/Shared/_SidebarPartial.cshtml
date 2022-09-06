@@ -42,7 +42,7 @@
         {
             <div class="w-100 cusror-pointer">
                 <div class="d-flex">
-                    <a href="/Parent/UserReport">
+                    <a asp-controller="Parent" asp-action="UserReport">
                         <div class="flex-grow-1">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h2 class="fs-1">User Report</h2>
@@ -56,7 +56,7 @@
         }
         <div class="w-100 cusror-pointer">
             <div class="d-flex">
-                <a href="/Identity/Account/Manage/PersonalData">
+                <a asp-area="Identity" asp-page="/Account/Manage/PersonalData">
                     <div class="flex-grow-1">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <h2 class="fs-1">Personal Data</h2>
@@ -69,7 +69,7 @@
         </div>
         <div class="w-100 cusror-pointer">
             <div class="d-flex">
-                <a href="/Identity/Account/Manage/ChangePassword">
+                <a asp-area="Identity" asp-page="/Account/Manage/ChangePassword">
                     <div class="flex-grow-1">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <h2 class="fs-1">Change Password</h2>
@@ -82,7 +82,7 @@
         </div>
         <div class="w-100 cusror-pointer">
             <div class="d-flex">
-                <a href="/Identity/Account/Manage/TwoFactorAuthentication">
+                <a asp-area="Identity" asp-page="/Account/Manage/TwoFactorAuthentication">
                     <div class="flex-grow-1">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <h2 class="fs-1">Two-factor Authentication</h2>
