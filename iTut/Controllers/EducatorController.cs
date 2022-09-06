@@ -24,7 +24,6 @@ namespace iTut.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<EducatorController> _logger;
-        private readonly object Server;
 
         public EducatorController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ILogger<EducatorController> logger)
         {
@@ -49,7 +48,7 @@ namespace iTut.Controllers
         }
 
         //Categories are renamed to topics 
-        public async Task<ActionResult> Categories()
+        public IActionResult Categories()
         {
             //return View(await _context.Categories.Where(c => c.EducatorID == _userManager.GetUserId(User)).ToListAsync());
             return View(_context.Topics.ToList());
