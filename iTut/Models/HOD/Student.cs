@@ -36,7 +36,7 @@ namespace iTut.Models.HOD
 
         public Religion Religion { get; set; }
 
-        public byte[] Image { get; set; }
+        
         public Gender Gender { get; set; }
 
         public virtual ICollection<Guardian> Guardians { get; set; }

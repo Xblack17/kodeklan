@@ -7,6 +7,8 @@ using iTut.Models.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +37,23 @@ namespace iTut
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddControllersWithViews();
+
+            services.Configure<RazorViewEngineOptions>(o =>
+            {
+                
+                o.ViewLocationFormats.Add
+                ("/View/HOD/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                ("/Views/Shared/{0}"+ RazorViewEngine.ViewExtension);
+
+
+            });
+            services.AddRazorPages();
+            services.Configure<RazorPagesOptions>
+                (options => options.RootDirectory = "/View/HOD");
+               
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +92,15 @@ namespace iTut
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+            });
+
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
             });
         }
 

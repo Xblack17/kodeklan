@@ -12,6 +12,10 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using static iTut.Models.ViewModels.HOD.HODIndexViewModel;
+using System.Collections.Generic;
+using System;
 
 namespace iTut.Controllers
 {
@@ -30,7 +34,7 @@ namespace iTut.Controllers
         }
 
         // GET: HODController
-       public ActionResult Index()
+        public ActionResult Index()
         {
             var hod = _context.HOD.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
 
@@ -41,12 +45,15 @@ namespace iTut.Controllers
 
             return View(viewModel);
         }
-       
+
 
 
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }
+

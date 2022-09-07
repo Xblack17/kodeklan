@@ -17,7 +17,7 @@ namespace iTut.Models.HOD
 
         public string PreviousSchoolAddrs { get; set; }
 
-        public byte[] PreviousSchoolDocument { get; set; }
+        
 
         public string Extension { get; set; }
 

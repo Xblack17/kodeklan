@@ -46,8 +46,6 @@ namespace iTut.Models.HOD
         [EmailAddress]
         public string Email { get; set; }
 
-        public byte[] Image { get; set; }
-
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 

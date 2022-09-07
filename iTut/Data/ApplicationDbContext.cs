@@ -2,12 +2,12 @@
 using iTut.Models.Relationships;
 using iTut.Models.Coordinator;
 using iTut.Models.Users;
-using iTut.Models.ViewModels.HOD;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using iTut.Models.HOD;
-using iTut.Models.HOD.Leave;
+using iTut.Models.ViewModels.Student;
+using static iTut.Models.ViewModels.HOD.HODIndexViewModel;
 
 namespace iTut.Data
 {
@@ -17,7 +17,7 @@ namespace iTut.Data
             : base(options)
         {
         }
-
+       
         public ApplicationDbContext()
         {
         }
@@ -32,6 +32,7 @@ namespace iTut.Data
             builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
             builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
+            builder.Entity<RegisterStudentViewModel>().HasNoKey();
         }
 
         public DbSet<ParentUser> Parents { get; set; }
@@ -54,7 +55,7 @@ namespace iTut.Data
         public DbSet<Section> Section { get; set; }
         public DbSet<Group> Group { get; set; }
         public DbSet<Shift> Shift { get; set; }
-        public DbSet<ExamMark> ExamMark { get; set; }
+        
         public DbSet<Course> Course { get; set; }
         public DbSet<StudentClass> StudentClass { get; set; }
         public DbSet<ClassName> ClassName { get; set; }
@@ -71,7 +72,7 @@ namespace iTut.Data
         public DbSet<DefaultSetting> DefaultSetting { get; set; }
         public DbSet<School> School { get; set; }
         public DbSet<iTut.Models.HOD.AssignStuff> AssignStuff { get; set; }
-        public DbSet<iTut.Models.HOD.Attendance> Attendance { get; set; }
+        
         
         public DbSet<iTut.Models.HOD.Grade> Grade { get; set; }
         public DbSet<iTut.Models.HOD.FeeType> FeeType { get; set; }
@@ -80,7 +81,8 @@ namespace iTut.Data
         public DbSet<iTut.Models.HOD.Leave.LeaveTypeVM> LeaveTypeVM { get; set; }
         public DbSet<iTut.Models.HOD.Leave.AdminLeaveRequestViewVM> AdminLeaveRequestViewVM { get; set; }
 
+        public DbSet<CalendarEvent> Events { get; set; }
 
-        
+
     }
 }
