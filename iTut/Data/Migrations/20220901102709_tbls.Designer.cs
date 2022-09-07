@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using iTut.Data;
 
 namespace iTut.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220901102709_tbls")]
+    partial class tbls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -521,16 +523,11 @@ namespace iTut.Data.Migrations
                     b.Property<string>("SecondarySubject")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SubjectId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SubjectId");
 
                     b.ToTable("Educator");
                 });
@@ -686,18 +683,6 @@ namespace iTut.Data.Migrations
                     b.HasOne("iTut.Models.Users.StudentUser", null)
                         .WithMany("Parents")
                         .HasForeignKey("StudentUserId");
-                });
-
-            modelBuilder.Entity("iTut.Models.Users.EducatorUser", b =>
-                {
-                    b.HasOne("iTut.Models.Coordinator.Subject", null)
-                        .WithMany("SubjectEducators")
-                        .HasForeignKey("SubjectId");
-                });
-
-            modelBuilder.Entity("iTut.Models.Coordinator.Subject", b =>
-                {
-                    b.Navigation("SubjectEducators");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.ParentUser", b =>

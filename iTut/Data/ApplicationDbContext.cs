@@ -5,6 +5,8 @@ using iTut.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System;
 
 namespace iTut.Data
 {
@@ -37,5 +39,14 @@ namespace iTut.Data
         public DbSet<MeetingRequest> MeetingRequest { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Report> Reports { get; set; }
+
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<SubjectGrade> SubjectGrades { get; set; }
+        public DbSet<SubjectEducator> SubjectEducators { get; set; }
+
+        internal Task FindAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,7 +1,7 @@
-﻿@model iTut.Models.Coordinator.Subject
+﻿@model iTut.Models.Coordinator.Grade
 
 @{
-    ViewData["Title"] = "CreateASubject";
+    ViewData["Title"] = "AddGrade";
 }
 
 <div id="collapseOffCanvas" class="bg-body offcanvas-collapse open w-100">
@@ -22,36 +22,26 @@
                             </a>
                         </div>
                     </div>
-                    <h2 class="mb-2 fs-2 lh-tight">Create A Subject</h2>
+                    <h2 class="mb-2 fs-2 lh-tight">Create a grade</h2>
                     <br />
                     <br />
-                    <form method="post" asp-action="CreateASubject" class="col-12 flex-grow-1">
+                    <form asp-action="CreateASubject" class="col-12 flex-grow-1">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                        
+                        @*<div class="form-group mb-3">
+                            <label asp-for="GradeId" class="control-label"></label>
+                            <input asp-for="GradeId" class="form-control" />
+                            <span asp-validation-for="GradeId" class="text-danger"></span>
+                        </div>*@
                         <div class="form-group mb-3">
-                            <label asp-for="SubjectName" class="control-label"></label>
-                            <input asp-for="SubjectName" class="form-control" />
-                            <span asp-validation-for="SubjectName" class="text-danger"></span>
+                            <label asp-for="GradeName" class="control-label"></label>
+                            <input asp-for="GradeName" class="form-control" />
+                            <span asp-validation-for="GradeName" class="text-danger"></span>
                         </div>
-                        <div class="form-group mb-3">
-                            <label asp-for="SubjectDescr" class="control-label"></label>
-                            <input asp-for="SubjectDescr" class="form-control" />
-                            <span asp-validation-for="SubjectDescr" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label asp-for="Created_at" class="control-label"></label>
-                            <input asp-for="Created_at" class="form-control" />
-                            <span asp-validation-for="Created_at" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label asp-for="Updated_at" class="control-label"></label>
-                            <input asp-for="Updated_at" class="form-control" />
-                            <span asp-validation-for="Updated_at" class="text-danger"></span>
-                        </div>
-                        
+                 
                         <br />
                         <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <input type="submit" value="Add" class="btn btn-primary" />
                         </div>
                     </form>
                 </div>
