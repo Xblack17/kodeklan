@@ -1,0 +1,26 @@
+﻿@model EditComplaintViewModel
+
+<div class="modal fade" id="deleteComplaintModal-@Model.Id" tabindex="-1" aria-labelledby="deleteComplaintModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-0">
+            <div class="modal-header py-4 bg-body shadow-none">
+                <h1 class="fs-2" id="deleteComplaintModalLabel">Delete Complaint</h1>
+                <button class="btn btn-auto d-inline-flex flex-shrink-0 align-items-center justify-content-center p-0 rounded-circle wh-2-5rem" data-dismiss="modal" type="button" aria-label="Close">
+                    <svg class="gi gi-x fs-3" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.613 6.2l.094.083L12 10.585l4.293-4.292.094-.083a1 1 0 0 1 1.403 1.403l-.083.094L13.415 12l4.292 4.293a1 1 0 0 1-1.32 1.497l-.094-.083L12 13.415l-4.293 4.292-.094.083a1 1 0 0 1-1.403-1.403l.083-.094L10.585 12 6.293 7.707a1 1 0 0 1 1.32-1.497z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body py-0">
+                <p >Are you sure you want to delete this complaint: @Model.Title?</p>
+            </div>
+            <div class="modal-footer py-4 d-flex bg-body shadow-none">
+                <div class="mr-auto"></div>
+                <button class="btn btn-lg btn-secondary mr-2" type="button" data-dismiss="modal">No, Cancel</button>
+                <form asp-controller="Parent" asp-action="DeleteComplaint" asp-route-id="@Model.Id">
+                    <button class="btn btn-lg btn-primary" type="submit">Yes, Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

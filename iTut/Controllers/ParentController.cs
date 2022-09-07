@@ -86,29 +86,55 @@ namespace iTut.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditComplaint(Complaint model)
+        public async Task<IActionResult> EditComplaint(EditComplaintViewModel model)
         {
-
-            Console.WriteLine($">>>>>>>>>>>>>>>>>>>>>>>>>>> Complaint Model ID: {model.Id}");
-
-            if (ModelState.IsValid)
+            var user = await _userManager.GetUserAsync(User);
+            if (await _userManager.IsInRoleAsync(user, RoleConstants.Parent.ToString()) || await _userManager.IsInRoleAsync(user, RoleConstants.HOD.ToString()))
             {
-                var dbComplaint = _context.Complaints.Where(c => c.Id == model.Id).FirstOrDefault();
-                if (dbComplaint != null)
+                if (ModelState.IsValid)
                 {
-                    dbComplaint.Title = model.Title;
-                    dbComplaint.ComplaintBody = model.ComplaintBody;
-                    dbComplaint.Status = model.Status;
-                    dbComplaint.UpdateAt = DateTime.Now;
-                    _context.Update(dbComplaint);
-                    await _context.SaveChangesAsync();
-                    _logger.LogInformation($"Complaint, id: {dbComplaint.Id}, updated");
-                    return RedirectToAction(nameof(Complaints));
+                    var dbComplaint = _context.Complaints.Where(c => c.Id == model.Id).FirstOrDefault();
+                    if (dbComplaint != null)
+                    {
+                        dbComplaint.Title = model.Title;
+                        dbComplaint.ComplaintBody = model.ComplaintBody;
+                        dbComplaint.Status = model.Status;
+                        dbComplaint.UpdateAt = DateTime.Now;
+                        _context.Update(dbComplaint);
+                        await _context.SaveChangesAsync();
+                        _logger.LogInformation($"Complaint, id: {dbComplaint.Id}, updated");
+                        return RedirectToAction(nameof(Complaints));
+                    }
                 }
+                return View("Error");
             }
-            return View(nameof(Complaints));
+            return View("Access Denied");
         }
 
+        [HttpPost("{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteComplaint([FromRoute] string id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (await _userManager.IsInRoleAsync(user, RoleConstants.Parent.ToString()))
+            {
+                if (ModelState.IsValid)
+                {
+                    var dbComplaint = _context.Complaints.Where(c => c.Id == id).FirstOrDefault();
+                    if (dbComplaint != null)
+                    {
+                        dbComplaint.Archived = true;
+                        dbComplaint.UpdateAt = DateTime.Now;
+                        _context.Update(dbComplaint);
+                        await _context.SaveChangesAsync();
+                        _logger.LogInformation($"Complaint, id: {dbComplaint.Id}, deleted");
+                        return RedirectToAction(nameof(Complaints));
+                    }
+                }
+                return View("Error");
+            }
+            return View("Access Denied");
+        }
         #endregion
 
         #region Meeting Requests

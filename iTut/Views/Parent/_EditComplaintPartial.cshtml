@@ -1,4 +1,4 @@
-﻿@model Complaint
+﻿@model EditComplaintViewModel
 
 <div class="modal fade" id="editComplaintModal-@Model.Id" tabindex="-1" aria-labelledby="editComplaintModalLabel" aria-hidden="true">
     <div class="modal-dialog mr-0 mt-0 mb-0 modal-md h-100 fadeInRight animated">
@@ -14,6 +14,7 @@
             <div class="modal-body py-0">
                 <div class="row">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="Id" hidden value="@Model.Id" />
                     <input asp-for="ParentId" hidden value="@Model.ParentId"/>
                     <div class="col-12">
                         <div class="form-group mb-3">
