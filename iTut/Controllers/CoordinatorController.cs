@@ -104,7 +104,7 @@ namespace iTut.Controllers
             }
            
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Subject");
             return View();
         }
 
