@@ -1,4 +1,5 @@
-﻿
+﻿@model iTut.Models.Quiz.Quiz
+
 @{
     ViewData["Title"] = "CreateQuiz";
 }
@@ -25,36 +26,48 @@
         <h4 class="py-2"> Quiz Credintials:</h4>
         <hr class="p-0 m-0"/>
         
+  <form asp-action="CreateQuiz" asp-controller="Educator" method="post" enctype = "multipart/form-data"> 
         <div class="dropdowns py-2"
-              <label class="pr-2" for="drop-down"> Select Grade :</label>
-                <select class="pl-2" style="border:none; width: 10%; background-color:#e5e5e5; border-radius:4px; "name="drop-down" id="drop-down">
-                  <option value="one"> select...</option>
-                  <option value="3"> Grade 10</option>
-                  <option value="two"> Grade 11</option>
-                  <option value="three"> Grade 12</option>
-                </select> 
+              <div class="form-group">
+                    <label asp-for="TopicId" class="control-label"> Select Test Topic</label>      
+                     <select asp-for="TopicId" class="form-control">
+                         @foreach(var topic in ViewBag.Topics)
+                         {
+                             <option value="@topic.TopicId"> @topic.TopicName</option>
+                         }
+
+                     </select>
+                     <span asp-validation-for="TopicId" class="text-danger"></span>
+                    
+                    
+              </div>
                 
-                <label class="pl-3 pr-2"for="drop-down"> Select Suject:</label>
-                    <select class="pl-2" style="border:none; width: 10%; background-color:#e5e5e5; border-radius:4px;" name="drop-down" id="drop-down">
-                    <option value="one"> select... </option>
-                     <option value="one"> Maths </option>
-                     <option value="two">Physics</option>
-       
-                 </select>
-                 <br />
-        <label class="py-3" for="textarea">Write Test Description and Instructions : </label><br><br>
-       <textarea id="textarea" cols="50" rows="10" placeholder="write here..."></textarea>
+        <div class="form-group">
+            <label asp-for="StartDate" class="control-label"> Start Date</label>
+            <input asp-for="StartDate" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")" />
+            <span asp-validation-for="StartDate" class="text-danger"></span> 
         </div>
+         <div class="form-group">
+            <label asp-for="EndDate" class="control-label"> End Date</label>
+            <input asp-for="EndDate" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")" />
+            <span asp-validation-for="EndDate" class="text-danger"></span> 
+        </div>
+        <label class="py-1" for="textarea">Write Test Description and Instructions : </label><br><br>
+         <textarea asp-for="QuizDescription" rows="7" cols="40">Write Here</textarea>
+         <span asp-validation-for="QuizDescription" class="text-danger"></span>
+      
 
      
-       <div class="navigation-btns"> 
-            <a href="" class="btn btn-danger">Active Quiz</a>
-            <a href="" class="btn btn-primary"> Next</a>
-
+       <div class="navigation-btns form-group pl-2"> 
+            <a href="" class="btn btn-danger">See Active Quiz</a>
+            <button type="submit" class="btn btn-primary">Start Quiz</button>
+</form>
        </div>
-     
+       </div>
+       </div>
+     </div>
 
+ 
      
     </div>
 
-</div>
