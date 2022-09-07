@@ -2,7 +2,6 @@
 using iTut.Models.Relationships;
 using iTut.Models.Coordinator;
 using iTut.Models.Users;
-using iTut.Models.Quiz;
 using iTut.Models.Educator;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -38,13 +37,5 @@ namespace iTut.Data
         public DbSet<StudentParent> StudentParents { get; set; }
         public DbSet<CoordinatorUser> SubjectCoordinators { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<Answer> Answers { get; set; }
-        public DbSet<Question> Question { get; set; }
-        public DbSet<Option> Options { get; set; }
-        public DbSet<Result> Results { get; set; }
-        public DbSet<Quiz> Quizzes { get; set; }
-
-
-
     }
 }
