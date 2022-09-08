@@ -4,7 +4,6 @@ using iTut.Coravel.Events;
 using iTut.Data;
 using iTut.Models;
 using iTut.Models.Parent;
-using iTut.Models.Relationships;
 using iTut.Models.Users;
 using iTut.Models.ViewModels.Parent;
 using Microsoft.AspNetCore.Authorization;
@@ -67,7 +66,8 @@ namespace iTut.Controllers
             {
                 var parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
 
-                var complaint = new Complaint {
+                var complaint = new Complaint
+                {
                     ParentId = parent.Id,
                     Title = model.Title,
                     ComplaintBody = model.ComplaintBody,
@@ -86,29 +86,55 @@ namespace iTut.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditComplaint(Complaint model)
+        public async Task<IActionResult> EditComplaint(EditComplaintViewModel model)
         {
-
-            Console.WriteLine($">>>>>>>>>>>>>>>>>>>>>>>>>>> Complaint Model ID: {model.Id}");
-
-            if (ModelState.IsValid)
+            var user = await _userManager.GetUserAsync(User);
+            if (await _userManager.IsInRoleAsync(user, RoleConstants.Parent.ToString()) || await _userManager.IsInRoleAsync(user, RoleConstants.HOD.ToString()))
             {
-                var dbComplaint = _context.Complaints.Where(c => c.Id == model.Id).FirstOrDefault();
-                if(dbComplaint != null)
+                if (ModelState.IsValid)
                 {
-                    dbComplaint.Title = model.Title;
-                    dbComplaint.ComplaintBody = model.ComplaintBody;
-                    dbComplaint.Status = model.Status;
-                    dbComplaint.UpdateAt = DateTime.Now;
-                    _context.Update(dbComplaint);
-                    await _context.SaveChangesAsync();
-                    _logger.LogInformation($"Complaint, id: {dbComplaint.Id}, updated");
-                    return RedirectToAction(nameof(Complaints));
+                    var dbComplaint = _context.Complaints.Where(c => c.Id == model.Id).FirstOrDefault();
+                    if (dbComplaint != null)
+                    {
+                        dbComplaint.Title = model.Title;
+                        dbComplaint.ComplaintBody = model.ComplaintBody;
+                        dbComplaint.Status = model.Status;
+                        dbComplaint.UpdateAt = DateTime.Now;
+                        _context.Update(dbComplaint);
+                        await _context.SaveChangesAsync();
+                        _logger.LogInformation($"Complaint, id: {dbComplaint.Id}, updated");
+                        return RedirectToAction(nameof(Complaints));
+                    }
                 }
+                return View("Error");
             }
-            return View(nameof(Complaints));
+            return View("Access Denied");
         }
 
+        [HttpPost("{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteComplaint([FromRoute] string id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (await _userManager.IsInRoleAsync(user, RoleConstants.Parent.ToString()))
+            {
+                if (ModelState.IsValid)
+                {
+                    var dbComplaint = _context.Complaints.Where(c => c.Id == id).FirstOrDefault();
+                    if (dbComplaint != null)
+                    {
+                        dbComplaint.Archived = true;
+                        dbComplaint.UpdateAt = DateTime.Now;
+                        _context.Update(dbComplaint);
+                        await _context.SaveChangesAsync();
+                        _logger.LogInformation($"Complaint, id: {dbComplaint.Id}, deleted");
+                        return RedirectToAction(nameof(Complaints));
+                    }
+                }
+                return View("Error");
+            }
+            return View("Access Denied");
+        }
         #endregion
 
         #region Meeting Requests
@@ -158,7 +184,7 @@ namespace iTut.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult InviteParent(InviteParent invite)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _logger.LogInformation($"Invitation Sent to {invite.ParentEmail}");
                 return RedirectToAction(nameof(Index));
@@ -168,50 +194,58 @@ namespace iTut.Controllers
 
         #endregion
 
+        #region Children
         [HttpGet]
         public ActionResult Children()
         {
             List<StudentUser> children = new List<StudentUser>();
-            var dbParent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
-            var students = _context.Students.Where(s => s.Archived == false).Include(s => s.Parents).ToList();
-            foreach (var student in students)
-            {
-                foreach (var parent in student.Parents)
-                {
-                    if(parent.ParentId == dbParent.Id)
-                    {
-                        children.Add(student);
-                    }
-                }
-            }
 
+            var parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).Include(p => p.Children).FirstOrDefault();
+            foreach (var child in parent.Children)
+            {
+                children.Add(child);
+            }
             return View(children);
         }
 
-        [HttpGet]
-        public ActionResult AddChild()
-        {
-            ViewBag.Parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
-            return View();
-        }
-
         [HttpPost]
-        public async Task<IActionResult> AddChild(AddStudentModel model)
+        public async Task<IActionResult> AddChild(AddStudent model)
         {
             if (ModelState.IsValid)
             {
-                var studentId = _context.Students.Where(s => s.EmailAddress == model.StudentEmail).FirstOrDefault().Id;
-                var studentParent = new StudentParent
+                var student = _context.Students.Where(s => s.EmailAddress == model.StudentEmail).FirstOrDefault();
+                if (student == null)
                 {
-                    ParentId = model.ParentId,
-                    StudentId = studentId,
-                    
-                };
-                _context.Add(studentParent);
-                await _context.SaveChangesAsync();
-                _logger.LogInformation($"Relationship created between parent: {model.ParentId} and student: {studentId}");
-                return RedirectToAction(nameof(Children));
+                    _logger.LogInformation($"Student with email address: {model.StudentEmail} does not exist!");
+                    return RedirectToAction(nameof(Error));
+                }
+                else
+                {
+                    var parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
+                    parent.Children.Add(student);
+                    _context.Update(parent);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation($"Relationship created between parent: {parent.Id} and student: {student.Id}");
+                    return RedirectToAction(nameof(Children));
+                }
             }
+            return View(model);
+        }
+
+        #endregion
+
+        public IActionResult UserReport()
+        {
+            var parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).Include(p => p.Children).FirstOrDefault();
+            var complaints = _context.Complaints.Where(c => c.ParentId == parent.Id).ToList();
+            var meetings = _context.MeetingRequest.Where(mR => mR.ParentId == parent.Id).ToList();
+
+            var model = new ParentUserReportViewModel
+            {
+                Parent = parent,
+                Complaints = complaints,
+                Meetings = meetings
+            };
             return View(model);
         }
 

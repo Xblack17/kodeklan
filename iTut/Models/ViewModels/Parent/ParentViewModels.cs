@@ -18,13 +18,4 @@ namespace iTut.Models.ViewModels.Parent
         public Complaint Complaint;
         public string ParentID;
     }
-
-    public class EditComplaintViewModel
-    {
-        public Complaint Complaint;
-        public EditComplaintViewModel(Complaint complaint)
-        {
-            Complaint = complaint;
-        }
-    }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using iTut.Data;
 
 namespace iTut.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220815135518_CreateParentStudentRelationship")]
+    partial class CreateParentStudentRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,46 +156,6 @@ namespace iTut.Data.Migrations
                     b.ToTable("UserTokens");
                 });
 
-            modelBuilder.Entity("iTut.Models.Coordinator.Feedback", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FeedbackContent")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Feedbacks");
-                });
-
-            modelBuilder.Entity("iTut.Models.Coordinator.Report", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CreatedFor")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(350)
-                        .HasColumnType("nvarchar(350)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Reports");
             modelBuilder.Entity("ParentUserStudentUser", b =>
                 {
                     b.Property<string>("ChildrenId")
@@ -214,50 +176,22 @@ namespace iTut.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("Created_at")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("SubjectDescr")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<string>("SubjectId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SubjectName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Updated_at")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.ToTable("Subjects");
-                });
-
-            modelBuilder.Entity("iTut.Models.Educator.Topic", b =>
-                {
-                    b.Property<string>("TopicId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EducatorID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TopicName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("TopicId");
-
-                    b.ToTable("Topics");
                 });
 
             modelBuilder.Entity("iTut.Models.Parent.Complaint", b =>
@@ -445,7 +379,7 @@ namespace iTut.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubjectCoordinator");
+                    b.ToTable("SubjectCoordinators");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.EducatorUser", b =>
@@ -495,7 +429,7 @@ namespace iTut.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Educator");
+                    b.ToTable("Educators");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.ParentUser", b =>

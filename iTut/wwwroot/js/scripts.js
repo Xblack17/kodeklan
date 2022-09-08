@@ -7,4 +7,8 @@
         localStorage.clear();
         window.location.href = "/Identity/Account/Logout";
     });
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 });
