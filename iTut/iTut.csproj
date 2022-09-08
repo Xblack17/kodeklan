@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,18 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <Compile Remove="Areas\HOD\Controllers\NewFolder\**" />
-    <Compile Remove="Models\Educator\**" />
-    <Content Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <Content Remove="Areas\HOD\Controllers\NewFolder\**" />
-    <Content Remove="Models\Educator\**" />
-    <EmbeddedResource Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <EmbeddedResource Remove="Areas\HOD\Controllers\NewFolder\**" />
-    <EmbeddedResource Remove="Models\Educator\**" />
-    <None Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <None Remove="Areas\HOD\Controllers\NewFolder\**" />
-    <None Remove="Models\Educator\**" />
     <Compile Remove="Models\Student\**" />
     <Content Remove="Models\Student\**" />
     <EmbeddedResource Remove="Models\Student\**" />
@@ -84,7 +72,7 @@
     <PackageReference Include="Coravel" Version="4.1.2" />
     <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.15" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
@@ -92,15 +80,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="MimeKit" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\HOD\Data\" />
-    <Folder Include="Controllers\HOD\" />
     <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
     <Folder Include="wwwroot\lib\jquery-validation-unobtrusive\" />
@@ -117,23 +103,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\img\undraw_add_files_re_v09g.svg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\js\daypilot\daypilot-all.min.js" />
-    <None Include="wwwroot\js\min\daypilot-calendar.min.js" />
-    <None Include="wwwroot\js\min\daypilot-common.min.js" />
-    <None Include="wwwroot\js\min\daypilot-datepicker.min.js" />
-    <None Include="wwwroot\js\min\daypilot-modal.min.js" />
-    <None Include="wwwroot\js\min\daypilot-month.min.js" />
-    <None Include="wwwroot\js\min\daypilot-navigator.min.js" />
-    <None Include="wwwroot\js\src\daypilot-calendar.src.js" />
-    <None Include="wwwroot\js\src\daypilot-common.src.js" />
-    <None Include="wwwroot\js\src\daypilot-datepicker.src.js" />
-    <None Include="wwwroot\js\src\daypilot-modal.src.js" />
-    <None Include="wwwroot\js\src\daypilot-month.src.js" />
-    <None Include="wwwroot\js\src\daypilot-navigator.src.js" />
-    <None Include="wwwroot\lib\daypilot\daypilot-all.min.js" />
   </ItemGroup>
 
 </Project>
