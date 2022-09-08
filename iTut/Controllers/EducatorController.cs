@@ -12,7 +12,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
-using iTut.Models.Quiz;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace iTut.Controllers
@@ -86,44 +86,9 @@ namespace iTut.Controllers
 
         public IActionResult CreateQuiz()
         {
-            ViewBag.Topics =_context.Topics.Where(t=>t.Status==Topic.TopicStatus.Active).ToList();
             return View();
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateQuiz (Quiz model)
-        {
-           if(ModelState.IsValid)
-           {
-                var educator = _context.Educator.Where(e => e.UserId == _userManager.GetUserId(User)).FirstOrDefault();
 
-                var quiz = new Quiz
-                {
-                    EducatorID = educator.Id,
-                    TopicId = model.TopicId,
-                    QuizDescription = model.QuizDescription,
-                    status = Quiz.quizStatus.Active,
-                    CreatedAt = DateTime.Now,
-                    StartDate = model.StartDate,
-                    EndDate = model.EndDate,
-                };
-                _context.Add(quiz);
-                await _context.SaveChangesAsync();
-                _logger.LogInformation($"Quiz id= {quiz.QuizId}, has beeen created!");
-                return RedirectToAction(nameof(AddQuestion));
-
-           }
-
-            return View(model); 
-
-        }
-
-        public IActionResult AddQuestion()
-        {
-            ViewBag.Quizzes = _context.Quizzes.Where(q => q.status == Quiz.quizStatus.Active).ToList();
-            return View();
-
-        }
         public IActionResult UploadFile()
         {
             SingleFileModel model = new SingleFileModel();
