@@ -154,6 +154,21 @@ namespace iTut.Data.Migrations
                     b.ToTable("UserTokens");
                 });
 
+            modelBuilder.Entity("ParentUserStudentUser", b =>
+                {
+                    b.Property<string>("ChildrenId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ParentsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ChildrenId", "ParentsId");
+
+                    b.HasIndex("ParentsId");
+
+                    b.ToTable("ParentUserStudentUser");
+                });
+
             modelBuilder.Entity("iTut.Models.Coordinator.Feedback", b =>
                 {
                     b.Property<string>("Id")
@@ -194,19 +209,6 @@ namespace iTut.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Reports");
-            modelBuilder.Entity("ParentUserStudentUser", b =>
-                {
-                    b.Property<string>("ChildrenId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ParentsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ChildrenId", "ParentsId");
-
-                    b.HasIndex("ParentsId");
-
-                    b.ToTable("ParentUserStudentUser");
                 });
 
             modelBuilder.Entity("iTut.Models.Coordinator.Subject", b =>

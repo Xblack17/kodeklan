@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace iTut.Data.Migrations
 {
-    public partial class AddedFeedback_Reports : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -189,6 +189,22 @@ namespace iTut.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Topics",
+                columns: table => new
+                {
+                    TopicId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    EducatorID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TopicName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Topics", x => x.TopicId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -237,30 +253,27 @@ namespace iTut.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StudentParents",
+                name: "ParentUserStudentUser",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ParentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StudentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ParentUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    StudentUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    ChildrenId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ParentsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentParents", x => x.Id);
+                    table.PrimaryKey("PK_ParentUserStudentUser", x => new { x.ChildrenId, x.ParentsId });
                     table.ForeignKey(
-                        name: "FK_StudentParents_Parents_ParentUserId",
-                        column: x => x.ParentUserId,
+                        name: "FK_ParentUserStudentUser_Parents_ParentsId",
+                        column: x => x.ParentsId,
                         principalTable: "Parents",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentParents_Students_StudentUserId",
-                        column: x => x.StudentUserId,
+                        name: "FK_ParentUserStudentUser_Students_ChildrenId",
+                        column: x => x.ChildrenId,
                         principalTable: "Students",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -349,6 +362,11 @@ namespace iTut.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ParentUserStudentUser_ParentsId",
+                table: "ParentUserStudentUser",
+                column: "ParentsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
                 table: "RoleClaims",
                 column: "RoleId");
@@ -359,16 +377,6 @@ namespace iTut.Data.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentParents_ParentUserId",
-                table: "StudentParents",
-                column: "ParentUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentParents_StudentUserId",
-                table: "StudentParents",
-                column: "StudentUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -413,19 +421,22 @@ namespace iTut.Data.Migrations
                 name: "MeetingRequest");
 
             migrationBuilder.DropTable(
+                name: "ParentUserStudentUser");
+
+            migrationBuilder.DropTable(
                 name: "Reports");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
 
             migrationBuilder.DropTable(
-                name: "StudentParents");
-
-            migrationBuilder.DropTable(
                 name: "SubjectCoordinator");
 
             migrationBuilder.DropTable(
                 name: "Subjects");
+
+            migrationBuilder.DropTable(
+                name: "Topics");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
