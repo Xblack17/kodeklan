@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using iTut.Models;
-using iTut.Models.Coordinator;
 
 namespace iTut.Models.Coordinator
 {
@@ -19,5 +17,6 @@ namespace iTut.Models.Coordinator
         [Display(Name = "Feedback")]
         public string FeedbackContent { get; set; }
         public DateTime CreateAt { get; set; }
+
     }
 }

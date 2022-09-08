@@ -1,8 +1,6 @@
 ﻿using System;
-using iTut.Models.Users;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
 
 namespace iTut.Models.Coordinator
 {
@@ -23,6 +21,5 @@ namespace iTut.Models.Coordinator
 
         public DateTime Created_at { get; set; }
         public DateTime Updated_at { get; set; }
-        public List<EducatorUser> SubjectEducators { get; set; } = new List<EducatorUser>();
     }
 }

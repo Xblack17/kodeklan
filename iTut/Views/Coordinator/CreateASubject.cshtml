@@ -25,7 +25,7 @@
                     <h2 class="mb-2 fs-2 lh-tight">Create A Subject</h2>
                     <br />
                     <br />
-                    <form method="post" asp-action="CreateASubject" class="col-12 flex-grow-1">
+                    <form asp-action="CreateASubject" class="col-12 flex-grow-1">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                        
                         <div class="form-group mb-3">
@@ -38,16 +38,16 @@
                             <input asp-for="SubjectDescr" class="form-control" />
                             <span asp-validation-for="SubjectDescr" class="text-danger"></span>
                         </div>
-                        <div class="form-group mb-3">
-                            <label asp-for="Created_at" class="control-label"></label>
-                            <input asp-for="Created_at" class="form-control" />
-                            <span asp-validation-for="Created_at" class="text-danger"></span>
+                        @*<div class="form-group mb-3">
+                            <label asp-for="Educator" class="control-label"></label>
+                            <input asp-for="Educator" class="form-control" />
+                            <span asp-validation-for="Educator" class="text-danger"></span>
                         </div>
                         <div class="form-group mb-3">
-                            <label asp-for="Updated_at" class="control-label"></label>
-                            <input asp-for="Updated_at" class="form-control" />
-                            <span asp-validation-for="Updated_at" class="text-danger"></span>
-                        </div>
+                            <label asp-for="Grade" class="control-label"></label>
+                            <input asp-for="Grade" class="form-control" />
+                            <span asp-validation-for="Grade" class="text-danger"></span>
+                        </div>*@
                         
                         <br />
                         <div class="form-group">

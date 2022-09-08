@@ -4,7 +4,7 @@
 }
 
 <div id="collapseOffCanvas" class="bg-body offcanvas-collapse open w-100">
-    <class="main-expanded vh-100 w-100">
+    <main class="main-expanded vh-100 w-100">
         <div class="container-fluid px-lg-5">
             <div class="d-flex py-5 border-bottom">
                 <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@Model.SubjectCoordinator.FirstName.ToCharArray()[0]</span>
@@ -30,7 +30,7 @@
                         <div class="d-flex align-items-center mb-3">
                             <div class="mr-auto">
 @*<<<<<<< HEAD*@
-                             <section class="bg-gray-50">
+                                <section class="bg-gray-50">
                               <div class="max-w-screen-xl px-4 py-32 mx-auto lg:h-screen lg:items-center lg:flex">
                                 <div class="max-w-xl mx-auto text-center">
                                   <h1 class="text-3xl font-extrabold sm:text-5xl">
@@ -48,16 +48,19 @@
                                     <a class="block w-full px-12 py-3 text-sm font-medium text-white bg-red-600 rounded shadow sm:w-auto active:bg-red-500 hover:bg-red-700 focus:outline-none focus:ring" href="/get-started">
                                       Get Started
                                     </a>
+
+                                    <a class="block w-full px-12 py-3 text-sm font-medium text-red-600 rounded shadow sm:w-auto hover:text-red-700 active:text-red-500 focus:outline-none focus:ring" href="/about">
+                                      Learn More
+                                    </a>
                                   </div>
                                 </div>
                               </div>
                             </section>
-                            <br/>
-                            <br/>
+
                             </div>
-                            </div>
-                            </div>
-                   
+                        </div>
+                      
+                    <div class="col-12">
                          <div class="row">
                             <div class="col-sm-6">
 @*>>>>>>> cb20df27c9734d170fdb350f323961eaf51392b2*@
@@ -65,43 +68,47 @@
                                     <div class="card-body" style="width:80%">
                                         <h5 class="card-title">Manage Subjects</h5>
                                         <img class="card-img-top" src="~/img/undraw_bookshelves_re_lxoy.svg" alt="Card image cap" style="width:50%" />
-                                         <a href="/Coordinator/Subject"  class="btn btn-primary"> Manage subjects</a>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>                       
-                        <br/>               
-                         <div class="row">
-                            <div class="col-sm-6">
-@*>>>>>>> cb20df27c9734d170fdb350f323961eaf51392b2*@
-                                <div class="card">
-                                    <div class="card-body" style="width:80%">
-                                        <h5 class="card-title">Manage Feedback</h5>
-                                        <img class="card-img-top" src="~/img/undraw_analyze_re_9kco.svg" alt="Card image cap" style="width:50%" />
-                                         <a href="/Coordinator/Feedback"  class="btn btn-primary"> Manage Feedback</a>
+                                         <a href="/Coordinator/CreateASubject"  class="btn btn-primary"> Manage subjects</a>
                                     </div>
                                 </div>
                             </div>
                              </div>
                         </div>
                         <br />
-                        
+                        <div class="m-4">
+                            <div class="row">
+                            <div class="col-sm-4">
+@*=======*@
+                                            @*<a href="/Coordinator/Subject"  class="btn btn-primary"> Manage subjects</a>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
                         <div class="row">
                             <div class="col-sm-6">
 @*>>>>>>> cb20df27c9734d170fdb350f323961eaf51392b2*@
                                 <div class="card">
                                     <div class="card-body" style="width:80%">
                                         <h5 class="card-title">Manage Educators</h5>
-                                        <img class="card-img-top" src="~/img/undraw_books_re_8gea.svg" alt="Card image cap" style="width:50%" />                               
+                                        <img class="card-img-top" src="~/img/undraw_books_re_8gea.svg" alt="Card image cap" style="width:50%" />
+                                       
                                         <a href="/Coordinator/Educator" class="btn btn-primary"> Manage Educators</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 @*<<<<<<< HEAD*@
+                             </div>
                         </div>
                         <br />
-                        
+                        <div class="m-4">
+                            <div class="row">
+                            <div class="col-sm-4">
+@*=======*@
+
+                        </div>
+                        <br />
                         <div class="row">
                             <div class="col-sm-6">
 @*>>>>>>> cb20df27c9734d170fdb350f323961eaf51392b2*@
@@ -118,10 +125,29 @@
                                 </div>
                             </div>
                         </div>
-@*<<<<<<< HEAD*@   
+@*<<<<<<< HEAD*@
+                         </div>
+                        <br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body" style="width:80%">
+                                            <h5 class="card-title">Manage Students</h5>
+                                            <img class="card-img-top" src="~/img/undraw_books_re_8gea.svg" alt="Card image cap" style="width:50%" />
+                                            <a href="#" class="btn btn-primary"> Manage Students</a>
+                                        </div>
+                                    </div>
+                                </div>
+                </div>
+                          @*  </div>
+                            <br />
+                        </div>*@
+                   @*     <br />
                     </div>
-                    
-             </div>
+                </div>*@
+            </div>
         </div>
-   </main>
- </div>
+    </main>
+</div>

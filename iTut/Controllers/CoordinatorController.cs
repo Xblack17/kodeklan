@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Grade = iTut.Models.Coordinator.Grade;
 
 namespace iTut.Controllers
 {
@@ -42,19 +41,17 @@ namespace iTut.Controllers
             return View(viewModel);
         }
 
-        //Subject view (Shows subjects in a tbl and has other functions too)
-        public async Task<IActionResult> Subject()
+        public IActionResult Subject()
         {
-            
-            //  List<Subject> subjects = _context.Subjects.ToList();         
-            //IEnumerable<Subject> subjects = _context.Subjects;
-            //IEnumerable<Subject> subjects = _context.Subjects.Select(S => S).ToList();
-            return View(await _context.Subjects.ToListAsync());
+            return View();
         }
+
         public IActionResult CreateASubject()
         {
             return View();
         }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateASubject(Subject model)
@@ -72,79 +69,13 @@ namespace iTut.Controllers
                     Updated_at = DateTime.Now,
 
                 };
-
-                _context.Add(model);
+                _context.Add(subject);
                 await _context.SaveChangesAsync();
                 _logger.LogInformation("Subject was created!");
-                return RedirectToAction("Subject");
+                return RedirectToAction(nameof(CreateASubject));
             }
             return View(model);
         }
-        public IActionResult Delete(string Id)
-        {
-            Subject subject = _context.Subjects.FirstOrDefault(s => s.Id == Id);
-            if (subject != null)
-            {
-                _context.Remove(subject);
-                _context.SaveChanges();
-                return RedirectToAction("Subject");
-            }
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(string Id)
-        {
-            Subject subject = _context.Subjects.FirstOrDefault(s => s.Id == Id);
-            if (subject != null)
-            {
-                _context.Remove(subject);
-                _context.SaveChanges();
-                return RedirectToAction("Subject");
-            }
-           
-
-            return RedirectToAction("Subject");
-            return View();
-        }
-
-
-
-        //ADDING THE GRADE
-        public IActionResult AddGrade()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddGrade(Grade model)
-        {
-
-            if (ModelState.IsValid)
-            {
-                 var SubjectCoordinator = _context.SubjectCoordinator.Where(e => e.UserId == _userManager.GetUserId(User)).FirstOrDefault();
-                var Grade = new Grade
-                {
-                    GradeId = model.GradeId,
-                    GradeName = model.GradeName
-                };
-                _context.Add(model);
-                await _context.SaveChangesAsync();
-                _logger.LogInformation("Grade successfully was created!");
-                return RedirectToAction("Subject");
-            }
-            return View();
-           
-        }
-
-
-
-
-
-
-
-
-        //PREPORTS VIEW
         public IActionResult Reports()
         {
             return View();
@@ -167,7 +98,6 @@ namespace iTut.Controllers
             }
             return View(model);
         }
-
 
         //GET FEEDBACK
         public IActionResult Feedback()
@@ -195,11 +125,6 @@ namespace iTut.Controllers
             return View(model);
         }
 
-
-
-
-
-
         //GETTING THE EDUCATOR
         public IActionResult Educator()
         {
@@ -213,14 +138,5 @@ namespace iTut.Controllers
             return RedirectToAction("Educator");
         }
 
-        
-
-
-
-      
-
-      
-          
-        
     }
 }
