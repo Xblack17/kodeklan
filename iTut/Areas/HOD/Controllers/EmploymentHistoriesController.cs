@@ -21,6 +21,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: EmploymentHistories
+        [Route("/HOD/EmploymentHistories")]
+        
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.EmploymentHistory.Include(e => e.Employee);
@@ -28,6 +30,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: EmploymentHistories/Details/5
+        [Route("/HOD/EmploymentHistories/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +51,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: EmploymentHistories/Create
+        [Route("/HOD/EmploymentHistories/Create")]
+
         public IActionResult Create()
         {
             ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Email");
@@ -56,6 +62,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: EmploymentHistories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/EmploymentHistories/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CompanyName,CompanyLocation,Designation,From,To,EmployeeId")] EmploymentHistory employmentHistory)
@@ -71,6 +79,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: EmploymentHistories/Edit/5
+        [Route("/HOD/EmploymentHistories/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,6 +100,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: EmploymentHistories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/EmploymentHistories/Edit")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyName,CompanyLocation,Designation,From,To,EmployeeId")] EmploymentHistory employmentHistory)
@@ -124,6 +136,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: EmploymentHistories/Delete/5
+        [Route("/HOD/EmploymentHistories/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,6 +157,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: EmploymentHistories/Delete/5
+        [Route("/HOD/EmploymentHistories/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

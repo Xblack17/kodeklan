@@ -30,58 +30,61 @@
                                 <h2 class="mb-2 fs-2 lh-tight">Timeline</h2>
                                 <p>What is happening?</p>
                             </div>
-                            <div class="mr-auto">
-                                <h2 class="mb-2 fs-2 lh-tight">Timeline</h2>
-                                <p>What is happening?</p>
-                            </div>
+                            
                         </div>
+                        <hr/>
+                        <p>
+                            <a asp-action="Create">Create New</a>
+                        </p>
+                         <hr/>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.LowestMark)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.HighestMark)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        @foreach (var item in Model) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LowestMark)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HighestMark)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                        }
+                            </tbody>
+                        </table>
+
                     </div>
-                    <div class="col-12">
-                        
+                    <hr />
+                    <div class="mr-auto">
+
+                        <img src="~/Back.png" alt="Sample Photo" hight="120px" width="100px" />
+                        <p><a asp-controller="HOD" asp-action="Admissions">Back To Class Fees</a></p>
                     </div>
+                    <hr />
                 </div>
             </div>
         </div>
     </main>
 </div>
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LowestMark)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HighestMark)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowestMark)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HighestMark)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

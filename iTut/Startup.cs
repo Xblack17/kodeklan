@@ -102,6 +102,8 @@ namespace iTut
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
             });
+
+            
         }
 
         private void InitializeDbContext(IApplicationBuilder builder)

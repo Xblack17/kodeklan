@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using iTut.Data;
 using iTut.Models.HOD;
 
-namespace iTut.Areas.HOD.Controllers
+namespace iTut.Areas.HOD.Controllers.Admissions
 {
     [Area("HOD")]
     public class AdmissionsController : Controller
@@ -21,6 +21,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: HOD/Admissions
+        [Route("/HOD/Admissions")]
+
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Admission.Include(a => a.Group).Include(a => a.Session).Include(a => a.Student).Include(a => a.StudentClass);
@@ -28,6 +30,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: HOD/Admissions/Details/5
+        [Route("/HOD/Admissions/Details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,8 +51,9 @@ namespace iTut.Areas.HOD.Controllers
 
             return View(admission);
         }
-
+        [Route("/HOD/Admissions/Create")]
         // GET: HOD/Admissions/Create
+        
         public IActionResult Create()
         {
             ViewData["GroupId"] = new SelectList(_context.Group, "Id", "Name");
@@ -60,6 +64,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: HOD/Admissions/Create
+        [Route("/HOD/Admissions/Create")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -79,6 +84,7 @@ namespace iTut.Areas.HOD.Controllers
             return View(admission);
         }
 
+        [Route("/HOD/Admissions/Edit")]
         // GET: HOD/Admissions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -100,6 +106,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: HOD/Admissions/Edit/5
+        [Route("/HOD/Admissions/Edit")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -138,6 +145,7 @@ namespace iTut.Areas.HOD.Controllers
             return View(admission);
         }
 
+        [Route("/HOD/Admissions/Delete")]
         // GET: HOD/Admissions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -161,6 +169,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: HOD/Admissions/Delete/5
+        [Route("/HOD/Admissions/Delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

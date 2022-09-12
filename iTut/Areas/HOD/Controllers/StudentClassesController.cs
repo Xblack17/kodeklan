@@ -21,6 +21,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: StudentClasses
+        [Route("/HOD/StudentClasses")]
+
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.StudentClass.Include(s => s.ClassName).Include(s => s.Section).Include(s => s.Shift);
@@ -28,6 +30,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: StudentClasses/Details/5
+        [Route("/HOD/StudentClasses/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,6 +53,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: StudentClasses/Create
+        [Route("/HOD/StudentClasses/Create")]
+
         public IActionResult Create()
         {
             ViewData["ClassNameId"] = new SelectList(_context.ClassName, "ID", "Name");
@@ -60,6 +66,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: StudentClasses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/StudentClasses/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ClassNameId,SectionId,ShiftId")] StudentClass studentClass)
@@ -77,6 +85,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: StudentClasses/Edit/5
+        [Route("/HOD/StudentClasses/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,6 +108,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: StudentClasses/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/StudentClasses/Edit")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ClassNameId,SectionId,ShiftId")] StudentClass studentClass)
@@ -134,6 +146,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: StudentClasses/Delete/5
+        [Route("/HOD/StudentClasses/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -155,6 +169,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: StudentClasses/Delete/5
+        [Route("/HOD/StudentClasses/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

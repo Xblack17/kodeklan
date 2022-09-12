@@ -25,70 +25,78 @@
                 <div class="row mt-3">
                     <div class="col-12">
                         <div class="d-flex align-items-center mb-3">
+                            <hr/>
                             <div class="mr-auto">
                                 <h2 class="mb-2 fs-2 lh-tight">List Of </h2>
                                 <p>LeaveAllocation</p>
                             </div>
+
                         </div>
+                        <hr/>
+                        <p>
+                            <a asp-action="Create">Create New</a>
+                        </p>
+                        <hr/>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.NumberOfDays)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DateCreated)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Period)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EmployeeId)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.LeaveType)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        @foreach (var item in Model) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NumberOfDays)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateCreated)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Period)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LeaveType.Name)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                        }
+                            </tbody>
+                        </table>
+
                     </div>
-                    <div class="col-12">
-                        
+                     <hr />
+                    <div class="mr-auto">
+
+                        <img src="~/Back.png" alt="Sample Photo" hight="120px" width="100px" />
+                        <p><a asp-controller="HOD" asp-action="AdminLeaveRequestViewVMs">Back To Class Fees</a></p>
                     </div>
+                    <hr />
                 </div>
             </div>
         </div>
     </main>
 </div>
 
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfDays)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateCreated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Period)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmployeeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LeaveType)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfDays)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Period)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LeaveType.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

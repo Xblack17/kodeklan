@@ -21,6 +21,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: JobInfoes
+        [Route("/HOD/JobInfoes")]
+
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.JobInfo.Include(j => j.Designation).Include(j => j.Employee);
@@ -28,6 +30,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: JobInfoes/Details/5
+        [Route("/HOD/JobInfoes/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,6 +52,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: JobInfoes/Create
+        [Route("/HOD/JobInfoes/Create")]
+
         public IActionResult Create()
         {
             ViewData["DesignationId"] = new SelectList(_context.Designation, "Id", "Name");
@@ -58,6 +64,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: JobInfoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/JobInfoes/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,DesignationId,DOJ,Salary,TotalLeave,Appointment,AppointmentExt,EmployeeId")] JobInfo jobInfo)
@@ -74,6 +82,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: JobInfoes/Edit/5
+        [Route("/HOD/JobInfoes/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,6 +104,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: JobInfoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/JobInfoes/Edit")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,DesignationId,DOJ,Salary,TotalLeave,Appointment,AppointmentExt,EmployeeId")] JobInfo jobInfo)
@@ -129,6 +141,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: JobInfoes/Delete/5
+        [Route("/HOD/JobInfoes/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,6 +163,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: JobInfoes/Delete/5
+        [Route("/HOD/JobInfoes/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

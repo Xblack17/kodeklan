@@ -21,12 +21,16 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: GuardianTypes
+        [Route("/HOD/GuardianTypes")]
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.GuardianType.ToListAsync());
         }
 
         // GET: GuardianTypes/Details/5
+        [Route("/HOD/GuardianTypes/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +49,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: GuardianTypes/Create
+        [Route("/HOD/GuardianTypes/Create")]
+
         public IActionResult Create()
         {
             return View();
@@ -53,6 +59,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: GuardianTypes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/GuardianTypes/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] GuardianType guardianType)
@@ -67,6 +75,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: GuardianTypes/Edit/5
+        [Route("/HOD/GuardianTypes/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,6 +95,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: GuardianTypes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/GuardianTypes/Edit")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] GuardianType guardianType)
@@ -118,6 +130,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: GuardianTypes/Delete/5
+        [Route("/HOD/GuardianTypes/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +150,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: GuardianTypes/Delete/5
+        [Route("/HOD/GuardianTypes/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

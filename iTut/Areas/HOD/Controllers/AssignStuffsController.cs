@@ -27,6 +27,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AssignStuffs/Details/5
+        [Route("/AssignStuffs/Details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,12 +46,14 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AssignStuffs/Create
+        [Route("/AssignStuffs/Create")]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: AssignStuffs/Create
+        [Route("/AssignStuffs/Create")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -67,6 +70,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AssignStuffs/Edit/5
+        [Route("/AssignStuffs/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,6 +87,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: AssignStuffs/Edit/5
+        [Route("/AssignStuffs/Edit")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -118,6 +123,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AssignStuffs/Delete/5
+        [Route("/AssignStuffs/Delete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +142,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: AssignStuffs/Delete/5
+        [Route("/AssignStuffs/Delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

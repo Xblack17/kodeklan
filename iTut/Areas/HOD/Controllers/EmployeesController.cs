@@ -21,12 +21,15 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: HOD/Employees
+        [Route("/HOD/Employees")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Employee.ToListAsync());
         }
 
         // GET: HOD/Employees/Details/5
+        [Route("/HOD/Employees/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +48,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: HOD/Employees/Create
+        [Route("/HOD/Employees/Create")]
+
         public IActionResult Create()
         {
             return View();
@@ -53,6 +58,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: HOD/Employees/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/Employees/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,FatherName,MotherName,Gender,DOB,MaritalStatus,Religion,Nationality,NID,PresentAddress,PermanentAddress,Phone,Email,UserName")] Employee employee)
@@ -67,6 +74,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: HOD/Employees/Edit/5
+        [Route("/HOD/Employees/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,6 +94,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: HOD/Employees/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/Employees/Edit")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,FatherName,MotherName,Gender,DOB,MaritalStatus,Religion,Nationality,NID,PresentAddress,PermanentAddress,Phone,Email,UserName")] Employee employee)
@@ -118,6 +129,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: HOD/Employees/Delete/5
+        [Route("/HOD/Employees/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +149,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: HOD/Employees/Delete/5
+        [Route("/HOD/Employees/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -51,11 +51,17 @@
                                             <input asp-for="MotherName" class="form-control" />
                                             <span asp-validation-for="MotherName" class="text-danger"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <label asp-for="Gender" class="control-label"></label>
-                                            <select asp-for="Gender" class="form-control"></select>
-                                            <span asp-validation-for="Gender" class="text-danger"></span>
-                                        </div>
+                                         <div class="form-group">
+                                        <label asp-for="Gender" class="control-label"></label>
+                                        <select asp-for="Gender"
+                                            class="form-control"
+                                            asp-items="Html.GetEnumSelectList<Gender>()">
+                                           <option>Select Gender</option>
+                                        </select>
+                                        
+                                        <span asp-validation-for="Gender" class="text-danger"></span>
+                                        
+                                    </div>
                                         <div class="form-group">
                                             <label asp-for="DOB" class="control-label"></label>
                                             <input asp-for="DOB" class="form-control" />
@@ -63,17 +69,29 @@
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="MaritalStatus" class="control-label"></label>
-                                            <input asp-for="MaritalStatus" class="form-control" />
+                                            <select asp-for="MaritalStatus"
+                                                class="form-control"
+                                                asp-items="Html.GetEnumSelectList<MaritalStatus>()">
+                                            <option>Select MaritalStatus</option>
+                                        </select>
                                             <span asp-validation-for="MaritalStatus" class="text-danger"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <label asp-for="Religion" class="control-label"></label>
-                                            <select asp-for="Religion" class="form-control"></select>
-                                            <span asp-validation-for="Religion" class="text-danger"></span>
-                                        </div>
+                                       <div class="form-group">
+                                        <label asp-for="Religion" class="control-label"></label>
+                                        <select asp-for="Religion"
+                                                class="form-control"
+                                                asp-items="Html.GetEnumSelectList<Religion>()">
+                                            <option>Select Religion</option>
+                                        </select>
+                                        <span asp-validation-for="Religion" class="text-danger"></span>
+                                    </div>
                                         <div class="form-group">
                                             <label asp-for="Nationality" class="control-label"></label>
-                                            <input asp-for="Nationality" class="form-control" />
+                                            <select asp-for="Nationality"
+                                                class="form-control"
+                                                asp-items="Html.GetEnumSelectList<Nationality>()">
+                                            <option>Select Nationality</option>
+                                            </select>
                                             <span asp-validation-for="Nationality" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">

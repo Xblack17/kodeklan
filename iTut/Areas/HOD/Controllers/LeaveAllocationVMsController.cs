@@ -21,6 +21,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: LeaveAllocationVMs
+        [Route("/HOD/LeaveAllocationVMs")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.LeaveAllocationVM.Include(l => l.LeaveType);
@@ -28,6 +29,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: LeaveAllocationVMs/Details/5
+        [Route("/HOD/LeaveAllocationVMs/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +50,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: LeaveAllocationVMs/Create
+        [Route("/HOD/LeaveAllocationVMs/Create")]
+
         public IActionResult Create()
         {
             ViewData["LeaveTypeId"] = new SelectList(_context.Set<LeaveTypeVM>(), "Id", "Name");
@@ -56,6 +61,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: LeaveAllocationVMs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/LeaveAllocationVMs/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NumberOfDays,DateCreated,Period,EmployeeId,LeaveTypeId")] LeaveAllocationVM leaveAllocationVM)
@@ -71,6 +78,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: LeaveAllocationVMs/Edit/5
+        [Route("/HOD/LeaveAllocationVMs/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,6 +99,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: LeaveAllocationVMs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/LeaveAllocationVMs/Edit")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NumberOfDays,DateCreated,Period,EmployeeId,LeaveTypeId")] LeaveAllocationVM leaveAllocationVM)
@@ -124,6 +135,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: LeaveAllocationVMs/Delete/5
+        [Route("/HOD/LeaveAllocationVMs/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,6 +156,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: LeaveAllocationVMs/Delete/5
+        [Route("/HOD/LeaveAllocationVMs/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

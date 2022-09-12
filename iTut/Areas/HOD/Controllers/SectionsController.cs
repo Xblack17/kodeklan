@@ -21,12 +21,16 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Sections
+        [Route("/HOD/Sections")]
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Section.ToListAsync());
         }
 
         // GET: Sections/Details/5
+        [Route("/HOD/Sections/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +49,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Sections/Create
+        [Route("/HOD/Sections/Create")]
+
         public IActionResult Create()
         {
             return View();
@@ -53,6 +59,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: Sections/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/Sections/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Section section)
@@ -67,6 +75,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Sections/Edit/5
+        [Route("/HOD/Sections/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,6 +93,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: Sections/Edit/5
+        [Route("/HOD/Sections/Edit")]
+
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -118,6 +130,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Sections/Delete/5
+        [Route("/HOD/Sections/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +150,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: Sections/Delete/5
+        [Route("/HOD/Sections/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

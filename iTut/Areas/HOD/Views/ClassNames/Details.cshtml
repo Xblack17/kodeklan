@@ -25,11 +25,13 @@
                 <div class="row mt-3">
                     <div class="col-12">
                         <div class="d-flex align-items-center mb-3">
+
                             <div class="mr-auto">
+
                                 <h2 class="mb-2 fs-2 lh-tight">Details</h2>
                                 <p>Class Name</p>
                             </div>
-                            
+                             <hr/>
                         </div>
                         <div>
                             <h4>ClassName</h4>
@@ -42,12 +44,14 @@
                                     @Html.DisplayFor(model => model.Name)
                                 </dd>
                             </dl>
+                             <hr/>
                         </div>
+
                         <div>
                             <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
                             <a asp-action="Index">Back to List</a>
                         </div>
-
+                         <hr/>
                     </div>
                     <div class="col-12">
                         

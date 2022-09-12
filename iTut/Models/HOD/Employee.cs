@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using iTut.Models.HOD.Enum;
 using System.ComponentModel.DataAnnotations;
+using iTut.Constants;
 
 namespace iTut.Models.HOD
 {
@@ -21,14 +21,13 @@ namespace iTut.Models.HOD
         public string MotherName { get; set; }
 
         public Gender Gender { get; set; }
-
         [Display(Name = "Date of Birth")]
         public DateTime DOB { get; set; }
 
-        public string MaritalStatus { get; set; }
+        public MaritalStatus MaritalStatus { get; set; }
         public Religion Religion { get; set; }
 
-        public string Nationality { get; set; }
+        public Nationality Nationality { get; set; }
 
          [Display(Name = "National ID No.")]
         public string NID { get; set; }

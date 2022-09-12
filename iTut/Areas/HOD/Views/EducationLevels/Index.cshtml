@@ -27,49 +27,50 @@
                     <div class="col-12">
                         <div class="d-flex align-items-center mb-3">
                             <div class="mr-auto">
-                                <h2 class="mb-2 fs-2 lh-tight">Timeline</h2>
-                                <p>What is happening?</p>
+                                <h2 class="mb-2 fs-2 lh-tight">List Of</h2>
+                                <p>Education Level</p>
                             </div>
-                            <div class="mr-auto">
-                                <h2 class="mb-2 fs-2 lh-tight">Timeline</h2>
-                                <p>What is happening?</p>
-                            </div>
+                            
                         </div>
-                    </div>
-                    <div class="col-12">
                         
+                        <p>
+                            <a asp-action="Create">Create New</a>
+                        </p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EducationLevelNaame)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        @foreach (var item in Model) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EducationLevelNaame)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                        }
+                            </tbody>
+                        </table>
                     </div>
+                    <hr />
+                    <div class="mr-auto">
+
+                        <img src="~/Back.png" alt="Sample Photo" hight="120px" width="100px" />
+                        <p><a asp-controller="HOD" asp-action="Employees">Back To Class Fees</a></p>
+                    </div>
+                    <hr />
                 </div>
             </div>
         </div>
     </main>
 </div>
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EducationLevelNaame)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EducationLevelNaame)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

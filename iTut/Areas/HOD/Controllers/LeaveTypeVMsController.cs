@@ -21,12 +21,15 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: LeaveTypeVMs
+        [Route("/HOD/LeaveTypeVMs")]
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.LeaveTypeVM.ToListAsync());
         }
 
         // GET: LeaveTypeVMs/Details/5
+        [Route("/HOD/LeaveTypeVMs/Details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +48,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: LeaveTypeVMs/Create
+        [Route("/HOD/LeaveTypeVMs/Create")]
+
         public IActionResult Create()
         {
             return View();
@@ -53,6 +58,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: LeaveTypeVMs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/LeaveTypeVMs/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,DefaultDays,DateCreated")] LeaveTypeVM leaveTypeVM)
@@ -67,6 +74,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: LeaveTypeVMs/Edit/5
+        [Route("/HOD/LeaveTypeVMs/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,6 +94,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: LeaveTypeVMs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/LeaveTypeVMs/Edit")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,DefaultDays,DateCreated")] LeaveTypeVM leaveTypeVM)
@@ -118,6 +129,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: LeaveTypeVMs/Delete/5
+        [Route("/HOD/LeaveTypeVMs/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +149,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: LeaveTypeVMs/Delete/5
+        [Route("/HOD/LeaveTypeVMs/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

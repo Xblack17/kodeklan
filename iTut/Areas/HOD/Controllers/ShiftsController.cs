@@ -21,12 +21,16 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Shifts
+        [Route("/HOD/Shifts")]
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Shift.ToListAsync());
         }
 
         // GET: Shifts/Details/5
+        [Route("/HOD/Shifts/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +49,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Shifts/Create
+        [Route("/HOD/Shifts/Create")]
+
         public IActionResult Create()
         {
             return View();
@@ -53,6 +59,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: Shifts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/Shifts/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Shift shift)
@@ -67,6 +75,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Shifts/Edit/5
+        [Route("/HOD/Shifts/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,6 +95,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: Shifts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/Shifts/Edit")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Shift shift)
@@ -118,6 +130,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Shifts/Delete/5
+        [Route("/HOD/Shifts/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +150,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: Shifts/Delete/5
+        [Route("/HOD/Shifts/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

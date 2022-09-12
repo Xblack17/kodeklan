@@ -28,6 +28,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Courses/Details/5
+        [Route("/Courses/Details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +48,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Courses/Create
+        [Route("/Courses/Create")]
         public IActionResult Create()
         {
             ViewData["ClassNameId"] = new SelectList(_context.ClassName, "ID", "Name");
@@ -54,6 +56,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: Courses/Create
+        [Route("/Courses/Create")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -71,6 +74,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Courses/Edit/5
+        [Route("Courses/Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

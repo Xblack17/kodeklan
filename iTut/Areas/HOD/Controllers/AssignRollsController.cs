@@ -28,6 +28,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AssignRolls/Details/5
+        [Route("/AssignRolls/Details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,6 +50,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AssignRolls/Create
+        [Route("/AssignRolls/Create")]
         public IActionResult Create()
         {
             ViewData["SessionId"] = new SelectList(_context.Session, "Id", "Id");
@@ -58,6 +60,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: AssignRolls/Create
+        [Route("/AssignRolls/Create")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -77,6 +80,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AssignRolls/Edit/5
+        [Route("/AssignRolls/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -96,6 +100,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: AssignRolls/Edit/5
+        [Route("/HOD/AssignRolls/Edit")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -134,6 +139,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AssignRolls/Delete/5
+        [Route("/HOD/AssignRolls/Delete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -155,6 +161,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: AssignRolls/Delete/5
+        [Route("/HOD/AssignRolls/Delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

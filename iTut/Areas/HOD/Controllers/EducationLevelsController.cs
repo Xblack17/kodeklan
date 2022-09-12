@@ -21,12 +21,15 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: EducationLevels
+        [Route("/HOD/EducationLevels")]
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.EducationLevel.ToListAsync());
         }
 
         // GET: EducationLevels/Details/5
+        [Route("/HOD/EducationLevels/Details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,12 +48,14 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: EducationLevels/Create
+        [Route("/HOD/EducationLevels/Create")]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: EducationLevels/Create
+        [Route("/HOD/EducationLevels/Create")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -67,6 +72,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: EducationLevels/Edit/5
+        [Route("/HOD/EducationLevels/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,6 +90,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: EducationLevels/Edit/5
+        [Route("/HOD/EducationLevels/Edit")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -118,6 +126,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: EducationLevels/Delete/5
+        [Route("/HOD/EducationLevels/Delete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +145,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: EducationLevels/Delete/5
+        [Route("/HOD/EducationLevels/Delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -21,6 +21,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: ClassFees
+        [Route("/HOD/ClassFees")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.ClassFee.Include(c => c.ClassName);
@@ -28,6 +29,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: ClassFees/Details/5
+        [Route("/HOD/ClassFees/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +50,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: ClassFees/Create
+        [Route("/HOD/ClassFees/Create")]
         public IActionResult Create()
         {
             ViewData["ClassNameId"] = new SelectList(_context.ClassName, "ID", "Name");
@@ -56,6 +60,7 @@ namespace iTut.Areas.HOD.Controllers
         // POST: ClassFees/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/ClassFees/Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AdmissionFee,ClassNameId")] ClassFee classFee)
@@ -71,6 +76,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: ClassFees/Edit/5
+        
+        [Route("/HOD/ClassFees/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,6 +97,7 @@ namespace iTut.Areas.HOD.Controllers
         // POST: ClassFees/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/ClassFees/Edit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,AdmissionFee,ClassNameId")] ClassFee classFee)
@@ -124,6 +132,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: ClassFees/Delete/5
+        [Route("/HOD/ClassFees/Delete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,6 +152,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: ClassFees/Delete/5
+        [Route("/HOD/ClassFees/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -21,6 +21,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: ExamTitles
+        [Route("/HOD/ExamTitles")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.ExamTitle.Include(e => e.EducationLevel);
@@ -28,6 +29,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: ExamTitles/Details/5
+        [Route("/HOD/ExamTitles/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +50,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: ExamTitles/Create
+        [Route("/HOD/ExamTitles/Create")]
+
         public IActionResult Create()
         {
             ViewData["EducationLevelId"] = new SelectList(_context.EducationLevel, "Id", "EducationLevelNaame");
@@ -56,6 +61,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: ExamTitles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/ExamTitles/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TitleName,EducationLevelId")] ExamTitle examTitle)
@@ -71,6 +78,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: ExamTitles/Edit/5
+        [Route("/HOD/ExamTitles/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,6 +99,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: ExamTitles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/ExamTitles/Edit")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,TitleName,EducationLevelId")] ExamTitle examTitle)
@@ -124,6 +135,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: ExamTitles/Delete/5
+        [Route("/HOD/ExamTitles/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,6 +156,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: ExamTitles/Delete/5
+        [Route("/HOD/ExamTitles/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

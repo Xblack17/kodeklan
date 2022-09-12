@@ -21,12 +21,15 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AdminLeaveRequestViewVMs
+        [Route("/HOD/AdminLeaveRequestViewVMs")]
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.AdminLeaveRequestViewVM.ToListAsync());
         }
 
         // GET: AdminLeaveRequestViewVMs/Details/5
+        [Route("/HOD/AdminLeaveRequestViewVMs/Details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +48,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AdminLeaveRequestViewVMs/Create
+        [Route("/HOD/AdminLeaveRequestViewVMs/Create")]
+
         public IActionResult Create()
         {
             return View();
@@ -53,6 +58,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: AdminLeaveRequestViewVMs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/AdminLeaveRequestViewVMs/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TotalRequests,ApprovedRequests,PendingRequests,RejectedRequests")] AdminLeaveRequestViewVM adminLeaveRequestViewVM)
@@ -67,6 +74,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AdminLeaveRequestViewVMs/Edit/5
+        [Route("/HOD/AdminLeaveRequestViewVMs/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,6 +91,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: AdminLeaveRequestViewVMs/Edit/5
+        [Route("/HOD/AdminLeaveRequestViewVMs/Edit")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -118,6 +127,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: AdminLeaveRequestViewVMs/Delete/5
+        [Route("/HOD/AdminLeaveRequestViewVMs/Delete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +146,7 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: AdminLeaveRequestViewVMs/Delete/5
+        [Route("/HOD/AdminLeaveRequestViewVMs/Delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

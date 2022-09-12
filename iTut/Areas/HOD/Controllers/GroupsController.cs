@@ -21,12 +21,16 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Groups
+        [Route("/HOD/Groups")]
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Group.ToListAsync());
         }
 
         // GET: Groups/Details/5
+        [Route("/HOD/Groups/Details")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +49,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Groups/Create
+        [Route("/HOD/Groups/Create")]
+
         public IActionResult Create()
         {
             return View();
@@ -53,6 +59,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: Groups/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/Groups/Create")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Group @group)
@@ -67,6 +75,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Groups/Edit/5
+        [Route("/HOD/Groups/Edit")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,6 +95,8 @@ namespace iTut.Areas.HOD.Controllers
         // POST: Groups/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("/HOD/Groups/Edit")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Group @group)
@@ -118,6 +130,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // GET: Groups/Delete/5
+        [Route("/HOD/Groups/Delete")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +150,8 @@ namespace iTut.Areas.HOD.Controllers
         }
 
         // POST: Groups/Delete/5
+        [Route("/HOD/Groups/Delete")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
