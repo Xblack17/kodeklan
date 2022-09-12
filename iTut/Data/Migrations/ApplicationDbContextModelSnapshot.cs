@@ -154,6 +154,21 @@ namespace iTut.Data.Migrations
                     b.ToTable("UserTokens");
                 });
 
+            modelBuilder.Entity("ParentUserStudentUser", b =>
+                {
+                    b.Property<string>("ChildrenId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ParentsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ChildrenId", "ParentsId");
+
+                    b.HasIndex("ParentsId");
+
+                    b.ToTable("ParentUserStudentUser");
+                });
+
             modelBuilder.Entity("iTut.Models.Coordinator.Feedback", b =>
                 {
                     b.Property<string>("Id")
@@ -207,19 +222,6 @@ namespace iTut.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Reports");
-            modelBuilder.Entity("ParentUserStudentUser", b =>
-                {
-                    b.Property<string>("ChildrenId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ParentsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ChildrenId", "ParentsId");
-
-                    b.HasIndex("ParentsId");
-
-                    b.ToTable("ParentUserStudentUser");
                 });
 
             modelBuilder.Entity("iTut.Models.Coordinator.Subject", b =>
@@ -247,30 +249,6 @@ namespace iTut.Data.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("iTut.Models.Educator.Topic", b =>
-                {
-                    b.Property<string>("TopicId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EducatorID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TopicName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("TopicId");
-
-                    b.ToTable("Topics");
             modelBuilder.Entity("iTut.Models.Coordinator.SubjectEducator", b =>
                 {
                     b.Property<string>("SubjectEducatorId")
@@ -301,852 +279,32 @@ namespace iTut.Data.Migrations
                     b.HasKey("SubjectGradeId");
 
                     b.ToTable("SubjectGrades");
-            modelBuilder.Entity("iTut.Models.HOD.Admission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("AdmissionDate")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PreviousSchool")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PreviousSchoolAddrs")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SessionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentClassId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
-
-                    b.HasIndex("SessionId");
-
-                    b.HasIndex("StudentClassId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Admission");
                 });
 
-            modelBuilder.Entity("iTut.Models.HOD.AssignRoll", b =>
+            modelBuilder.Entity("iTut.Models.Edu.Topic", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Roll")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SessionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentClassId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SessionId");
-
-                    b.HasIndex("StudentClassId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("AssignRoll");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.AssignStuff", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AssignStuff");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.ClassFee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("AdmissionFee")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ClassNameId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClassNameId");
-
-                    b.ToTable("ClassFee");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.ClassName", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("ClassName");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ClassNameId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Mcq")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Practical")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Theory")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClassNameId");
-
-                    b.ToTable("Course");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.DefaultSetting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("From")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Language")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("SMSBalance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("SMSStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("To")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Vat")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DefaultSetting");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Designation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Designation");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.EducationLevel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("EducationLevelNaame")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EducationLevel");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FatherName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MaritalStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MotherName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nationality")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PermanentAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PresentAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Religion")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Employee");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.EmployeeEducation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Achievement")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("CGPA")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EducationLevelId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExamTitleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("InstituteName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Major")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Marks")
-                        .HasColumnType("real");
-
-                    b.Property<string>("PassingYear")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ResultType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Scale")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EducationLevelId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("ExamTitleId");
-
-                    b.ToTable("EmployeeEducation");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.EmploymentHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CompanyLocation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Designation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("From")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("To")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmploymentHistory");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.ExamTitle", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("EducationLevelId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TitleName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EducationLevelId");
-
-                    b.ToTable("ExamTitle");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.FeeType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FeeType");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Grade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("HighestMark")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LowestMark")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Grade");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Group", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Group");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Guardian", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GuardianTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GuardianTypeId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Guardian");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.GuardianType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GuardianType");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.JobInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<byte[]>("Appointment")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("AppointmentExt")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DOJ")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DesignationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("TotalLeave")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DesignationId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("JobInfo");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Leave.AdminLeaveRequestViewVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ApprovedRequests")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PendingRequests")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RejectedRequests")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalRequests")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AdminLeaveRequestViewVM");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Leave.EmployeeVM", b =>
-                {
-                    b.Property<string>("Id")
+                    b.Property<string>("TopicId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("DateJoined")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
+                    b.Property<string>("EducatorID")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Firstname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lastname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TaxId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmployeeVM");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Leave.LeaveAllocationVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EmployeeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("LeaveTypeId")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfDays")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Period")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("LeaveTypeId");
-
-                    b.ToTable("LeaveAllocationVM");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Leave.LeaveRequestVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AdminLeaveRequestViewVMId")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("Approved")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ApprovedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Cancelled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("DateActioned")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateRequested")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("LeaveTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RequestComments")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("RequestingEmployeeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdminLeaveRequestViewVMId");
-
-                    b.HasIndex("ApprovedById");
-
-                    b.HasIndex("LeaveTypeId");
-
-                    b.HasIndex("RequestingEmployeeId");
-
-                    b.ToTable("LeaveRequestVM");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Leave.LeaveTypeVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DefaultDays")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("TopicName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("LeaveTypeVM");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.School", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Fax")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Logo")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneAlt")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhonePrimary")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("School");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Section", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Section");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Session", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Session");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Shift", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Shift");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Student", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("DateOfBirth")
-                        .IsRequired()
+                    b.Property<DateTime>("UpdateAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("TopicId");
 
-                    b.Property<string>("FatherName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MotherName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ParmanentAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PresentAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Religion")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Student");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.StudentClass", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ClassNameId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SectionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShiftId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClassNameId");
-
-                    b.HasIndex("SectionId");
-
-                    b.HasIndex("ShiftId");
-
-                    b.ToTable("StudentClass");
+                    b.ToTable("Topics");
                 });
 
             modelBuilder.Entity("iTut.Models.Parent.Complaint", b =>
@@ -1182,6 +340,40 @@ namespace iTut.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Complaints");
+                });
+
+            modelBuilder.Entity("iTut.Models.Parent.MeetingRequest", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EducatorId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MeetingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ParentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MeetingRequest");
                 });
 
             modelBuilder.Entity("iTut.Models.Quiz.Answer", b =>
@@ -1280,40 +472,6 @@ namespace iTut.Data.Migrations
                     b.HasKey("ResultID");
 
                     b.ToTable("Results");
-                });
-
-            modelBuilder.Entity("iTut.Models.Relationships.StudentParent", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EducatorId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("MeetingDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ParentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MeetingRequest");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.ApplicationUser", b =>
@@ -1531,7 +689,7 @@ namespace iTut.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HOD");
+                    b.ToTable("HODs");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.ParentUser", b =>
@@ -1623,32 +781,6 @@ namespace iTut.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("iTut.Models.ViewModels.HOD.HODIndexViewModel+CalendarEvent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("End")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Start")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("iTut.Models.ViewModels.Student.RegisterStudentViewModel", b =>
@@ -1745,247 +877,6 @@ namespace iTut.Data.Migrations
                 });
 
             modelBuilder.Entity("ParentUserStudentUser", b =>
-            modelBuilder.Entity("iTut.Models.HOD.Admission", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.Group", "Group")
-                        .WithMany()
-                        .HasForeignKey("GroupId");
-
-                    b.HasOne("iTut.Models.HOD.Session", "Session")
-                        .WithMany()
-                        .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.StudentClass", "StudentClass")
-                        .WithMany()
-                        .HasForeignKey("StudentClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Group");
-
-                    b.Navigation("Session");
-
-                    b.Navigation("Student");
-
-                    b.Navigation("StudentClass");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.AssignRoll", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.Session", "Session")
-                        .WithMany()
-                        .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.StudentClass", "StudentClass")
-                        .WithMany()
-                        .HasForeignKey("StudentClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Session");
-
-                    b.Navigation("Student");
-
-                    b.Navigation("StudentClass");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.ClassFee", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.ClassName", "ClassName")
-                        .WithMany()
-                        .HasForeignKey("ClassNameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ClassName");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Course", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.ClassName", "ClassName")
-                        .WithMany()
-                        .HasForeignKey("ClassNameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ClassName");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.EmployeeEducation", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.EducationLevel", "EducationLevel")
-                        .WithMany()
-                        .HasForeignKey("EducationLevelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.Employee", "Employee")
-                        .WithMany("EmployeeEducation")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.ExamTitle", "ExamTitle")
-                        .WithMany()
-                        .HasForeignKey("ExamTitleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EducationLevel");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("ExamTitle");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.EmploymentHistory", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.Employee", "Employee")
-                        .WithMany("EmploymentHistory")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.ExamTitle", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.EducationLevel", "EducationLevel")
-                        .WithMany()
-                        .HasForeignKey("EducationLevelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EducationLevel");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Guardian", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.GuardianType", "GuardianType")
-                        .WithMany()
-                        .HasForeignKey("GuardianTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.Student", "Student")
-                        .WithMany("Guardians")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("GuardianType");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.JobInfo", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.Designation", "Designation")
-                        .WithMany()
-                        .HasForeignKey("DesignationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.Employee", "Employee")
-                        .WithMany("JobInfo")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Designation");
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Leave.LeaveAllocationVM", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.Leave.EmployeeVM", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId");
-
-                    b.HasOne("iTut.Models.HOD.Leave.LeaveTypeVM", "LeaveType")
-                        .WithMany()
-                        .HasForeignKey("LeaveTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("LeaveType");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Leave.LeaveRequestVM", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.Leave.AdminLeaveRequestViewVM", null)
-                        .WithMany("LeaveRequests")
-                        .HasForeignKey("AdminLeaveRequestViewVMId");
-
-                    b.HasOne("iTut.Models.HOD.Leave.EmployeeVM", "ApprovedBy")
-                        .WithMany()
-                        .HasForeignKey("ApprovedById");
-
-                    b.HasOne("iTut.Models.HOD.Leave.LeaveTypeVM", "LeaveType")
-                        .WithMany()
-                        .HasForeignKey("LeaveTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.Leave.EmployeeVM", "RequestingEmployee")
-                        .WithMany()
-                        .HasForeignKey("RequestingEmployeeId");
-
-                    b.Navigation("ApprovedBy");
-
-                    b.Navigation("LeaveType");
-
-                    b.Navigation("RequestingEmployee");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.StudentClass", b =>
-                {
-                    b.HasOne("iTut.Models.HOD.ClassName", "ClassName")
-                        .WithMany()
-                        .HasForeignKey("ClassNameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.Section", "Section")
-                        .WithMany()
-                        .HasForeignKey("SectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("iTut.Models.HOD.Shift", "Shift")
-                        .WithMany()
-                        .HasForeignKey("ShiftId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ClassName");
-
-                    b.Navigation("Section");
-
-                    b.Navigation("Shift");
-                });
-
-            modelBuilder.Entity("iTut.Models.Relationships.StudentParent", b =>
                 {
                     b.HasOne("iTut.Models.Users.StudentUser", null)
                         .WithMany()
@@ -1998,6 +889,8 @@ namespace iTut.Data.Migrations
                         .HasForeignKey("ParentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
             modelBuilder.Entity("iTut.Models.Users.EducatorUser", b =>
                 {
                     b.HasOne("iTut.Models.Coordinator.Subject", null)
@@ -2008,35 +901,6 @@ namespace iTut.Data.Migrations
             modelBuilder.Entity("iTut.Models.Coordinator.Subject", b =>
                 {
                     b.Navigation("SubjectEducators");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Employee", b =>
-                {
-                    b.Navigation("EmployeeEducation");
-
-                    b.Navigation("EmploymentHistory");
-
-                    b.Navigation("JobInfo");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Leave.AdminLeaveRequestViewVM", b =>
-                {
-                    b.Navigation("LeaveRequests");
-                });
-
-            modelBuilder.Entity("iTut.Models.HOD.Student", b =>
-                {
-                    b.Navigation("Guardians");
-                });
-
-            modelBuilder.Entity("iTut.Models.Users.ParentUser", b =>
-                {
-                    b.Navigation("Children");
-                });
-
-            modelBuilder.Entity("iTut.Models.Users.StudentUser", b =>
-                {
-                    b.Navigation("Parents");
                 });
 #pragma warning restore 612, 618
         }

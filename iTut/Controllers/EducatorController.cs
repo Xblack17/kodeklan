@@ -1,9 +1,9 @@
 ﻿using iTut.Constants;
 using iTut.Data;
-using iTut.Models.Educator;
 using iTut.Models.Users;
 using iTut.Models.UploadFiles;
 using iTut.Models.ViewModels.Educator;
+using iTut.Models.Edu;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using iTut.Models.Quiz;
-using Microsoft.AspNetCore.Http;
 
 namespace iTut.Controllers
 {

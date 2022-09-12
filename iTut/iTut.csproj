@@ -7,17 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <Compile Remove="Areas\HOD\Controllers\NewFolder\**" />
+    <Compile Remove="Areas\HOD\**" />
+    <Compile Remove="Controllers\HOD\**" />
     <Compile Remove="Models\Educator\**" />
-    <Content Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <Content Remove="Areas\HOD\Controllers\NewFolder\**" />
+    <Content Remove="Areas\HOD\**" />
+    <Content Remove="Controllers\HOD\**" />
     <Content Remove="Models\Educator\**" />
-    <EmbeddedResource Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <EmbeddedResource Remove="Areas\HOD\Controllers\NewFolder\**" />
+    <EmbeddedResource Remove="Areas\HOD\**" />
+    <EmbeddedResource Remove="Controllers\HOD\**" />
     <EmbeddedResource Remove="Models\Educator\**" />
-    <None Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <None Remove="Areas\HOD\Controllers\NewFolder\**" />
+    <None Remove="Areas\HOD\**" />
+    <None Remove="Controllers\HOD\**" />
     <None Remove="Models\Educator\**" />
     <Compile Remove="Models\Student\**" />
     <Content Remove="Models\Student\**" />
@@ -98,8 +98,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\HOD\Data\" />
-    <Folder Include="Controllers\HOD\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
