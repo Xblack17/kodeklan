@@ -17,6 +17,20 @@
     <EmbeddedResource Remove="Controllers\HOD\**" />
     <EmbeddedResource Remove="Models\Educator\**" />
     <None Remove="Areas\HOD\**" />
+    <Compile Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
+    <Compile Remove="Areas\HOD\Data\**" />
+    <Compile Remove="Controllers\HOD\**" />
+    <Compile Remove="Models\Educator\**" />
+    <Content Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
+    <Content Remove="Areas\HOD\Data\**" />
+    <Content Remove="Controllers\HOD\**" />
+    <Content Remove="Models\Educator\**" />
+    <EmbeddedResource Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
+    <EmbeddedResource Remove="Areas\HOD\Data\**" />
+    <EmbeddedResource Remove="Controllers\HOD\**" />
+    <EmbeddedResource Remove="Models\Educator\**" />
+    <None Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
+    <None Remove="Areas\HOD\Data\**" />
     <None Remove="Controllers\HOD\**" />
     <None Remove="Models\Educator\**" />
     <Compile Remove="Models\Student\**" />
@@ -86,7 +100,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.15" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
       <PrivateAssets>all</PrivateAssets>
