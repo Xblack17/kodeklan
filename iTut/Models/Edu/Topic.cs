@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace iTut.Models.Educator
+
+namespace iTut.Models.Edu
 {
     public class Topic
     {

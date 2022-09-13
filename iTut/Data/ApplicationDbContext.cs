@@ -1,10 +1,12 @@
 ﻿using iTut.Models.Parent;
 using iTut.Models.Coordinator;
 using iTut.Models.Users;
-using iTut.Models.Educator;
+using iTut.Models.Quiz;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using iTut.Models.ViewModels.Student;
+using iTut.Models.Edu;
 
 namespace iTut.Data
 {
@@ -28,6 +30,7 @@ namespace iTut.Data
         }
 
         public DbSet<ParentUser> Parents { get; set; }
+        public DbSet<HODUser> HODs { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<EducatorUser> Educator { get; set; }
         public DbSet<Topic> Topics { get; set; }
@@ -37,5 +40,13 @@ namespace iTut.Data
         public DbSet<MeetingRequest> MeetingRequest { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<SubjectGrade> SubjectGrades { get; set; }
+        public DbSet<SubjectEducator> SubjectEducators { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Question> Question { get; set; }
+        public DbSet<Option> Options { get; set; }
+        public DbSet<Result> Results { get; set; }
+        public DbSet<Quiz> Quizzes { get; set; }
     }
 }

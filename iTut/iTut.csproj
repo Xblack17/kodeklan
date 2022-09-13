@@ -7,6 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\HOD\**" />
+    <Compile Remove="Controllers\HOD\**" />
+    <Compile Remove="Models\Educator\**" />
+    <Content Remove="Areas\HOD\**" />
+    <Content Remove="Controllers\HOD\**" />
+    <Content Remove="Models\Educator\**" />
+    <EmbeddedResource Remove="Areas\HOD\**" />
+    <EmbeddedResource Remove="Controllers\HOD\**" />
+    <EmbeddedResource Remove="Models\Educator\**" />
+    <None Remove="Areas\HOD\**" />
+    <None Remove="Controllers\HOD\**" />
+    <None Remove="Models\Educator\**" />
     <Compile Remove="Models\Student\**" />
     <Content Remove="Models\Student\**" />
     <EmbeddedResource Remove="Models\Student\**" />
