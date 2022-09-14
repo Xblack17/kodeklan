@@ -43,7 +43,7 @@ namespace iTut.Controllers
 
         public IActionResult Subject()
         {
-            return View();
+            return View(_context.Subjects.ToList());
         }
 
         public IActionResult CreateASubject()
@@ -72,10 +72,38 @@ namespace iTut.Controllers
                 _context.Add(subject);
                 await _context.SaveChangesAsync();
                 _logger.LogInformation("Subject was created!");
-                return RedirectToAction(nameof(CreateASubject));
+                return RedirectToAction("Subject");
             }
             return View(model);
         }
+        //DELETE 
+        public IActionResult Delete(string Id)
+        {
+            Subject subject = _context.Subjects.FirstOrDefault(s => s.Id == Id);
+            if (subject != null)
+            {
+                _context.Remove(subject);
+                _context.SaveChanges();
+                return RedirectToAction("Subject");
+            }
+            return View();
+        }
+
+        //EDIT
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditPost(string Id)
+        {
+            Subject subject = _context.Subjects.FirstOrDefault(s => s.Id == Id);
+            if (subject != null)
+            {
+                _context.Remove(subject);
+                _context.SaveChanges();
+                return RedirectToAction("Subject");
+            }
+            return View();
+        }
+
         public IActionResult Reports()
         {
             return View();
@@ -104,7 +132,11 @@ namespace iTut.Controllers
         {
             return View();
         }
-        //
+        //feedback view
+        public async Task<IActionResult> ViewFeedback()
+        {
+            return View(await _context.Feedbacks.ToListAsync());
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
