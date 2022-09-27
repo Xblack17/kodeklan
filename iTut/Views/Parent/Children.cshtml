@@ -43,26 +43,37 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-12">
-                        @if (Model.Count > 0)
-                        {
-                            <div class="row">
-                                @foreach (var child in Model)
-                                {
-                                    <div class="col-md-5 mx-3 card">
-                                        <h3>@child.FirstName @child.LastName</h3>
-                                        <p>Grade: @child.Grade</p>
+                    @if (Model.Count > 0)
+                    {
+                        <div class="row">
+                            @foreach (var child in Model)
+                            {
+                                <a class="cusror-pointer" asp-controller="Parent" asp-action="Child" asp-route-id="@child.Id">
+                                    <div class="col-md-5 mb-4">
+                                        <div class="w-100 h-100 bg-body-light rounded d-flex p-3">
+                                            <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@child.FirstName.ToCharArray()[0]</span>
+                                            <div class="d-flex align-items-start flex-column w-100">
+                                                <div class="mb-auto w-100">
+                                                    <div>
+                                                        <h2 class="mb-2 fs-1 lh-tight">
+                                                            @child.FirstName @child.LastName
+                                                        </h2>
+                                                        <p class="text-body">Grade: @child.Grade</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                }
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="alert alert-info">
-                                <p>No Children Found</p>
-                            </div>
-                        }
-                    </div>
+                                </a>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <p>No Children Found</p>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

@@ -141,8 +141,10 @@ namespace iTut.Controllers
         [HttpGet]
         public ActionResult MeetingRequest()
         {
-            ViewBag.Parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
+            var parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
+            ViewBag.Parent = parent.Id;
             ViewBag.Teachers = _context.Educator.Where(e => e.Archived == false).ToList();
+            ViewBag.Requests = _context.MeetingRequest.Where(mR => mR.ParentId.Equals(parent.Id)).ToList();
             return View();
         }
 
@@ -165,7 +167,7 @@ namespace iTut.Controllers
                 _context.Add(meetingRequest);
                 await _context.SaveChangesAsync();
                 _logger.LogInformation($"Meeting Request, id: {meetingRequest.Id}, created!");
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MeetingRequest));
             }
             return View(model);
         }
@@ -233,6 +235,17 @@ namespace iTut.Controllers
         }
 
         #endregion
+
+        // GET: Child
+        [Route("/Parent/Child/{id}")]
+        public IActionResult Child([FromRoute] string id)
+        {
+            var child = _context.Students.Where(s => s.Id.Equals(id)).FirstOrDefault();
+
+            ViewBag.Child = child;
+
+            return View();
+        }
 
         public IActionResult UserReport()
         {
