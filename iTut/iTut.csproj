@@ -121,40 +121,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Areas\HOD\Views\Admissions\Create.cshtml" />
-    <None Include="Areas\HOD\Views\Admissions\Index.cshtml" />
-    <None Include="Areas\HOD\Views\AssignRolls\Index.cshtml" />
-    <None Include="Areas\HOD\Views\AssignStuffs\Index.cshtml" />
-    <None Include="Areas\HOD\Views\ClassFees\Index.cshtml" />
-    <None Include="Areas\HOD\Views\ClassNames\Create.cshtml" />
-    <None Include="Areas\HOD\Views\ClassNames\Index.cshtml" />
-    <None Include="Areas\HOD\Views\Courses\Index.cshtml" />
-    <None Include="Areas\HOD\Views\Designations\Create.cshtml" />
-    <None Include="Areas\HOD\Views\Designations\Index.cshtml" />
-    <None Include="Areas\HOD\Views\EducationLevels\Create.cshtml" />
-    <None Include="Areas\HOD\Views\EducationLevels\Delete.cshtml" />
-    <None Include="Areas\HOD\Views\EducationLevels\Details.cshtml" />
-    <None Include="Areas\HOD\Views\EducationLevels\Edit.cshtml" />
-    <None Include="Areas\HOD\Views\EducationLevels\Index.cshtml" />
-    <None Include="Areas\HOD\Views\EmployeeEducations\Index.cshtml" />
-    <None Include="Areas\HOD\Views\Employees\Create.cshtml" />
-    <None Include="Areas\HOD\Views\Employees\Index.cshtml" />
-    <None Include="Areas\HOD\Views\EmploymentHistories\Index.cshtml" />
-    <None Include="Areas\HOD\Views\ExamTitles\Index.cshtml" />
-    <None Include="Areas\HOD\Views\FeeTypes\Index.cshtml" />
-    <None Include="Areas\HOD\Views\Grades\Index.cshtml" />
-    <None Include="Areas\HOD\Views\Groups\Index.cshtml" />
-    <None Include="Areas\HOD\Views\JobInfoes\Index.cshtml" />
-    <None Include="Areas\HOD\Views\LeaveAllocationVMs\Index.cshtml" />
-    <None Include="Areas\HOD\Views\LeaveRequestVMs\Index.cshtml" />
-    <None Include="Areas\HOD\Views\LeaveTypeVMs\Index.cshtml" />
-    <None Include="Areas\HOD\Views\Schools\Index.cshtml" />
-    <None Include="Areas\HOD\Views\Sections\Index.cshtml" />
-    <None Include="Areas\HOD\Views\Sessions\Index.cshtml" />
-    <None Include="Areas\HOD\Views\Shared\_NavsidePartial.cshtml" />
-    <None Include="Areas\HOD\Views\Shifts\Index.cshtml" />
-    <None Include="Areas\HOD\Views\StudentClasses\Index.cshtml" />
-    <None Include="Areas\HOD\Views\Students\Index.cshtml" />
     <None Include="wwwroot\img\undraw_add_files_re_v09g.svg" />
   </ItemGroup>
 
