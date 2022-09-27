@@ -1,51 +1,115 @@
-﻿@model iTut.Models.Parent.MeetingRequest
+﻿@{
+    ViewData["Title"] = "Meeting Requests";
+    List<MeetingRequest> meetings = ViewBag.Requests;
+    List<EducatorUser> educators = ViewBag.Teachers;
 
-@{
-    ViewData["Title"] = "Meeting Request";
+
+    string PrintEducatorName (MeetingRequest meeting) {
+        return $"{educators.Find(e => e.Id.Equals(meeting.EducatorId)).FirstName} {educators.Find(e => e.Id.Equals(meeting.EducatorId)).LastName}";
+    }
 }
 <div id="collapseOffCanvas" class="bg-body offcanvas-collapse open w-100">
     <main class="main-expanded vh-100 w-100">
         <div class="container-fluid px-lg-5">
+            <div class="d-flex py-4 border-bottom">
+                <div class="mr-auto w-100">
+                    <form class="w-100" style="max-width: 600px">
+                        <div class="input-group">
+                            <div class="input-group-item mb-0">
+                                <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="gi gi-search fs-3">
+                                    <path d="M11 3a8 8 0 0 1 8 8c0 1.848-.627 3.55-1.68 4.905l3.386 3.388a1 1 0 0 1-1.32 1.497l-.094-.083-3.388-3.386C14.55 18.373 12.848 19 11 19a8 8 0 1 1 0-16zm0 2a6 6 0 1 0 0 12 6 6 0 1 0 0-12z"></path>
+                                </svg>
+                            </div>
+                            <input type="search" placeholder="Search Meetings" aria-label="Search Complaints" class="form-control form-control-lg">
+                        </div>
+                    </form>
+                </div>
+                <ul class="list-unstyled d-flex align-items-center">
+                    <li class="d-lg-none mr-sm-5">
+                        <button class="btn link-body p-0 offcanvas-button" type="button">
+                            <svg class="gi gi-arrow-circle-left fs-4" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm-.293 6.293a1 1 0 0 0-1.414 0h0l-3 3-.083.094a1 1 0 0 0 .083 1.32h0l3 3 .094.083a1 1 0 0 0 1.32-.083h0l.083-.094a1 1 0 0 0-.083-1.32h0L10.416 13H16l.117-.007A1 1 0 0 0 16 11h0-5.586l1.293-1.293.083-.094a1 1 0 0 0-.083-1.32z"></path>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </div>
             <div class="invisible-scrollbar position-relative wh-main">
                 <div class="row mt-3">
                     <div class="col-12">
                         <div class="d-flex align-items-center mb-3">
                             <div class="mr-auto">
-                                <h2 class="mb-2 fs-2 lh-tight">Request Meeting</h2>
+                                <h2 class="mb-2 fs-2 lh-tight">Meetings</h2>
                             </div>
+                            <button type="button" data-toggle="modal" data-target="#createMeetingRequestModal" class="btn btn-auto d-inline-flex flex-shrink-0 align-items-center justify-content-center p-0 rounded-circle wh-2-5rem">
+                                <svg class="gi gi-plus-circle-outline fs-3" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 1 0 0-16zm0 4a1 1 0 0 1 1 1v2h2a1 1 0 1 1 0 2h-2v2a1 1 0 1 1-2 0v-2H9a1 1 0 1 1 0-2h2V9a1 1 0 0 1 1-1z" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                    <form asp-controller="Parent" asp-action="MeetingRequest" class="col-12">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input asp-for="ParentId" hidden value="@ViewBag.Parent" />
-                        <div>
-                            <div class="form-group mb-3">
-                                <label asp-for="EducatorId" class="control-label"></label>
-                                <select asp-for="EducatorId" class="form-control">
-                                    @foreach (var teacher in ViewBag.Teachers)
-                                   {
-                                       <option value="@teacher.Id">@teacher.FirstName @teacher.LastName</option>
-                                   }
-                                </select>
-                                <span asp-validation-for="EducatorId" class="text-danger"></span>
+                    @if (meetings.Count > 0 && meetings != null)
+                    {
+                        @foreach (var meeting in meetings)
+                        {
+                            <div class="col-12 mb-4">
+                                <div class="w-100 h-100 bg-body-light rounded d-flex p-3">
+                                    <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@PrintEducatorName(meeting).ToCharArray()[0]</span>
+                                    <div class="d-flex align-items-start flex-column w-100">
+                                        <div class="mb-auto w-100">
+                                            <div>
+                                                <h2 class="mb-2 fs-1 lh-tight">
+                                                   @PrintEducatorName(meeting) - @meeting.MeetingDate.ToLongDateString()
+                                                </h2>
+                                                <p>@meeting.Reason</p>
+                                                @if (meeting.Status.Equals(MeetingStatus.Pending))
+                                                {
+                                                    <p class="badge bg-warning text-white">
+                                                        @MeetingStatus.Pending
+                                                    </p>
+                                                }
+                                                else if (meeting.Status.Equals(MeetingStatus.Accepted))
+                                                {
+                                                    <p class="badge bg-success text-white">
+                                                        @MeetingStatus.Accepted
+                                                    </p>
+                                                }
+                                                else if (meeting.Status.Equals(MeetingStatus.Rejected)) {
+                                                    <p class="badge bg-success text-white">
+                                                        @MeetingStatus.Rejected
+                                                    </p>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="d-flex w-100">
+                                            <div class="mr-auto"></div>
+                                            <button type="button" data-toggle="modal" data-target="#deleteMeetingRequestModal-@meeting.Id" class="btn btn-auto d-inline-flex flex-shrink-0 align-items-center bg-body justify-content-center p-0 rounded-circle wh-2-5rem mr-1">
+                                                <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="gi gi-edit-2 fs-2">
+                                                    <path d="M14 2a2 2 0 0 1 2 2v2h5a1 1 0 1 1 0 2h-1v11a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V8H3a1 1 0 1 1 0-2h5V4a2 2 0 0 1 2-2h4zm0 2h-4v2h4V4z" />
+                                                </svg>
+                                            </button>
+                                            <button type="button" data-toggle="modal" data-target="#editMeetingRequestModal-@meeting.Id" class="btn btn-auto d-inline-flex flex-shrink-0 align-items-center bg-body justify-content-center p-0 rounded-circle wh-2-5rem">
+                                                <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="gi gi-edit-2 fs-2">
+                                                    <path d="M16.57 2.47l.107.1 2.754 2.754a1.95 1.95 0 0 1 .099 2.647l-.1.107-8.72 8.72c-.255.255-.576.434-.925.517l-.177.034L5.112 18c-.6.086-1.12-.388-1.11-.974v-.127l.642-4.497c.05-.357.2-.692.43-.968l.12-.133 8.72-8.72a1.95 1.95 0 0 1 2.647-.099zM15.3 3.947l-2.065 2.065 2.754 2.754L18.053 6.7 15.3 3.947zM19 20a1 1 0 0 1 .117 1.993L19 22H5a1 1 0 0 1-.117-1.993L5 20h14z"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="Reason" class="control-label"></label>
-                                <textarea cols="4" asp-for="Reason" class="form-control"></textarea>
-                                <span asp-validation-for="Reason" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="MeetingDate" class="control-label"></label>
-                                <input asp-for="MeetingDate" class="form-control" type="datetime-local" />
-                                <span asp-validation-for="MeetingDate" class="text-danger"></span>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                <p>No Meetings Found</p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <input type="submit" value="Request" class="btn btn-primary" />
-                        </div>
-                    </form>
+                    }
                 </div>
             </div>
         </div>
+        <partial name="_CreateMeetingRequestPartial" model="new MeetingRequest()" />
     </main>
 </div>
