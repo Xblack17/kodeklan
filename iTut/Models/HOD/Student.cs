@@ -13,7 +13,10 @@ namespace iTut.Models.HOD
 
         [Required(ErrorMessage = "Required!")]
         [Display(Name = "Students's Name")]
+
         public string Name { get; set; }
+        [Display(Name = "ID NUMBER")]
+        public string IDNUMBER { get; set; }
 
         [Display(Name = "Father's Name")]
         public string FatherName { get; set; }
@@ -38,7 +41,7 @@ namespace iTut.Models.HOD
 
         
         public Gender Gender { get; set; }
-
+        [Display(Name = "Guardian ID")]
         public virtual ICollection<Guardian> Guardians { get; set; }
     }
 }

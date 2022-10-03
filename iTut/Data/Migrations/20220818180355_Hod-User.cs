@@ -8,7 +8,7 @@ namespace iTut.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "HOD",
+                name: "HODs",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -25,14 +25,14 @@ namespace iTut.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HOD", x => x.Id);
+                    table.PrimaryKey("PK_HODs", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "HOD");
+                name: "HODs");
         }
     }
 }

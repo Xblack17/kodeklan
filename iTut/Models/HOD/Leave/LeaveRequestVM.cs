@@ -2,16 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 using iTut.Models.ViewModels.HOD;
-
+using iTut.Models.HOD;
 namespace iTut.Models.HOD.Leave
 {
     public class LeaveRequestVM
     {
         public int Id { get; set; }
-        public EmployeeVM RequestingEmployee { get; set; }
+        
+        public Employee RequestingEmployee { get; set; }
         [Display(Name = "Employee Name")]
         public string RequestingEmployeeId { get; set; }
         [Display(Name = "Start Date")]
@@ -22,6 +22,7 @@ namespace iTut.Models.HOD.Leave
         [Required]
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
+        [ForeignKey("LeaveTypeId")]
         public LeaveTypeVM LeaveType { get; set; }
         public int LeaveTypeId { get; set; }
 
@@ -31,6 +32,7 @@ namespace iTut.Models.HOD.Leave
         public DateTime DateActioned { get; set; }
         [Display(Name = "Approval State")]
         public bool? Approved { get; set; }
+        
         public EmployeeVM ApprovedBy { get; set; }
         [Display(Name = "Approver Name")]
         public string ApprovedById { get; set; }
@@ -73,7 +75,6 @@ namespace iTut.Models.HOD.Leave
 
     public class EmployeeLeaveRequestViewVM
     {
-        public List<LeaveAllocationVM> LeaveAllocations { get; set; }
         public List<LeaveRequestVM> LeaveRequests { get; set; }
     }
 }

@@ -7,20 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <Compile Remove="Areas\HOD\Data\**" />
     <Compile Remove="Controllers\HOD\**" />
     <Compile Remove="Models\Educator\**" />
-    <Content Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <Content Remove="Areas\HOD\Data\**" />
     <Content Remove="Controllers\HOD\**" />
     <Content Remove="Models\Educator\**" />
-    <EmbeddedResource Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <EmbeddedResource Remove="Areas\HOD\Data\**" />
     <EmbeddedResource Remove="Controllers\HOD\**" />
     <EmbeddedResource Remove="Models\Educator\**" />
-    <None Remove="Areas\HOD\Controllers\AdminLeaveRequestViewVMs\**" />
-    <None Remove="Areas\HOD\Data\**" />
     <None Remove="Controllers\HOD\**" />
     <None Remove="Models\Educator\**" />
     <Compile Remove="Models\Student\**" />

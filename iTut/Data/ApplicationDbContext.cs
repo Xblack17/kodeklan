@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using iTut.Models.HOD;
 using iTut.Models.ViewModels.Student;
 using static iTut.Models.ViewModels.HOD.HODIndexViewModel;
+using iTut.Models.HOD.Leave;
 
 namespace iTut.Data
 {
@@ -55,7 +56,6 @@ namespace iTut.Data
         public DbSet<Section> Section { get; set; }
         public DbSet<Group> Group { get; set; }
         public DbSet<Shift> Shift { get; set; }
-        
         public DbSet<Course> Course { get; set; }
         public DbSet<StudentClass> StudentClass { get; set; }
         public DbSet<ClassName> ClassName { get; set; }
@@ -71,16 +71,14 @@ namespace iTut.Data
         
         public DbSet<DefaultSetting> DefaultSetting { get; set; }
         public DbSet<School> School { get; set; }
-        public DbSet<iTut.Models.HOD.AssignStuff> AssignStuff { get; set; }
+        public DbSet<AssignStuff> AssignStuff { get; set; }
         
         
-        public DbSet<iTut.Models.HOD.Grade> Grade { get; set; }
-        public DbSet<iTut.Models.HOD.FeeType> FeeType { get; set; }
-        public DbSet<iTut.Models.HOD.Leave.LeaveAllocationVM> LeaveAllocationVM { get; set; }
-        public DbSet<iTut.Models.HOD.Leave.LeaveRequestVM> LeaveRequestVM { get; set; }
-        public DbSet<iTut.Models.HOD.Leave.LeaveTypeVM> LeaveTypeVM { get; set; }
-        public DbSet<iTut.Models.HOD.Leave.AdminLeaveRequestViewVM> AdminLeaveRequestViewVM { get; set; }
-
+        public DbSet<Grade> Grade { get; set; }
+        public DbSet<FeeType> FeeType { get; set; }
+        public DbSet<LeaveRequestVM> LeaveRequestVM { get; set; }
+        public DbSet<LeaveTypeVM> LeaveTypeVM { get; set; }
+        public DbSet<AdminLeaveRequestViewVM> AdminLeaveRequestViewVM { get; set; }
         public DbSet<CalendarEvent> Events { get; set; }
 
 
