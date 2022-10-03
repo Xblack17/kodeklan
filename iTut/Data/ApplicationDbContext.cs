@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using iTut.Models.Edu;
+using iTut.Models.UploadFiles;
 using static iTut.Models.ViewModels.HOD.HODIndexViewModel;
 
 namespace iTut.Data
@@ -40,8 +41,10 @@ namespace iTut.Data
         public DbSet<MeetingRequest> MeetingRequest { get; set; }
 
         public DbSet<CalendarEvent> Events { get; set; }
-
+        // Educator Tables
         public DbSet<Topic> Topics { get; set; }
+        public DbSet<FileOnDatabase> FilesOnDatabase { get; set; }
+
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Report> Reports { get; set; }

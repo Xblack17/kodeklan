@@ -12,6 +12,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace iTut.Controllers
 {
@@ -87,40 +90,60 @@ namespace iTut.Controllers
             return View();
         }
 
-        public IActionResult UploadFile()
+        private async Task<FileUploadViewModel> LoadAllFiles()
         {
-            SingleFileModel model = new SingleFileModel();
-            return View(model);
+            var viewModel = new FileUploadViewModel();
+            viewModel.FilesOnDatabase = await _context.FilesOnDatabase.ToListAsync();
+         
+            return viewModel;
         }
+        public async Task<IActionResult> UploadFile()
+        {
+            var fileuploadViewModel = await LoadAllFiles();
+            ViewBag.Message = TempData["Message"];
+            return View(fileuploadViewModel);
+        }
+
         [HttpPost]
-        public IActionResult Upload(SingleFileModel model)
+        public async Task<IActionResult> UploadFile(List<IFormFile> files, string description)
         {
-            if (ModelState.IsValid)
+            foreach (var file in files)
             {
-                model.IsResponse = true;
-
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files");
-
-                //create folder if not exist
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-
-                //get file extension
-                FileInfo fileInfo = new FileInfo(model.File.FileName);
-                string fileName = model.FileName + fileInfo.Extension;
-
-                string fileNameWithPath = Path.Combine(path, fileName);
-
-                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                var extension = Path.GetExtension(file.FileName);
+                var fileModel = new FileOnDatabase
                 {
-                    model.File.CopyTo(stream);
+                    CreatedOn = DateTime.UtcNow,
+                    FileType = file.ContentType,
+                    Extension = extension,
+                    Name = fileName,
+                    Description = description
+                };
+                using (var dataStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(dataStream);
+                    fileModel.Data = dataStream.ToArray();
                 }
-                model.IsSuccess = true;
-                model.Message = "File upload successfully";
+                _context.FilesOnDatabase.Add(fileModel);
+                _context.SaveChanges();
             }
-            return View("UploadFile", model);
+            TempData["Message"] = "File successfully uploaded";
+            return RedirectToAction("UploadFile");
         }
-
+        public async Task<IActionResult> DownloadFileFromDatabase(string id)
+        {
+            var file = await _context.FilesOnDatabase.Where(x => x.ID == id).FirstOrDefaultAsync();
+            if (file == null) return null;
+            return File(file.Data, file.FileType, file.Name + file.Extension);
+        }
+        public async Task<IActionResult> DeleteFileFromDatabase(string id)
+        {
+            var file = await _context.FilesOnDatabase.Where(x => x.ID == id).FirstOrDefaultAsync();
+            _context.FilesOnDatabase.Remove(file);
+            _context.SaveChanges();
+            TempData["Message"] = $"Removed {file.Name + file.Extension} successfully from the Files.";
+            return RedirectToAction("UploadFile");
+        }
 
     }
 }
