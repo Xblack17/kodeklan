@@ -2,6 +2,7 @@
 using iTut.Data;
 using iTut.Models.Users;
 using iTut.Models.Coordinator;
+using iTut.Models.Parent;
 using iTut.Models.ViewModels.Coordinator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -44,6 +45,12 @@ namespace iTut.Controllers
         public IActionResult Subject()
         {
             return View(_context.Subjects.ToList());
+        }
+        //complaint
+        public IActionResult Complaint()
+        {
+            return View(_context.Complaints.ToList());
+            //return View (_context.Complaints.)
         }
 
         public IActionResult CreateASubject()
@@ -88,6 +95,41 @@ namespace iTut.Controllers
             }
             return View();
         }
+
+        //details
+        public IActionResult Details(string Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            var subject = _context.Subjects.AsNoTracking().FirstOrDefault(s => s.Id == Id);
+            if(subject == null)
+            {
+                return NotFound();
+            }
+            return RedirectToAction("Details");
+            //return View(Details);
+        }
+        /*trying to get the subjects from the database
+         * [HttpGet]
+         * public ActionResult Edit(int Id)
+         * {
+         *      var subject = subjectList.Where(s => s.Id).FirstOrDefault();
+         *      return View(suject);
+         * }
+         * [HttpPost]
+         * public ActionResult Edit(int Id)
+         * {
+         *      var subject = subjectList.Where(s => s.Id).FirstOrDefault();
+         *      subjectList.Remove(subject);
+         *      subjectList.Add(subject);
+         *      
+         *       return RedirectToAction("Subject");
+         * }
+         */
+
 
         //EDIT
         [HttpPost]

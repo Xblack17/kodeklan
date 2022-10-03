@@ -6,12 +6,18 @@ namespace iTut.Models.Coordinator
 {
     public class Subject
     {
+        //Grade enums
+        ////public enum Grade
+        ////{
+        ////    A, B, C, D, F
+        ////}
+
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; } = $"{Guid.NewGuid()}{Guid.NewGuid()}";
 
         [Required]
-        [Display(Name = "Subject description")]
+        [Display(Name = "Subject Name")]
         public string SubjectName { get; set; }
 
         [Required]

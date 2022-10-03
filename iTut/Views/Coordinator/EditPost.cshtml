@@ -23,6 +23,14 @@
                 <input asp-for="SubjectDescr" class="form-control" />
                 <span asp-validation-for="SubjectDescr" class="text-danger"></span>
             </div>
+           @* <div class="form-group">
+                <label asp-for="Grade" class="control-label"></label>
+                <select asp-for="Grade" class="form-control"
+                 asp-items="Html.GetEnumSelectList<Grade>()">
+                <option>Select type ...</option>
+                </select>
+                <span asp-validation-for="Grade" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Created_at" class="control-label"></label>
                 <input asp-for="Created_at" class="form-control" />
@@ -44,8 +52,8 @@
     <a asp-action="Subject">Back to List</a>
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+    }*@
