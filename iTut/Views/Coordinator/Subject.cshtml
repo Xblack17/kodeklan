@@ -25,48 +25,45 @@
 </head>
 <section>
     <br />
-
-    <div class="text-right">
-      @*  <a href="/Coordinator/CreateASubject" class="btn btn-primary btn-sm justify-content-md-end ">Add Subjects</a>*@
-        <a href="/Coordinator/CreateASubject" class="btn btn-primary btn-sm justify-content-md-end ">Add </a>
-    </div>
+    <form asp-controller="Subject" asp-action="Subject" method="get">
+    <p>
+           <input type="text" name="SearchString" />
+           <input type="submit" value="Search" />
+        </p>
+        <div class="text-right">
+            <a href="/Coordinator/CreateASubject" class="btn btn-sm btn-primary">Add more</a>
+@*            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Complaint Details</button>
+*@        </div>
+   </form>
     <br />
     <table class="table">
         <thead>
             <tr>
                 <!--It isn't necessarry for the coordinator to see the subject number on the database but its there for data storage purposes-->
-                @*<th scope="col">
-                @Html.DisplayNameFor(model => model.Id)
-                </th>*@
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.SubjectName)
+                @Html.DisplayNameFor(model => model.SubjectName)
                 </th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.SubjectDescr)
-                </th>
+                </th>              
                 <th></th>
-                @*<th scope="col">
-                    @Html.DisplayNameFor(model => model.Created_at)
-                </th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.Updated_at)
-                </th>*@
-                <th></th>
+                </th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <br/>
         <tbody>
             @foreach (var subject in Model)
             {
-                <tr>
-                    @*<td width="20%">@Html.DisplayFor(modelSubject => subject.Id) </td>*@
+                <tr>                
                     <td width="30%">@Html.DisplayFor(modelSubject => subject.SubjectName) </td>
                     <td width="30%">@Html.DisplayFor(model => subject.SubjectDescr) </td>
-                    <td></td>
-                  @*  <td width="30%">@Html.DisplayFor(model => subject.Created_at)</td>
-                    <td width="30%">@Html.DisplayFor(model => subject.Updated_at)</td>*@
-                    <td>
-                        <a asp-action="EditPost" asp-route-id="@subject.Id">Update</a>|
+                    @*<td width="30%">@Html.DisplayFor(model => subject.Grade) </td>*@
+                    <td width="30%">@Html.DisplayFor(model => subject.Updated_at)</td>
+                    <td width="40%">
+                        <a asp-action="Edit" asp-route-id="@subject.Id">Edit</a>|
                         <a asp-action="Details" asp-route-id="@subject.Id">Details</a> |
                         <a asp-action="Delete" asp-route-id="@subject.Id">Delete</a>
                     </td>
@@ -77,3 +74,39 @@
 </section>
 </main>
 </div>
+
+@*
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Complaint Details</button>
+
+
+        <form asp-action="Index" asp-controller="ComplaintDetails" data-ajax-method="POST" data-ajax="true" data-ajax-update="ComplaintDetails" data-ajax-complete="OnComplete">
+    <div id="exampleModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                            <h5 class="modal-title">ComplaintDetails</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                        <div class="modal-body" id="ComplaintDetails">
+                            @* <partial name="~/Views/Coordinator/ComplaintDetails.cshtml" model="@Model"/> 
+                </div>
+                <div class="modal-footer">
+                    <input id="btnSubmit" type="submit" value="Submit" class="btn btn-primary" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript">
+        function OnComplete() {
+            $("#exampleModal").modal("hide");
+        }
+    </script>
+}*@

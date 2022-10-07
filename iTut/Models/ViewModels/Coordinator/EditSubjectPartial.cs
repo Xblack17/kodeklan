@@ -1,18 +1,12 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Linq;
+using System;
 
-namespace iTut.Models.Coordinator
+namespace iTut.Models.ViewModels.Coordinator
 {
-    public class Subject
+    public class EditSubjectPartial
     {
-        //Grade enums
-        //public enum Grade
-        //{
-        //   11;
-        //}
-
-
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; } = $"{Guid.NewGuid()}{Guid.NewGuid()}";
 
@@ -23,7 +17,7 @@ namespace iTut.Models.Coordinator
 
         [Required]
         [StringLength(60, MinimumLength = 3)]
-        
+
         [Display(Name = "Subject description")]
         public string SubjectDescr { get; set; }
         public string Grade { get; set; }
