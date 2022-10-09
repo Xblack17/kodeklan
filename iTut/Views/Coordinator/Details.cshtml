@@ -1,0 +1,51 @@
+﻿@model iTut.Models.Coordinator.Subject
+@{
+    ViewData["Title"] = "Details";
+}
+<div>
+
+</div>
+<div>
+    <section>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SubjectName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SubjectName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SubjectDescr)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SubjectDescr)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Grade)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Grade)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Created_at)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Created_at)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Updated_at)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Updated_at)
+            </dd>
+        </dl>
+
+        <div>
+
+            <a href="/Coordinator/Subject" class="btn btn-sm btn-primary">Back</a>
+          
+        </div>
+
+    </section>
+</div>
+    <hr />

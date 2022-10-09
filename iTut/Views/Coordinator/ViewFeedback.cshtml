@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<iTut.Models.Coordinator.Feedback>
 
 @{
-    ViewData["Title"] = "ViewFeedback";
+    ViewData["Title"] = "Feedback";
 }
 
 
@@ -32,7 +32,7 @@
         <a href="/Coordinator/Feedback" class="btn btn-primary align-content-center">Add Feedback</a>
     </p>
     <br/>
-    <table class="table table-bordered align-bottom">
+    <table class="table">
     <thead>
             <tr>
                 <th scope="col">
@@ -41,7 +41,7 @@
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.FeedbackContent)
                 </th>
-             
+             <th></th>
             </tr>
         </thead>
         <tbody>
@@ -50,8 +50,10 @@
                 <tr>
                     <td width="30%">@Html.DisplayFor(Model => feedback.Id) </td>
                     <td width="30%">@Html.DisplayFor(Model => feedback.FeedbackContent)</td>
+                    <td width="30%">@Html.DisplayFor(Model => feedback.CreateAt)</td>
                     <td>
-                        <a asp-action="Delete" asp-route-id=@feedback.Id></a>
+                        <a asp-action="Delete" asp-route-id=@feedback.Id></a>|
+                        <a asp-action="Edit" asp-route-id="@feedback.Id">Edit</a>|
                     </td>
                     <td>
                         <a asp-action="Feedback">Back to List</a>
@@ -60,6 +62,4 @@
             }
         </tbody>
     </table>
-</main>
-    </div>
 </section>

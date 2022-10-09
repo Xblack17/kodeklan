@@ -10,7 +10,8 @@ namespace iTut.Models.Coordinator
         public string Id { get; set; } = $"{Guid.NewGuid()}{Guid.NewGuid()}";
 
         [Required]
-        public string UserId { get; set; }
+        [Display(Name = "Educator Name")]
+        public string EducatorName { get; set; }
 
         [Required]
         [StringLength(250)]
