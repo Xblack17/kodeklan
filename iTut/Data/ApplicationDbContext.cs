@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using iTut.Models.Edu;
 using static iTut.Models.ViewModels.HOD.HODIndexViewModel;
+using iTut.Models.Shared;
 
 namespace iTut.Data
 {
@@ -40,6 +41,8 @@ namespace iTut.Data
         public DbSet<MeetingRequest> MeetingRequest { get; set; }
 
         public DbSet<CalendarEvent> Events { get; set; }
+        public DbSet<TimelinePost> Posts { get; set; }
+        public DbSet<PostComment> PostComments { get; set; }
 
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Subject> Subjects { get; set; }
