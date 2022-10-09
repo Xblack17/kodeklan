@@ -2,38 +2,8 @@
 @{
     var user = await UserManager.GetUserAsync(User);
 }
-<div class="sidebar sidebar-expand-lg invisible-scrollbar order-1 order-lg-0">
-    <div class="container px-lg-5">
-        <div class="d-flex py-5 pb-2">
-            <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@user.FirstName.ToCharArray()[0]</span>
-            <div class="mr-auto">
-                @user.FirstName @user.LastName <br />
-                @if (User.IsInRole(RoleConstants.Parent))
-                {
-                    <p class="mt-1 badge bg-success text-white my-auto">
-                        Parent
-                    </p>
-                }
-                else if (User.IsInRole(RoleConstants.Educator))
-                {
-                    <p class="mt-1 badge bg-success text-white my-auto">
-                        Educator
-                    </p>
-                }
-                else if (User.IsInRole(RoleConstants.Student))
-                {
-                    <p class="mt-1 badge bg-success text-white my-auto">
-                        Student
-                    </p>
-                }
-                else if (User.IsInRole(RoleConstants.SubjectCoordinator))
-                {
-                    <p class="mt-1 badge bg-success text-white my-auto">
-                        Coordinator
-                    </p>
-                }
-            </div>
-        </div>
+<div class="modal fade" id="sideBarPartialModal" tabindex="-1" aria-labelledby="sideBarPartialModalLabel" aria-hidden="true">
+    <div class="modal-dialog mr-0 mt-0 mb-0 modal-md h-100 fadeInRight animated modal-content rounded-0 px-3 pt-5">
         <div class="d-flex py-2 align-items-center">
             <h1 class="mr-auto fs-3 mb-3">Menu</h1>
         </div>
@@ -88,19 +58,6 @@
                             <h2 class="fs-1">Two-factor Authentication</h2>
                         </div>
                         <p class="text-body fs-1">Add additional layer of security</p>
-                    </div>
-                </a>
-            </div>
-            <hr class="mt-1" role="presentation">
-        </div>
-        <div class="w-100 cusror-pointer">
-            <div class="d-flex">
-                <a asp-area="Identity" asp-page="/Account/Logout">
-                    <div class="flex-grow-1">
-                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <h2 class="fs-1">Log Out</h2>
-                        </div>
-                        <p class="text-body fs-1">Exit Application</p>
                     </div>
                 </a>
             </div>

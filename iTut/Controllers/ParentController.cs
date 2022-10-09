@@ -4,6 +4,7 @@ using iTut.Coravel.Events;
 using iTut.Data;
 using iTut.Models;
 using iTut.Models.Parent;
+using iTut.Models.Shared;
 using iTut.Models.Users;
 using iTut.Models.ViewModels.Parent;
 using Microsoft.AspNetCore.Authorization;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -40,10 +42,12 @@ namespace iTut.Controllers
         public ActionResult Index()
         {
             var parent = _context.Parents.Where(p => p.UserId == _userManager.GetUserId(User)).FirstOrDefault();
+            var posts = _context.Posts.Where(p => p.Archived == false).Include(p => p.Comments).ToList();
 
             var viewModel = new ParentIndexViewModel
             {
                 Parent = parent,
+                Posts = posts
             };
 
             return View(viewModel);
@@ -76,7 +80,7 @@ namespace iTut.Controllers
                     UpdateAt = DateTime.Now
                 };
                 _context.Add(complaint);
-                //_queue.QueueBroadcast(new ComplaintCreated(complaint, parent));
+                _queue.QueueBroadcast(new ComplaintCreated(complaint, parent));
                 await _context.SaveChangesAsync();
                 _logger.LogInformation($"Complaint, id: {complaint.Id}, created!");
                 return RedirectToAction(nameof(Complaints));
@@ -188,6 +192,7 @@ namespace iTut.Controllers
         {
             if (ModelState.IsValid)
             {
+                _queue.QueueBroadcast(new NewParentInvite(invite));
                 _logger.LogInformation($"Invitation Sent to {invite.ParentEmail}");
                 return RedirectToAction(nameof(Index));
             }
@@ -234,8 +239,6 @@ namespace iTut.Controllers
             return View(model);
         }
 
-        #endregion
-
         // GET: Child
         [Route("/Parent/Child/{id}")]
         public IActionResult Child([FromRoute] string id)
@@ -246,6 +249,8 @@ namespace iTut.Controllers
 
             return View();
         }
+
+        #endregion
 
         public IActionResult UserReport()
         {
@@ -261,6 +266,69 @@ namespace iTut.Controllers
             };
             return View(model);
         }
+
+        #region Timeline Posts
+        [Route("/Parent/LikePost/{id}")]
+        [HttpPost("{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LikePost([FromRoute] string id)
+        {
+            if (ModelState.IsValid)
+            {
+                var _post = _context.Posts.Where(p => p.Id == id).FirstOrDefault();
+                if (_post != null)
+                {
+                    _post.Likes = _post.Likes++;
+                    _post.UpdatedAt = DateTime.Now;
+                    _context.Update(_post);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation($"Post, id: {_post.Id}, updated");
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View("Error");
+        }
+
+        // GET: Timeline Post
+        [HttpGet("/Parent/Post/{id}")]
+        public IActionResult Post([FromRoute] string id)
+        {
+            var post = _context.Posts.Where(p => p.Id.Equals(id)).Include(p => p.Comments).FirstOrDefault();
+
+            ViewBag.Post = post;
+
+            return View();
+        }
+
+        // POST: Comment on Timeline Post
+        [HttpPost("/Parent/Post/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CommentOnPost([FromRoute] string id, PostComment model)
+        {
+            var post = _context.Posts.Where(p => p.Id.Equals(id)).Include(p => p.Comments).FirstOrDefault();
+            var userId = _context.Users.Where(u => u.Id == _userManager.GetUserId(User)).FirstOrDefault().Id;
+            if (post != null && !post.Archived)
+            {
+                if (ModelState.IsValid)
+                {
+                    var comment = new PostComment
+                    {
+                        UserId = userId,
+                        CommentContent = model.CommentContent,
+                        Post = post,
+                        CreatedAt = DateTime.Now,
+                    };
+                    _context.Add(comment);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation($"Comment, id: {comment.Id}, created on post: {post.Id}");
+                    return Redirect($"/Parent/Post/{id}");
+                }
+                return View("Error");
+            }
+            return NotFound();
+        }
+
+        #endregion
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
