@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iTut.Models.ViewModels.HOD
 {
@@ -24,6 +25,8 @@ namespace iTut.Models.ViewModels.HOD
         public Gender Gender { get; set; }
 
         [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DOB { get; set; }
 
         [Display(Name = "Marital Status")]
@@ -48,7 +51,7 @@ namespace iTut.Models.ViewModels.HOD
         [EmailAddress]
         public string Email { get; set; }
 
-        public byte[] Image { get; set; }
+       
 
         [Display(Name = "User Name")]
         public string UserName { get; set; }
@@ -100,8 +103,11 @@ namespace iTut.Models.ViewModels.HOD
         [Display(Name = "Designation")]
         [Required(ErrorMessage = "Required!")]
         public string Designation { get; set; }
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime From { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 
         public DateTime To { get; set; }
 
@@ -111,7 +117,12 @@ namespace iTut.Models.ViewModels.HOD
         public Designation NewDesignation { get; set; }
 
         [Display(Name = "Date of Join")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DOJ { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "decimal(18, 2)")]
+
         public decimal Salary { get; set; }
 
         [Display(Name = "Total Leave")]

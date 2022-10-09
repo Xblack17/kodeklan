@@ -14,7 +14,7 @@ namespace iTut.Models.HOD
         [Required(ErrorMessage = "Required!")]
         public string TitleName { get; set; }
 
-
+        [Display(Name = "Select Education Level")]
         public int EducationLevelId { get; set; }
 
         public EducationLevel EducationLevel { get; set; }

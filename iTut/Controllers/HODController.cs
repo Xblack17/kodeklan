@@ -15,7 +15,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using iTut.Models.HOD.Leave;
 using iTut.Models.HOD;
-
 using Grade = iTut.Models.HOD.Grade;
 using System.Collections.Generic;
 using System.Net;
@@ -36,7 +35,6 @@ namespace iTut.Controllers
             _userManager = userManager;
             _logger = logger;
         }
-
         public ActionResult EmployeIndex()
         {
             return View(_context.Employee.ToList());
@@ -133,6 +131,416 @@ namespace iTut.Controllers
             return View(empList.FirstOrDefault());
         }
 
+        // GET: EmployeeEducations
+        public async Task<IActionResult> EmployeeEducationsIndex()
+        {
+            var applicationDbContext = _context.EmployeeEducation.Include(e => e.EducationLevel).Include(e => e.Employee).Include(e => e.ExamTitle);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: EmployeeEducations/Details/5
+        public async Task<IActionResult> EmployeeEducationsDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employeeEducation = await _context.EmployeeEducation
+                .Include(e => e.EducationLevel)
+                .Include(e => e.Employee)
+                .Include(e => e.ExamTitle)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (employeeEducation == null)
+            {
+                return NotFound();
+            }
+
+            return View(employeeEducation);
+        }
+
+        // GET: EmployeeEducations/Create
+        public IActionResult EmployeeEducationsCreate()
+        {
+            ViewData["EducationLevelId"] = new SelectList(_context.EducationLevel, "Id", "EducationLevelNaame");
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Email");
+            ViewData["ExamTitleId"] = new SelectList(_context.ExamTitle, "Id", "TitleName");
+            return View();
+        }
+
+        // POST: EmployeeEducations/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EmployeeEducationsCreate([Bind("Id,EducationLevelId,ExamTitleId,Major,InstituteName,ResultType,CGPA,Scale,Marks,PassingYear,Duration,Achievement,EmployeeId")] EmployeeEducation employeeEducation)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(employeeEducation);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(EmployeeEducationsIndex));
+            }
+            ViewData["EducationLevelId"] = new SelectList(_context.EducationLevel, "Id", "EducationLevelNaame", employeeEducation.EducationLevelId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Email", employeeEducation.EmployeeId);
+            ViewData["ExamTitleId"] = new SelectList(_context.ExamTitle, "Id", "TitleName", employeeEducation.ExamTitleId);
+            return View(employeeEducation);
+        }
+
+        // GET: EmployeeEducations/Edit/5
+        public async Task<IActionResult> EmployeeEducationsEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employeeEducation = await _context.EmployeeEducation.FindAsync(id);
+            if (employeeEducation == null)
+            {
+                return NotFound();
+            }
+            ViewData["EducationLevelId"] = new SelectList(_context.EducationLevel, "Id", "EducationLevelNaame", employeeEducation.EducationLevelId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Email", employeeEducation.EmployeeId);
+            ViewData["ExamTitleId"] = new SelectList(_context.ExamTitle, "Id", "TitleName", employeeEducation.ExamTitleId);
+            return View(employeeEducation);
+        }
+
+        // POST: EmployeeEducations/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EmployeeEducationsEdit(int id, [Bind("Id,EducationLevelId,ExamTitleId,Major,InstituteName,ResultType,CGPA,Scale,Marks,PassingYear,Duration,Achievement,EmployeeId")] EmployeeEducation employeeEducation)
+        {
+            if (id != employeeEducation.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(employeeEducation);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EmployeeEducationExists(employeeEducation.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(EmployeeEducationsIndex));
+            }
+            ViewData["EducationLevelId"] = new SelectList(_context.EducationLevel, "Id", "EducationLevelNaame", employeeEducation.EducationLevelId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Email", employeeEducation.EmployeeId);
+            ViewData["ExamTitleId"] = new SelectList(_context.ExamTitle, "Id", "TitleName", employeeEducation.ExamTitleId);
+            return View(employeeEducation);
+        }
+
+        // GET: EmployeeEducations/Delete/5
+        public async Task<IActionResult> EmployeeEducationsDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employeeEducation = await _context.EmployeeEducation
+                .Include(e => e.EducationLevel)
+                .Include(e => e.Employee)
+                .Include(e => e.ExamTitle)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (employeeEducation == null)
+            {
+                return NotFound();
+            }
+
+            return View(employeeEducation);
+        }
+
+        // POST: EmployeeEducations/Delete/5
+        [HttpPost, ActionName("EmployeeEducationsDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EmployeeEducationsDeleteConfirmed(int id)
+        {
+            var employeeEducation = await _context.EmployeeEducation.FindAsync(id);
+            _context.EmployeeEducation.Remove(employeeEducation);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(EmployeeEducationsIndex));
+        }
+
+        private bool EmployeeEducationExists(int id)
+        {
+            return _context.EmployeeEducation.Any(e => e.Id == id);
+        }
+
+        // GET: Transports
+        public async Task<IActionResult> TransportsIndex()
+        {
+            return View(await _context.Transport.ToListAsync());
+        }
+
+        // GET: Transports/Details/5
+        public async Task<IActionResult> TransportsDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var transport = await _context.Transport
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (transport == null)
+            {
+                return NotFound();
+            }
+
+            return View(transport);
+        }
+
+        // GET: Transports/Create
+        public IActionResult TransportsCreate()
+        {
+            return View();
+        }
+
+        // POST: Transports/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TransportsCreate([Bind("Id,Name,Type,From,To,Leave,Arrival")] Transport transport)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(transport);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(TransportsIndex));
+            }
+            return View(transport);
+        }
+
+        // GET: Transports/Edit/5
+        public async Task<IActionResult> TransportsEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var transport = await _context.Transport.FindAsync(id);
+            if (transport == null)
+            {
+                return NotFound();
+            }
+            return View(transport);
+        }
+
+        // POST: Transports/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TransportsEdit(int id, [Bind("Id,Name,Type,From,To,Leave,Arrival")] Transport transport)
+        {
+            if (id != transport.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(transport);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TransportExists(transport.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(TransportsIndex));
+            }
+            return View(transport);
+        }
+
+        // GET: Transports/Delete/5
+        public async Task<IActionResult> TransportsDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var transport = await _context.Transport
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (transport == null)
+            {
+                return NotFound();
+            }
+
+            return View(transport);
+        }
+
+        // POST: Transports/Delete/5
+        [HttpPost, ActionName("TransportsDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TransportsDeleteConfirmed(int id)
+        {
+            var transport = await _context.Transport.FindAsync(id);
+            _context.Transport.Remove(transport);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(TransportsIndex));
+        }
+
+        private bool TransportExists(int id)
+        {
+            return _context.Transport.Any(e => e.Id == id);
+        }
+        // GET: Enrollments
+        public async Task<IActionResult> EnrollmentsIndex()
+        {
+            return View(await _context.Enrollment.ToListAsync());
+        }
+
+        // GET: Enrollments/Details/5
+        public async Task<IActionResult> EnrollmentsDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var enrollment = await _context.Enrollment
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (enrollment == null)
+            {
+                return NotFound();
+            }
+
+            return View(enrollment);
+        }
+
+        // GET: Enrollments/Create
+        public IActionResult EnrollmentsCreate()
+        {
+            return View();
+        }
+
+        // POST: Enrollments/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EnrollmentsCreate([Bind("Id,Roll")] Enrollment enrollment)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(enrollment);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(EnrollmentsIndex));
+            }
+            return View(enrollment);
+        }
+
+        // GET: Enrollments/Edit/5
+        public async Task<IActionResult> EnrollmentsEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var enrollment = await _context.Enrollment.FindAsync(id);
+            if (enrollment == null)
+            {
+                return NotFound();
+            }
+            return View(enrollment);
+        }
+
+        // POST: Enrollments/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EnrollmentsEdit(int id, [Bind("Id,Roll")] Enrollment enrollment)
+        {
+            if (id != enrollment.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(enrollment);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EnrollmentExists(enrollment.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(EnrollmentsIndex));
+            }
+            return View(enrollment);
+        }
+
+        // GET: Enrollments/Delete/5
+        public async Task<IActionResult> EnrollmentsDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var enrollment = await _context.Enrollment
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (enrollment == null)
+            {
+                return NotFound();
+            }
+
+            return View(enrollment);
+        }
+
+        // POST: Enrollments/Delete/5
+        [HttpPost, ActionName("EnrollmentsDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EnrollmentsDeleteConfirmed(int id)
+        {
+            var enrollment = await _context.Enrollment.FindAsync(id);
+            _context.Enrollment.Remove(enrollment);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(EnrollmentsIndex));
+        }
+
+        private bool EnrollmentExists(int id)
+        {
+            return _context.Enrollment.Any(e => e.Id == id);
+        }
         private ActionResult HttpNotFound()
         {
             throw new NotImplementedException();
@@ -160,7 +568,7 @@ namespace iTut.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Details", new { id = id });
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 //TempData["Toastr"] = Toastr.DbError(ex.Message);
@@ -188,7 +596,7 @@ namespace iTut.Controllers
 
                 return RedirectToAction("Details", new { id = id });
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 //TempData["Toastr"] = Toastr.DbError(ex.Message);
@@ -489,7 +897,7 @@ namespace iTut.Controllers
             var admission = await _context.Admission.FindAsync(id);
             _context.Admission.Remove(admission);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AdmissionsIndex));
         }
 
         private bool AdmissionExists(int id)
@@ -624,7 +1032,7 @@ namespace iTut.Controllers
             var adminLeaveRequestViewVM = await _context.AdminLeaveRequestViewVM.FindAsync(id);
             _context.AdminLeaveRequestViewVM.Remove(adminLeaveRequestViewVM);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AdminLeaveRequestViewVMsIndex));
         }
 
         private bool AdminLeaveRequestViewVMExists(int id)
@@ -1368,7 +1776,7 @@ namespace iTut.Controllers
             {
                 _context.Add(designation);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(DesignationsIndex));
             }
             return View(designation);
         }
@@ -1782,7 +2190,7 @@ namespace iTut.Controllers
             {
                 _context.Add(employmentHistory);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(EmploymentHistoriesIndex));
             }
             ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Email", employmentHistory.EmployeeId);
             return View(employmentHistory);
@@ -1872,7 +2280,7 @@ namespace iTut.Controllers
             var employmentHistory = await _context.EmploymentHistory.FindAsync(id);
             _context.EmploymentHistory.Remove(employmentHistory);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(EmploymentHistoriesIndex));
         }
 
         private bool EmploymentHistoryExists(int id)
@@ -1982,7 +2390,7 @@ namespace iTut.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ExamTitlesIndex));
             }
             ViewData["EducationLevelId"] = new SelectList(_context.EducationLevel, "Id", "EducationLevelNaame", examTitle.EducationLevelId);
             return View(examTitle);
@@ -2069,7 +2477,7 @@ namespace iTut.Controllers
             {
                 _context.Add(feeType);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(FeeTypesIndex));
             }
             return View(feeType);
         }
@@ -2490,7 +2898,7 @@ namespace iTut.Controllers
             {
                 _context.Add(guardian);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GuardiansIndex));
             }
             ViewData["GuardianTypeId"] = new SelectList(_context.GuardianType, "Id", "Name", guardian.GuardianTypeId);
             ViewData["StudentId"] = new SelectList(_context.Student, "Id", "Name", guardian.StudentId);
@@ -3737,6 +4145,16 @@ namespace iTut.Controllers
         {
             return _context.Student.Any(e => e.Id == id);
         }
+    }
+    public class EventMoveParams
+    {
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+    }
+
+    public class EventColorParams
+    {
+        public string Color { get; set; }
     }
 }
 

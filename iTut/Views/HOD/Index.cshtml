@@ -32,47 +32,61 @@
             </div>
             <div class="invisible-scrollbar position-relative wh-main">
                 <div class="row mt-3">
-                    <div class="col-12">
+                    <div class="col-12 " >
                         <div class="mr-auto">
 
-                            <img src="~/img/HOD/welcome.png" alt="Sample Photo" hight="300px" width="800px" />
-                            </div>
-                        <hr />
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="mr-auto">
-                               
-                                <img src="~/Admission.png" alt="Sample Photo" hight="100px" width="100px" />
-                                 <p><a asp-action="Admissions">Admissions Management</a></p>
-                            </div>
-                           
-                            <div class="backimg">
-
-                                    <img src="~/ClassFees.png" alt="Sample Photo" hight="100px" width="100px" />
-                                <p><a asp-action="ClassFees">Class Fees Management</a></p>
-                            </div>
-                            
-                            <div class="mr-auto">
-                                <img src="~/school.png" alt="Sample Photo" hight="100px" width="100px" />
-                                <p><a asp-action="Schools">School Management</a></p>
-                            </div>
-                            <div class="mr-auto">
-                                <img src="~/employees.png" alt="Sample Photo" hight="100px" width="100px" />
-                                <p><a asp-action="Employees">Employees Management</a></p>
-                            </div>
-                            <div class="mr-auto">
-                                <img src="~/leave.png" alt="Sample Photo" hight="100px" width="100px" />
-                                <p><a asp-action="AdminLeaveRequestViewVMs">Admin Leave Request View</a></p>
-                            </div>
-                        </div>
-                        <div class="mr-auto">
+                            <img src="~/img/HOD/welcome.png" alt="Sample Photo" hight="300px" width="800" />
                         </div>
                         <hr />
                         
-                    </div>
-                    <div class="col-12">
+                     </div>
                         
-                    </div>
+                        
                 </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row text-center">
+                                    <div class="col-md-3" align="Center">
+                                        <div class="card grow-sm mb-4 animated fadeInDown">
+                                            <div class="card-body" align="Center">
+                                                <img src="~/img/HOD/employees.png" alt="Sample Photo" hight="120px" width="100" />
+                                                <p><a asp-controller="HOD" asp-action="EmployeesIndex">Employees Management</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" align="Center">
+                                        <div class="card grow-sm mb-4 mt-5 animated fadeInUp">
+                                            <div class="card-body" align="Center">
+                                                <img src="~/img/HOD/ClassFees.png" alt="Sample Photo" hight="100px" width="100" />
+                                                <p><a asp-controller="HOD" asp-action="ClassFeesINdex">Class Fees Management</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" align="Center">
+                                        <div class="card grow-sm mb-4 animated fadeInDown">
+                                            <div class="card-body" align="Center">
+                                                <img src="~/img/HOD/school.png" alt="Sample Photo" hight="100px" width="100" />
+                                                <p><a asp-controller="HOD" asp-action="SchoolsIndex">School Management</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" align="Center">
+                                        <div class="card grow-sm mb-4 mt-5 animated fadeInUp" align="Center">
+                                            <div class="card-body">
+                                                <img src="~/img/HOD/Admission.png" alt="Sample Photo" hight="100px" width="100" />
+                                                <p><a asp-controller="HOD asp-action="AdmissionsIndex">Admissions Management</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+               <hr/>
+                        
+               <hr />
             </div>
         </div>
     </main>

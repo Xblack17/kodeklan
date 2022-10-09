@@ -1,0 +1,29 @@
+﻿@model iTut.Models.HOD.Enrollment
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr />
+<h1>Shool Managemen</h1>
+<hr />
+<h1>Details</h1>
+<hr />
+<div>
+    <h4>Enrollment</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Roll)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Roll)
+        </dd>
+    </dl>
+</div>
+<hr />
+<div>
+    <a asp-controller="HOD" asp-action="EnrollmentsEdit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-controller="HOD" asp-action="EnrollmentsIndex">Back to List</a>
+</div>
+<hr />

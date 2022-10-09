@@ -25,7 +25,7 @@ namespace iTut.Models.HOD
         [Required(ErrorMessage = "Required!")]
         public int GuardianTypeId { get; set; }
         public virtual GuardianType GuardianType { get; set; }
-
+        [Display(Name = "Select Student")]
         public int StudentId { get; set; }
         public Student Student { get; set; }
 

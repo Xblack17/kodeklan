@@ -32,12 +32,13 @@
                         </div>
 
                                     <h1>List Of Designations</h1>
-
+                                    <hr/>
                                     <p>
                             <a asp-controller="HOD" asp-action="DesignationsCreate">Create New</a>
                                     </p>
-                                    <table class="table" border="1" width="500" >
-                            <thead bgcolor="cyan">
+                                    <hr/>
+                        <table class="table table-striped table-dark table-hover">
+                            <thead >
                                             <tr>
                                                 <th>
                                                     @Html.DisplayNameFor(model => model.Name)

@@ -10,6 +10,8 @@ namespace iTut.Models.ViewModels.HOD
 {
     public class AdmissionVM
     {
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Admission Date")]
         public DateTime AdmissionDate { get; set; }
 

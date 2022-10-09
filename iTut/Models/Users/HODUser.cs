@@ -20,6 +20,7 @@ namespace iTut.Models.Users
         public string LastName { get; set; }
 
         [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string EmailAddress { get; set; }
 
         [Required]
@@ -31,6 +32,8 @@ namespace iTut.Models.Users
         public Race Race { get; set; }
 
         public string PhysicalAddress { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 
         public DateTime CreatedOn { get; set; }
 

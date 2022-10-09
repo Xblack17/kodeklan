@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using iTut.Constants;
+using System.Runtime.CompilerServices;
 
 namespace iTut.Models.HOD
 {
@@ -22,6 +23,8 @@ namespace iTut.Models.HOD
 
         public Gender Gender { get; set; }
         [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DOB { get; set; }
 
         public MaritalStatus MaritalStatus { get; set; }
@@ -32,13 +35,14 @@ namespace iTut.Models.HOD
          [Display(Name = "National ID No.")]
         public string NID { get; set; }
 
-        [Display(Name = "Present Address")]
+        [Display(Name = "Present Location")]
         public string PresentAddress  { get; set; }
 
-        [Display(Name = "Parmanent Address")]
+        [Display(Name = "Parmanent Location")]
         public string PermanentAddress { get; set; }
 
         [Required(ErrorMessage = "Required!")]
+        [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Required!")]

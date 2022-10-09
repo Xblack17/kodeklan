@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using iTut.Models.HOD;
 using iTut.Models.ViewModels.Student;
-using static iTut.Models.ViewModels.HOD.HODIndexViewModel;
 using iTut.Models.HOD.Leave;
+using iTut.Models.ViewModels.HOD;
 
 namespace iTut.Data
 {
@@ -68,19 +68,19 @@ namespace iTut.Data
         public DbSet<EmploymentHistory> EmploymentHistory { get; set; }
         public DbSet<JobInfo> JobInfo { get; set; }
         public DbSet<ClassFee> ClassFee { get; set; }
-        
         public DbSet<DefaultSetting> DefaultSetting { get; set; }
         public DbSet<School> School { get; set; }
         public DbSet<AssignStuff> AssignStuff { get; set; }
-        
-        
         public DbSet<Grade> Grade { get; set; }
         public DbSet<FeeType> FeeType { get; set; }
         public DbSet<LeaveRequestVM> LeaveRequestVM { get; set; }
         public DbSet<LeaveTypeVM> LeaveTypeVM { get; set; }
         public DbSet<AdminLeaveRequestViewVM> AdminLeaveRequestViewVM { get; set; }
         public DbSet<CalendarEvent> Events { get; set; }
-
+        public DbSet<Enrollment> Enrollment { get; set; }
+        public DbSet<Transport> Transport { get; set; }
+        public DbSet<iTut.Models.ViewModels.HOD.EmployeeVM> EmployeeVM { get; set; }
+       
 
     }
 }

@@ -264,6 +264,30 @@ namespace iTut.Data.Migrations
                     b.ToTable("AssignStuff");
                 });
 
+            modelBuilder.Entity("iTut.Models.HOD.CalendarEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
+                });
+
             modelBuilder.Entity("iTut.Models.HOD.ClassFee", b =>
                 {
                     b.Property<int>("Id")
@@ -557,6 +581,21 @@ namespace iTut.Data.Migrations
                     b.ToTable("EmploymentHistory");
                 });
 
+            modelBuilder.Entity("iTut.Models.HOD.Enrollment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Roll")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Enrollment");
+                });
+
             modelBuilder.Entity("iTut.Models.HOD.ExamTitle", b =>
                 {
                     b.Property<int>("Id")
@@ -847,9 +886,6 @@ namespace iTut.Data.Migrations
                     b.Property<string>("Fax")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Logo")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -934,7 +970,8 @@ namespace iTut.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("IDNUMBER")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("MotherName")
                         .HasColumnType("nvarchar(max)");
@@ -982,6 +1019,37 @@ namespace iTut.Data.Migrations
                     b.HasIndex("ShiftId");
 
                     b.ToTable("StudentClass");
+                });
+
+            modelBuilder.Entity("iTut.Models.HOD.Transport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Arrival")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("From")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Leave")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("To")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Transport");
                 });
 
             modelBuilder.Entity("iTut.Models.Parent.Complaint", b =>
@@ -1255,7 +1323,7 @@ namespace iTut.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HODs");
+                    b.ToTable("HOD");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.ParentUser", b =>
@@ -1407,9 +1475,6 @@ namespace iTut.Data.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("InstituteName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1485,32 +1550,6 @@ namespace iTut.Data.Migrations
                     b.HasIndex("ExamTitleId");
 
                     b.ToTable("EmployeeVM");
-                });
-
-            modelBuilder.Entity("iTut.Models.ViewModels.HOD.HODIndexViewModel+CalendarEvent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("End")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Start")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("iTut.Models.ViewModels.Student.RegisterStudentViewModel", b =>
@@ -1803,7 +1842,7 @@ namespace iTut.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("iTut.Models.ViewModels.HOD.EmployeeVM", "RequestingEmployee")
+                    b.HasOne("iTut.Models.HOD.Employee", "RequestingEmployee")
                         .WithMany()
                         .HasForeignKey("RequestingEmployeeId1");
 
