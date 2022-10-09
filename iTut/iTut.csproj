@@ -10,9 +10,11 @@
     <Compile Remove="Areas\NewFolder\**" />
     <Compile Remove="Controllers\HOD\**" />
     <Compile Remove="Models\Educator\**" />
+    <Compile Remove="wwwroot\UploadedFiles\**" />
     <Content Remove="Areas\NewFolder\**" />
     <Content Remove="Controllers\HOD\**" />
     <Content Remove="Models\Educator\**" />
+    <Content Remove="wwwroot\UploadedFiles\**" />
     <EmbeddedResource Remove="Areas\NewFolder\**" />
     <EmbeddedResource Remove="Controllers\HOD\**" />
     <EmbeddedResource Remove="Models\Educator\**" />
@@ -22,6 +24,7 @@
     <Content Remove="Models\Educator\**" />
     <EmbeddedResource Remove="Controllers\HOD\**" />
     <EmbeddedResource Remove="Models\Educator\**" />
+    <EmbeddedResource Remove="wwwroot\UploadedFiles\**" />
     <None Remove="Areas\NewFolder\**" />
     <None Remove="Controllers\HOD\**" />
     <None Remove="Models\Educator\**" />
@@ -29,6 +32,7 @@
     <Content Remove="Models\Student\**" />
     <EmbeddedResource Remove="Models\Student\**" />
     <None Remove="Models\Student\**" />
+    <None Remove="wwwroot\UploadedFiles\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -88,6 +92,7 @@
 
   <ItemGroup>
     <PackageReference Include="Coravel" Version="4.1.2" />
+    <PackageReference Include="DinkToPdfIncludesDependencies" Version="1.0.8" />
     <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.16" />
@@ -117,7 +122,6 @@
     <Folder Include="wwwroot\lib\jquery-validation\dist\" />
     <Folder Include="wwwroot\lib\jquery\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
-    <Folder Include="wwwroot\UploadedFiles\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -110,43 +110,43 @@ namespace iTut
                 if (!roleManager.Roles.Any())
                 {
                     var roles = new List<IdentityRole>
-                {
-                    new IdentityRole
                     {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = RoleConstants.Student,
-                        NormalizedName = "STUDENT",
-                        ConcurrencyStamp = Guid.NewGuid().ToString()
-                    },
-                    new IdentityRole
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = RoleConstants.Parent,
-                        NormalizedName = "PARENT",
-                        ConcurrencyStamp = Guid.NewGuid().ToString()
-                    },
-                    new IdentityRole
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = RoleConstants.SubjectCoordinator,
-                        NormalizedName = "SUBJECTCOORDINATOR",
-                        ConcurrencyStamp = Guid.NewGuid().ToString()
-                    },
-                    new IdentityRole
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = RoleConstants.Educator,
-                        NormalizedName = "EDUCATOR",
-                        ConcurrencyStamp = Guid.NewGuid().ToString()
-                    },
-                    new IdentityRole
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = RoleConstants.HOD,
-                        NormalizedName = "HOD",
-                        ConcurrencyStamp = Guid.NewGuid().ToString()
-                    }
-                };
+                        new IdentityRole
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = RoleConstants.Student,
+                            NormalizedName = "STUDENT",
+                            ConcurrencyStamp = Guid.NewGuid().ToString()
+                        },
+                        new IdentityRole
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = RoleConstants.Parent,
+                            NormalizedName = "PARENT",
+                            ConcurrencyStamp = Guid.NewGuid().ToString()
+                        },
+                        new IdentityRole
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = RoleConstants.SubjectCoordinator,
+                            NormalizedName = "SUBJECTCOORDINATOR",
+                            ConcurrencyStamp = Guid.NewGuid().ToString()
+                        },
+                        new IdentityRole
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = RoleConstants.Educator,
+                            NormalizedName = "EDUCATOR",
+                            ConcurrencyStamp = Guid.NewGuid().ToString()
+                        },
+                        new IdentityRole
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = RoleConstants.HOD,
+                            NormalizedName = "HOD",
+                            ConcurrencyStamp = Guid.NewGuid().ToString()
+                        }
+                    };
                     foreach (var role in roles)
                     {
                         roleManager.CreateAsync(role).Wait();
