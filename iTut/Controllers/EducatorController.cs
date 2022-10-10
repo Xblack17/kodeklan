@@ -1,5 +1,6 @@
 ﻿using iTut.Constants;
 using iTut.Data;
+using iTut.Models.Coordinator;
 using iTut.Models.Users;
 using iTut.Models.UploadFiles;
 using iTut.Models.ViewModels.Educator;
@@ -43,11 +44,13 @@ namespace iTut.Controllers
 
             return View(viewModel);
         }
+
         public IActionResult CreateTask()
         {
             return View();
         }
 
+        #region Categories
         //Categories are renamed to topics 
         public IActionResult Categories()
         {
@@ -84,40 +87,63 @@ namespace iTut.Controllers
             }
             return View(model);
         }
-
+#endregion
         public IActionResult CreateQuiz()
         {
             return View();
         }
 
+        #region UploadedFiles
         private async Task<FileUploadViewModel> LoadAllFiles()
         {
+            
+          
             var viewModel = new FileUploadViewModel();
             viewModel.FilesOnDatabase = await _context.FilesOnDatabase.ToListAsync();
-         
+            viewModel.subjects=  _context.Subjects.ToList();
+            viewModel.topics= await _context.Topics.ToListAsync();
+            
+            
+            //  string grades = new List<Grade>;
+
+            // model.Jobs.Add(new SelectListItem() { Text = "Email", Value = "1", Selected = false });
+            //viewModel.subjects= new List<Subject>();
+            //viewModel.subjects.Add(new Subject());
+
             return viewModel;
         }
         public async Task<IActionResult> UploadFile()
         {
+           
             var fileuploadViewModel = await LoadAllFiles();
+            ViewBag.topics = _context.Topics.ToList();
             ViewBag.Message = TempData["Message"];
             return View(fileuploadViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadFile(List<IFormFile> files, string description)
+        public async Task<IActionResult> UploadFile(List<IFormFile> files, string description,Grade grade)
         {
             foreach (var file in files)
             {
+             
                 var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                var subject = _context.Subjects.FirstOrDefault();
+                var topic = _context.Topics.Where(t => t.Status == Topic.TopicStatus.Active).FirstOrDefault();
                 var extension = Path.GetExtension(file.FileName);
+
+
                 var fileModel = new FileOnDatabase
                 {
                     CreatedOn = DateTime.UtcNow,
                     FileType = file.ContentType,
                     Extension = extension,
                     Name = fileName,
-                    Description = description
+                    Description =description,
+                    SubjectID =subject.Id,
+                    TopicID = topic.TopicId,
+                    Grade= grade,
+                    
                 };
                 using (var dataStream = new MemoryStream())
                 {
@@ -144,6 +170,6 @@ namespace iTut.Controllers
             TempData["Message"] = $"Removed {file.Name + file.Extension} successfully from the Files.";
             return RedirectToAction("UploadFile");
         }
-
+        #endregion
     }
 }

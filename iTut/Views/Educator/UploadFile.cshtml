@@ -1,8 +1,13 @@
-﻿@model iTut.Models.UploadFiles.FileUploadViewModel
+﻿
+@model iTut.Models.UploadFiles.FileUploadViewModel
 
 @{
     ViewData["Title"] = "Upload File";
+
+    //List<iTut.Models.Edu.Topic> topics = ViewBag.topics;
 }
+    
+
 <div class="Container py-3 m-2 w-100">
     
    <div class="Category-container d-flex py-2 mx-2">
@@ -27,10 +32,50 @@
                 @ViewBag.Message
             </div>
         }
-        <form method="post" enctype="multipart/form-data">
-            <input type="file" name="files" multiple required/>
-            <input type="text" autocomplete="off" placeholder="Enter File Description" name="description" required />
+        <form method="post" enctype="multipart/form-data" class="form-group">
+            <div class="form-group">
+            <label for="file-title" class="pb-2" >Choose File</label>
+            <input type="file" name="files" multiple required class="form-control"/>
+            </div>
+          <div class="form-group">
+              <label for="file=-description" class="pb-2" >Enter File description</label>
+            <input type="text" autocomplete="off" class="form-control"placeholder="Enter File Description" name="description" required />
+           </div>
+
+          <div class="form-group">
+              <div class="form-group mb-5 droptown">
+                  <label for="subject" class="pb-2"> Choose Subject:</label>
+                    <select asp-for="subjects" class="form-control">
+                                @foreach (var subject in Model.subjects)
+                                {
+                                    <option value="@subject.Id"> @subject.SubjectName </option>
+                                }
+                    </select>
+              </div>
+                 
+          </div>
+           <div class="form-group">
+                  <label for="Grades" class="pb-2"> Choose Grade:</label>
+                   <div class="form-group">
+                    <select asp-for="FilesOnDatabase" asp-items="Html.GetEnumSelectList<Grade>()" class="form-control"></select>
+                </div>
+                  
+            </div>
+
+            <div class="form-group">
+                 <label for="topics" class="pb-2"> Choose a Topic:</label>
+                <select asp-for="topics" class="form-control">
+                     @foreach (var topic in Model.topics)
+                        {
+                          <option value="@topic.TopicId"> @topic.TopicName </option>
+                        }
+                    </select>
+
+           </div>
+           <div class="form-group py-2">
+
             <button class="btn btn-success" type="submit" asp-controller="Educator" asp-action="UploadFile">Upload File</button>
+            </div>
         </form>
     </div>
         <hr />

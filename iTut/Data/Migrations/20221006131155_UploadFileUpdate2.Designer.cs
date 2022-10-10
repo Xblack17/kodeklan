@@ -10,8 +10,8 @@ using iTut.Data;
 namespace iTut.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220930084803_eduInitial")]
-    partial class eduInitial
+    [Migration("20221006131155_UploadFileUpdate2")]
+    partial class UploadFileUpdate2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -331,6 +331,46 @@ namespace iTut.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MeetingRequest");
+                });
+
+            modelBuilder.Entity("iTut.Models.UploadFiles.FileOnDatabase", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("Data")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TopicID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("FilesOnDatabase");
                 });
 
             modelBuilder.Entity("iTut.Models.Users.ApplicationUser", b =>
