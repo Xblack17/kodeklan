@@ -1,4 +1,4 @@
-﻿@model IEnumerable<iTut.Models.Coordinator.Subject>
+﻿ @model IEnumerable<iTut.Models.Coordinator.Subject>
 
 @{
     ViewData["Title"] = "Subject";
@@ -10,7 +10,7 @@
                 <div class="d-flex py-5 border-bottom">
                     @*  <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@Model.Coordinator.FirstName.ToCharArray()[0]</span>
                     *@
-                    <h2>Subjects</h2>
+                    <h2 class=" align-content-center">Subjects</h2>
                     <ul class="list-unstyled d-flex align-items-center">
                         <li class="d-lg-none mr-sm-5">
                             <button class="btn link-body p-0 offcanvas-button" type="button">
@@ -21,22 +21,22 @@
                         </li>
                     </ul>
                 </div>
-
 </head>
 <section>
     <br />
     <form asp-controller="Subject" asp-action="Subject" method="get">
     <p>
            <input type="text" name="SearchString" />
-           <input type="submit" value="Search" />
+           <input type="submit" value="Filter" />
         </p>
         <div class="text-right">
             <a href="/Coordinator/CreateASubject" class="btn btn-sm btn-primary">Add more</a>
+            <a href="" class="btn btn-sm btn-primary">View Archived</a>
 @*            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Complaint Details</button>
 *@        </div>
    </form>
     <br />
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <!--It isn't necessarry for the coordinator to see the subject number on the database but its there for data storage purposes-->
@@ -45,7 +45,11 @@
                 </th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.SubjectDescr)
-                </th>              
+                </th>
+                <th scope="auto">
+                    @Html.DisplayNameFor(model => model.Grade)
+                </th>
+                <th></th>
                 <th></th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.Updated_at)
@@ -60,7 +64,10 @@
                 <tr>                
                     <td width="30%">@Html.DisplayFor(modelSubject => subject.SubjectName) </td>
                     <td width="30%">@Html.DisplayFor(model => subject.SubjectDescr) </td>
+                     <td>@Html.DisplayFor(model => subject.Grade) </td>
                     @*<td width="30%">@Html.DisplayFor(model => subject.Grade) </td>*@
+                    <td ></td>
+                    <td></td>
                     <td width="30%">@Html.DisplayFor(model => subject.Updated_at)</td>
                     <td width="40%">
                         <a asp-action="Edit" asp-route-id="@subject.Id">Edit</a>|

@@ -28,11 +28,11 @@
                                <!---->
                             <hr />
                             <div>
-                                <a asp-action="Index">Back to List</a>
+                        <a asp-action="ViewFeedback">Back to List</a>
                             </div>
                             <hr/>
                            
-                            <form method="post" asp-action="Feeback" class="col-12 flex-grow-1">
+                            <form method="post" asp-action="Feedback" class="col-12 flex-grow-1">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         @*<div class="form-group mb-3">
                                             <label asp-for="Id" class="control-label"></label>
@@ -59,31 +59,3 @@
                             </div>
                            </div>
                      <main/>
-
-
-
-
-
-
-
-                           @* </div>
-                            <br />
-                            <br />
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                            </div>
-                            @*<div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
-                            <div class="form-floating">
-                                <label for="comment" class="form-label">Comment</label>
-                                <textarea class="form-control" rows="5" id="comment" name="text" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                            </div>
-                            <br />
-                        @*    <button type="button" class="btn btn-primary">Done !</button>
-                               <a href="/Coordinator/ViewFeedback" class="btn btn-primary align-content-center">Done !</a>
-                        </div>
-                    </main>
-                </div>*@

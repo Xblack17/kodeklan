@@ -1,10 +1,8 @@
-﻿@model IEnumerable<iTut.Models.Coordinator.Feedback>
+﻿@model IEnumerable<iTut.Models.Coordinator.Subject>
 
 @{
-    ViewData["Title"] = "Feedback";
+    ViewData["Title"] = "Feedbacks";
 }
-
-
 <head>
     <div id="collapseOffCanvas" class="bg-body offcanvas-collapse open w-100">
         <main class="main-expanded vh-100 w-100">
@@ -12,7 +10,7 @@
                 <div class="d-flex py-5 border-bottom">
                     @*  <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@Model.Coordinator.FirstName.ToCharArray()[0]</span>
                     *@
-                    <h2>Subjects</h2>
+                    <h2>Feedbacks</h2>
                     <ul class="list-unstyled d-flex align-items-center">
                         <li class="d-lg-none mr-sm-5">
                             <button class="btn link-body p-0 offcanvas-button" type="button">
@@ -26,40 +24,30 @@
 
 </head>
 <section>
-    <br/>
-    <h1>Feedbacks</h1>
-    <p>
-        <a href="/Coordinator/Feedback" class="btn btn-primary align-content-center">Add Feedback</a>
-    </p>
-    <br/>
-    <table class="table">
-    <thead>
+    <br />
+    <form asp-controller="Feedback" asp-action="Feedback" method="post">
+        <div class="text-right">
+            <a href="/Coordinator/Feedback" class="btn btn-sm btn-primary">Add more</a>
+          
+        </div>
+    </form>
+    <br />
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.FeedbackContent)
-                </th>
-             <th></th>
+              
             </tr>
         </thead>
+        <br />
         <tbody>
-            @foreach (var feedback in Model)
+            @foreach (var subject in Model)
             {
                 <tr>
-                    <td width="30%">@Html.DisplayFor(Model => feedback.Id) </td>
-                    <td width="30%">@Html.DisplayFor(Model => feedback.FeedbackContent)</td>
-                    <td width="30%">@Html.DisplayFor(Model => feedback.CreateAt)</td>
-                    <td>
-                        <a asp-action="Delete" asp-route-id=@feedback.Id></a>|
-                        <a asp-action="Edit" asp-route-id="@feedback.Id">Edit</a>|
-                    </td>
-                    <td>
-                        <a asp-action="Feedback">Back to List</a>
-                    </td>
+                  
                 </tr>
             }
         </tbody>
     </table>
 </section>
+</main>
+</div>

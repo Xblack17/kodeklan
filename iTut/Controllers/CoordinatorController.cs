@@ -24,13 +24,14 @@ namespace iTut.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<CoordinatorController> _logger;
-
+        private ApplicationUser user;
 
         public CoordinatorController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ILogger<CoordinatorController> logger)
         {
             _context = context;
             _userManager = userManager;
             _logger = logger;
+            //_queue = queue;
         }
 
         public ActionResult Index()
@@ -43,19 +44,13 @@ namespace iTut.Controllers
             return View(viewModel);
         }
         //adding search functionality
-        public IActionResult Subject(/*string sortOrder,*/ string searchString)
+        
+        public IActionResult Subject(string Id)
         {
-           
-            var subjects = from s in _context.Subjects select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                subjects = subjects.Where( e => e.SubjectName.Contains(searchString));
-            }
+
             return View(_context.Subjects.ToList());
         }
        
-
-
         //complaint
         public IActionResult Complaint()
         {
@@ -82,6 +77,7 @@ namespace iTut.Controllers
                     Id = model.Id,
                     SubjectName = model.SubjectName,
                     SubjectDescr = model.SubjectDescr,
+                    Grade = model.Grade,    
                     Created_at = DateTime.Now,
                     Updated_at = DateTime.Now,
 
@@ -94,27 +90,72 @@ namespace iTut.Controllers
             return View(model);
         }
 
-
-
-        //edit 
-        public IActionResult Edit(string Id)
+        [HttpGet]
+        public ActionResult Edit(string Id)
         {
-            var subject = _context.Subjects.Where(s => s.Id == Id).FirstOrDefault();
-            return RedirectToAction("Edit");
-
-            //return View(subject);
+            //if(Id == null || Id == 0)
+            //{
+            //    return NotFound();
+            //}
+            //var subjecct = _context.Subjects.Find(Id);
+            //if(subjecct == null)
+            //{
+            //    return NotFound();
+            //}
+            Subject subject = _context.Subjects.FirstOrDefault(s => s.Id == Id);
+            if (ModelState.IsValid)
+            {
+                _context.Subjects.Update(subject);
+                _context.SaveChanges();
+                return RedirectToAction("Subject");
+            }
+            return View();
+            //Subject subject = _context.Subjects.FirstOrDefault(s => s.Id == Id);
+            //if (subject != null)
+            //{
+            //    _context.Update(subject);
+            //    _context.SaveChanges();
+            //    return RedirectToAction("Edit");
+            //}
+          
+            return View();
         }
-
+        //edit
         [HttpPost]
-        public IActionResult Edit(Subject model)
+        public async Task<IActionResult>Edit(Subject subject)
         {
-            var Id = model.Id;
-            var SubjectName = model.SubjectName;
-            var SubjectDescr = model.SubjectDescr;
+            _context.Subjects.Update(subject);
+            _context.SaveChanges();
+            return RedirectToAction("Subject");
+            //try
+            //{
+            //    Subject studentToUpdate = new Subject() { Id = Id };
+            //    _context.Entry(studentToUpdate).State = EntityState.Modified;
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Edit));
+            //}
+            //catch (DbUpdateException /* ex */)
+            //{
+            //    //Log the error (uncomment ex variable name and write a log.)
+            //    return RedirectToAction(nameof(Edit), new { Id = Id, saveChangesError = true });
+            //}
 
-           return RedirectToAction("Subject");
+            //var subject = _context.Subjects.Where(s => s.Id == Id).FirstOrDefault();
+
+            //if (Id == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //var subject = _context.Subjects.AsNoTracking().FirstOrDefault(s => s.Id == Id);
+
+            //if (subject == null)
+            //{
+            //    return NotFound();
+            //}
+            //return View(subject);
+
         }
-
 
 
         //DELETE 
@@ -226,13 +267,15 @@ namespace iTut.Controllers
             }
             return View(model);
         }*/
+
+
         //GET FEEDBACK
         public IActionResult ViewFeedback()
         {
-           return View(_context.Feedbacks.ToList());
-            //     return View();
+           return View(_context.Feedbacks.ToList());            
         }
 
+        [HttpGet]
         public IActionResult Feedback()
         {
             return View();
@@ -254,7 +297,7 @@ namespace iTut.Controllers
                 _context.Add(feedback);
                 await _context.SaveChangesAsync();
                 _logger.LogInformation("Feedback was created!");
-                return RedirectToAction("ViewFeedback");
+                return RedirectToAction("Feedback");
             }
             return View(model);
         }
@@ -263,5 +306,10 @@ namespace iTut.Controllers
             return View();
         }
        
+        //Assign Subjects
+        public IActionResult AssignSubjects()
+        {
+            return View();
+        }
     }
 }
