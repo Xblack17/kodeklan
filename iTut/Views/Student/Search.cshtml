@@ -1,18 +1,19 @@
-﻿@model StudentIndexViewModel
-@{
-    ViewData["Title"] = "Home";
-}
+@model IEnumerable<iTut.Models.Coordinator.Subject>
 
-<div id="collapseOffCanvas" class="bg-body offcanvas-collapse open w-100">
+@{
+      ViewData["Title"] = "Search";
+}
+  <div id="collapseOffCanvas" class="bg-body offcanvas-collapse open w-100">
     <main class="main-expanded vh-100 w-100">
         <div class="container-fluid px-lg-5">
             <div class="d-flex py-5 border-bottom">
-                <span class="d-inline-flex flex-shrink-0 align-items-center justify-content-center mr-3 text-white text-uppercase bg-primary rounded-circle  wh-2-5rem">@Model.Student.FirstName.ToCharArray()[0]</span>
                 <div class="mr-auto">
-                    <h2 class="mb-2 fs-1 lh-tight">Hi, @Model.Student.FirstName</h2>
-                    <p class="lh-tight">Dashboard</p>
+                    <br />
+
+                    <p class="lh-tight"><b>Your Search results:</b></p> <!-- Html.LabelFor(s => s.NumberOfRows)-->
                 </div>
                  <div class="form-group form-group-lg has-feedback">
+                    <div >
                    <form  asp-action = "Search"  method = "get" >
                        <div class =" col-lg-auto">
                     <input type="search" placeholder="Search Subject" name="SearchSubject" class="form-control " value = "@ViewData["CreateSubject"]"/>
@@ -32,22 +33,32 @@
                         </button>
                     </li>
                 </ul>
-            </div>
-            <div class="invisible-scrollbar position-relative wh-main">
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="mr-auto">
-                                <h2 class="mb-2 fs-2 lh-tight">Timeline</h2>
-                                <p>What is happening?</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-</div>
+            </div> 
+            <br/>
+          <br />
+            
+                <table class="table">
+                   
+                    @foreach (var subject in Model )
+                    {
+                        string selectedRow = ""; 
+                    
+                        if (subject.SubjectId == ViewBag.SubjectId || subject.SubjectName == ViewBag.SubjectName)
+                        {
+                            selectedRow = "success";
+
+                        }
+                        <tr>
+                            <th>
+                             @Html.DisplayFor(modelSubject => subject.SubjectId): @Html.DisplayFor(modelSubject => subject.SubjectName)
+                            </th>
+                            </tr>
+                        <tr class="@selectedRow">
+                            <td>
+                                @Html.DisplayFor(modelSubject => subject.SubjectDescr)  
+                            </td>
+                        </tr>
+
+                    }
+
+                </table>

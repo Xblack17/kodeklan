@@ -47,5 +47,36 @@ namespace iTut.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+         public IActionResult Subjects()
+        {
+            return View();
+        }
+        public IActionResult Search()
+        {
+            var displaydata = _context.Subjects.ToList();
+
+            return View(displaydata);
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> Search(string searchSubject)
+        {
+            ViewData["CreateSubject"] = searchSubject;
+
+            var subjects = from s in _context.Subjects
+                         select s;
+
+            if (!String.IsNullOrEmpty(searchSubject))
+            {
+                subjects = subjects.Where(s => s.SubjectName.Contains(searchSubject) || s.SubjectId.Contains(searchSubject));
+            }
+
+            return View(await subjects.ToListAsync());
+        }
+        public IActionResult Calendar()
+        {
+            return View();
+        }
     }
 }
